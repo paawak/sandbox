@@ -1,5 +1,17 @@
-<mat-toolbar>My App</mat-toolbar>
+<mat-toolbar>
+  <span>
+    <mat-button-toggle-group>
+      <mat-button-toggle>TRADES</mat-button-toggle>
+      <mat-button-toggle>TRANSFERS</mat-button-toggle>
+      <mat-button-toggle>TRANSPORTS</mat-button-toggle>
+    </mat-button-toggle-group>
+  </span>
 
+  <!-- This fills the remaining space of the current row -->
+  <span class="fill-remaining-space"></span>
+
+  <span>Username</span>
+</mat-toolbar>
 
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
