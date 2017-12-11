@@ -13,6 +13,30 @@
   <span>Username</span>
 </mat-toolbar>
 
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile colspan="2">
+    <span>
+      <span>
+          <mat-form-field>
+              <input matInput [matDatepicker]="fromDate" placeholder="Trade Date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+            </mat-form-field>
+          </span>
+      <span>to</span>
+      <span>
+          <mat-form-field>
+              <input matInput [matDatepicker]="toDate">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+            </mat-form-field>
+          </span>
+    </span>
+  </mat-grid-tile>
+  <mat-grid-tile>2</mat-grid-tile>
+  <mat-grid-tile>3</mat-grid-tile>
+</mat-grid-list>
+
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
@@ -23,13 +47,18 @@
 <h2>Here are some links to help you start: </h2>
 <ul>
   <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
+    <h2>
+      <a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a>
+    </h2>
   </li>
   <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
+    <h2>
+      <a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a>
+    </h2>
   </li>
   <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
+    <h2>
+      <a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a>
+    </h2>
   </li>
 </ul>
-
