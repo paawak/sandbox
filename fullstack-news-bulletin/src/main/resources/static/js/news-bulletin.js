@@ -1,9 +1,12 @@
-$.get("rest/news/", function(data, status) {
-	if (status == "success") {
-		loadNewsItems(data);
-	} else {
-		// TODO
-	}
+$.ajax({
+    url: 'rest/news/',
+    type: 'GET',
+    success: function(data){ 
+    	loadNewsItems(data);
+    },
+    error: function(data) {
+    	showAlert();
+    }
 });
 
 function loadNewsItems(newsItemsArray) {
@@ -20,4 +23,10 @@ function addNews(newsItem) {
 	+ '<div class="col">' + newsItem.publishedTime + '</div>'
 	+ '</div>'; 
     tableDiv.innerHTML += newDivRow;
+}
+
+function showAlert() {
+	var alertMessage = '<div class="alert alert-warning alert-dismissible fade show"' +'		role="alert">' +'		<strong>Sorry!</strong> Could not load news items.' +'		<button type="button" class="close" data-dismiss="alert"' +'			aria-label="Close">' +'			<span aria-hidden="true">&times;</span>' +'		</button>' +'	</div>';
+	var divAlert = document.getElementById("divAlert");
+	divAlert.innerHTML += alertMessage;
 }
