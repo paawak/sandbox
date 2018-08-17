@@ -1,10 +1,12 @@
 package com.he.shoppingCart;
 
-public class Product {
-    private String name;
-    private Double price;
+import java.math.BigDecimal;
 
-    public Product(String name, Double price) {
+public class Product {
+    private final String name;
+    private final BigDecimal price;
+
+    public Product(String name, BigDecimal price) {
         this.name = name;
         this.price = price;
     }
@@ -13,16 +15,8 @@ public class Product {
         return this.name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return this.price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
     }
 
 }
