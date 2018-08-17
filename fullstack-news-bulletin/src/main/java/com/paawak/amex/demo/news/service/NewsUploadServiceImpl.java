@@ -26,7 +26,7 @@ public class NewsUploadServiceImpl implements NewsUploadService {
     @Override
     public int uploadRawNews(InputStream is) {
 
-        List<String> lines = new ArrayList<>();
+        List<Article> articles = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(is, Charset.defaultCharset()))) {
 
@@ -35,14 +35,18 @@ public class NewsUploadServiceImpl implements NewsUploadService {
                 if (line == null) {
                     break;
                 }
-                lines.add(line);
+                articles.add(parseArticle(line));
             }
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        return 0;
+        if (articles.isEmpty()) {
+            throw new RuntimeException("No records found!");
+        }
+
+        return articleDao.insertArticles(articles);
     }
 
     Article parseArticle(String text) {
