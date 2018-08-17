@@ -1,6 +1,6 @@
 package com.he.shoppingCart;
 
-import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -37,21 +37,20 @@ public class Cart {
 
     public void generateInvoice() {
 
+        DecimalFormat formatter = new DecimalFormat("#######.00");
         String priceInfoTemplate = "%s %d %s";
         items.entrySet().stream().sorted((Entry<Product, Integer> entry1, Entry<Product, Integer> entry2) -> {
             return entry1.getKey().getName().compareTo(entry2.getKey().getName());
         }).map((Entry<Product, Integer> productEntry) -> {
             return String.format(priceInfoTemplate, productEntry.getKey().getName(), productEntry.getValue(),
-                    productEntry.getKey().getPrice().setScale(2, BigDecimal.ROUND_HALF_EVEN));
+                    formatter.format(productEntry.getKey().getPrice()));
         }).forEach(System.out::println);
 
-        BigDecimal totalAmount = items.entrySet().stream().map((Entry<Product, Integer> productEntry) -> {
-            return productEntry.getKey().getPrice().multiply(new BigDecimal(productEntry.getValue()));
-        }).reduce((BigDecimal left, BigDecimal right) -> {
-            return left.add(right);
-        }).get().setScale(2, BigDecimal.ROUND_HALF_EVEN);
+        double totalAmount = items.entrySet().stream().mapToDouble((Entry<Product, Integer> productEntry) -> {
+            return productEntry.getKey().getPrice() * productEntry.getValue();
+        }).sum();
 
-        System.out.println("Total price: " + totalAmount);
+        System.out.println("Total price: " + formatter.format(totalAmount));
     }
 
     public void checkOut() {
