@@ -8,4 +8,6 @@ public interface ArticleDao {
 
     int insertArticles(List<Article> articles);
 
+    List<Article> getArticles();
+
 }

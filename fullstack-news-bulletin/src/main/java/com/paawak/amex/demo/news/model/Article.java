@@ -18,6 +18,10 @@ public class Article {
     private final String publisherUrl;
     private final Date publishedTime;
 
+    public Article() {
+        this(0, null, null, null, null, null, null);
+    }
+
     public Article(long id, String headline, String url, String publisherName, String classifier, String publisherUrl, Date publishedTime) {
         this.id = id;
         this.headline = headline;

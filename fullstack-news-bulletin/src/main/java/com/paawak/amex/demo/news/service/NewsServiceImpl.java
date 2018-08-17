@@ -15,11 +15,11 @@ import com.paawak.amex.demo.news.dao.ArticleDao;
 import com.paawak.amex.demo.news.model.Article;
 
 @Service
-public class NewsUploadServiceImpl implements NewsUploadService {
+public class NewsServiceImpl implements NewsService {
 
     private final ArticleDao articleDao;
 
-    public NewsUploadServiceImpl(ArticleDao articleDao) {
+    public NewsServiceImpl(ArticleDao articleDao) {
         this.articleDao = articleDao;
     }
 
@@ -47,6 +47,11 @@ public class NewsUploadServiceImpl implements NewsUploadService {
         }
 
         return articleDao.insertArticles(articles);
+    }
+
+    @Override
+    public List<Article> getArticles() {
+        return articleDao.getArticles();
     }
 
     Article parseArticle(String text) {

@@ -8,7 +8,11 @@ A full satck news bulletin project. This uses the in-memory H2 DB
 # H2 Console
 	http://localhost:8080/news-bulletin/h2
 
-# File Upload
+# File Upload UI
 	http://localhost:8080/news-bulletin/raw-news-upload.html
-	
-	http://localhost:8080/news-bulletin/rest/raw-news/upload
+
+# Rest API
+## File Upload	
+	POST: http://localhost:8080/news-bulletin/rest/news/
+## Fetch News Headlines
+	GET: http://localhost:8080/news-bulletin/rest/news/

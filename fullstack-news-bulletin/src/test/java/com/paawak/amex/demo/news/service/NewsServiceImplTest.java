@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import com.paawak.amex.demo.news.model.Article;
 
-public class NewsUploadServiceImplTest {
+public class NewsServiceImplTest {
 
     @Test
     public void testParseArticle() {
@@ -16,7 +16,7 @@ public class NewsUploadServiceImplTest {
         String rawText = "\"23\",\"This is a headline\",\"The url\",\"The publisherName\",\"The classifier\",\"The publisherUrl\",\"1394470370698\"";
         Article expected =
                 new Article(23L, "This is a headline", "The url", "The publisherName", "The classifier", "The publisherUrl", new Date(1394470370698L));
-        NewsUploadServiceImpl testClass = new NewsUploadServiceImpl(null);
+        NewsServiceImpl testClass = new NewsServiceImpl(null);
 
         // when
         Article result = testClass.parseArticle(rawText);
