@@ -7,7 +7,9 @@ import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -109,6 +111,47 @@ public class CartTest {
 
         // cleanup
         System.setOut(originalPrintStream);
+
+    }
+
+    @Test
+    public void testCheckOut() {
+
+        // given
+
+        Map<Product, Integer> items = new HashMap<>();
+        items.put(new Product("Basmati Rice", new BigDecimal("102.89")), 100);
+        items.put(new Product("Pitted Dates", new BigDecimal("56.78")), 200);
+        items.put(new Product("Mango Alphanso", new BigDecimal("500.00")), 800);
+        items.put(new Product("Tooth Paste Colgate", new BigDecimal("230.08")), 400);
+
+        Inventory.getInstance().addItems(items);
+
+        Cart testClass = new Cart();
+
+        testClass.addItem(new Product("Pitted Dates", new BigDecimal("56.78")), 100);
+        testClass.addItem(new Product("Tooth Paste Colgate", new BigDecimal("230.08")), 800);
+        testClass.addItem(new Product("Basmati Rice", new BigDecimal("102.89")), 200);
+        testClass.addItem(new Product("Mango Alphanso", new BigDecimal("500.00")), 500);
+        testClass.addItem(new Product("Litchi Bunch", new BigDecimal("200.00")), 2);
+        testClass.removeItem(new Product("Tooth Paste Colgate", new BigDecimal("230.08")));
+
+        // when
+        testClass.checkOut();
+
+        // then
+        assertEquals(100, Inventory.getInstance().getAvailableAmount(new Product("Pitted Dates", new BigDecimal("56.78"))));
+        assertEquals(400, Inventory.getInstance().getAvailableAmount(new Product("Tooth Paste Colgate", new BigDecimal("230.08"))));
+        assertEquals(100, Inventory.getInstance().getAvailableAmount(new Product("Basmati Rice", new BigDecimal("102.89"))));
+        assertEquals(300, Inventory.getInstance().getAvailableAmount(new Product("Mango Alphanso", new BigDecimal("500.00"))));
+
+        assertEquals(0, testClass.getQuantityInCart(new Product("Pitted Dates", new BigDecimal("56.78"))));
+        assertEquals(0, testClass.getQuantityInCart(new Product("Tooth Paste Colgate", new BigDecimal("230.08"))));
+        assertEquals(0, testClass.getQuantityInCart(new Product("Basmati Rice", new BigDecimal("102.89"))));
+        assertEquals(0, testClass.getQuantityInCart(new Product("Mango Alphanso", new BigDecimal("500.00"))));
+        assertEquals(0, testClass.getQuantityInCart(new Product("Litchi Bunch", new BigDecimal("200.00"))));
+
+        // cleanup
         Inventory.getInstance().clearMasterRoster();
 
     }
