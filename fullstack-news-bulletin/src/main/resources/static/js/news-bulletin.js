@@ -20,12 +20,16 @@ function fetchNews(url) {
 	    	loadNewsItems(data);
 	    },
 	    error: function(data) {
-	    	showAlert();
+	    	showAlert('Could not load news items.');
 	    }
 	});
 }
 
 function loadNewsItems(newsItemsArray) {
+	if (newsItemsArray.length == 0) {
+		showAlert('No news items found!');
+		return;
+	}
 	addNewsTableHeader();
 	newsItemsArray.forEach(function(newsItem) {
 		addNews(newsItem);
@@ -50,7 +54,7 @@ function addNewsTableHeader() {
     $("#tableDiv").append(newDivRow);
 }
 
-function showAlert() {
-	var alertMessage = '<div class="alert alert-warning alert-dismissible fade show"' +'		role="alert">' +'		<strong>Sorry!</strong> Could not load news items.' +'		<button type="button" class="close" data-dismiss="alert"' +'			aria-label="Close">' +'			<span aria-hidden="true">&times;</span>' +'		</button>' +'	</div>';
+function showAlert(message) {
+	var alertMessage = '<div class="alert alert-warning alert-dismissible fade show"' +'		role="alert">' +'		<strong>Sorry!</strong> ' + message +'		<button type="button" class="close" data-dismiss="alert"' +'			aria-label="Close">' +'			<span aria-hidden="true">&times;</span>' +'		</button>' +'	</div>';
 	$("#divAlert").append(alertMessage);
 }
