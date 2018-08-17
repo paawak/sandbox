@@ -38,7 +38,9 @@ public class Cart {
     public void generateInvoice() {
 
         String priceInfoTemplate = "%s %d %s";
-        items.entrySet().stream().map((Entry<Product, Integer> productEntry) -> {
+        items.entrySet().stream().sorted((Entry<Product, Integer> entry1, Entry<Product, Integer> entry2) -> {
+            return entry1.getKey().getName().compareTo(entry2.getKey().getName());
+        }).map((Entry<Product, Integer> productEntry) -> {
             return String.format(priceInfoTemplate, productEntry.getKey().getName(), productEntry.getValue(),
                     productEntry.getKey().getPrice().setScale(2, BigDecimal.ROUND_HALF_EVEN));
         }).forEach(System.out::println);
