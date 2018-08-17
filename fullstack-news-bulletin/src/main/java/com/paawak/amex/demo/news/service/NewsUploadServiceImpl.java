@@ -50,18 +50,9 @@ public class NewsUploadServiceImpl implements NewsUploadService {
     }
 
     Article parseArticle(String text) {
-        String[] tokens = text.split(",");
-        return new Article(Long.parseLong(stripLeadingTrailingChar(tokens[0])), stripLeadingTrailingChar(tokens[1]), stripLeadingTrailingChar(tokens[2]),
-                stripLeadingTrailingChar(tokens[3]), stripLeadingTrailingChar(tokens[4]), stripLeadingTrailingChar(tokens[5]),
-                new Date(Long.parseLong(stripLeadingTrailingChar(tokens[6]))));
-    }
-
-    String stripLeadingTrailingChar(String text) {
-        text = text.trim();
-        if (text.length() <= 2) {
-            return text;
-        }
-        return text.substring(1, text.length() - 1);
+        String[] tokens = text.split("\",\"");
+        return new Article(Long.parseLong(tokens[0].substring(1)), tokens[1], tokens[2], tokens[3], tokens[4], tokens[5],
+                new Date(Long.parseLong(tokens[6].substring(0, tokens[6].length() - 1))));
     }
 
 }
