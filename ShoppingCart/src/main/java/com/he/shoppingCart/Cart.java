@@ -87,4 +87,15 @@ public class Cart {
 
     }
 
+    /**
+     * Added for testing only
+     */
+    int getQuantityInCart(Product product) {
+        if (!items.containsKey(product)) {
+            return 0;
+        }
+
+        return items.get(product);
+    }
+
 }

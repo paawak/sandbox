@@ -9,9 +9,68 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class CartTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    public void testAddItem_happy() {
+
+        // given
+        Cart testClass = new Cart();
+
+        // when
+        testClass.addItem(new Product("Pitted Dates", new BigDecimal("56.78")), 4);
+
+        // then
+        assertEquals(4, testClass.getQuantityInCart(new Product("Pitted Dates", new BigDecimal("56.78"))));
+    }
+
+    @Test
+    public void testAddItem_negative() {
+
+        // given
+        Cart testClass = new Cart();
+
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("the quantity should be greater than 0");
+
+        // when, then
+        testClass.addItem(new Product("Pitted Dates", new BigDecimal("56.78")), -4);
+    }
+
+    @Test
+    public void testRemoveItem_happy() {
+
+        // given
+        Cart testClass = new Cart();
+
+        testClass.addItem(new Product("Pitted Dates", new BigDecimal("56.78")), 4);
+
+        // when
+        testClass.removeItem(new Product("Pitted Dates", new BigDecimal("56.78")));
+
+        // then
+        assertEquals(0, testClass.getQuantityInCart(new Product("Pitted Dates", new BigDecimal("56.78"))));
+    }
+
+    @Test
+    public void testRemoveItem_negative() {
+
+        // given
+        Cart testClass = new Cart();
+
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("the product does not exist in the shopping cart");
+
+        // when, then
+        testClass.removeItem(new Product("Pitted Dates", new BigDecimal("56.78")));
+    }
 
     @Test
     public void testGenerateInvoice() {
