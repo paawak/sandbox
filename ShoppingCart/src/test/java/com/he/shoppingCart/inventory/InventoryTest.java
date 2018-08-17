@@ -26,7 +26,7 @@ public class InventoryTest {
         items.put(new Product("Mango Alphanso", new BigDecimal("500.00")), 300);
         items.put(new Product("Tooth Paste Colgate", new BigDecimal("230.08")), 400);
 
-        Inventory testClass = new Inventory();
+        Inventory testClass = Inventory.getInstance();
 
         // when
         testClass.addItems(items);
@@ -38,6 +38,8 @@ public class InventoryTest {
         assertEquals(400, testClass.getAvailableAmount(new Product("Tooth Paste Colgate", new BigDecimal("230.08"))));
         assertEquals(0, testClass.getAvailableAmount(new Product("Ashirvad Atta", new BigDecimal("678.09"))));
 
+        // cleanup
+        testClass.clearMasterRoster();
     }
 
     @Test
@@ -53,7 +55,7 @@ public class InventoryTest {
         items2.put(new Product("Basmati Rice", new BigDecimal("102.89")), 100);
         items2.put(new Product("Pitted Dates", new BigDecimal("56.78")), 200);
 
-        Inventory testClass = new Inventory();
+        Inventory testClass = Inventory.getInstance();
 
         // when
         testClass.addItems(items1);
@@ -65,6 +67,8 @@ public class InventoryTest {
         assertEquals(300, testClass.getAvailableAmount(new Product("Mango Alphanso", new BigDecimal("500.00"))));
         assertEquals(400, testClass.getAvailableAmount(new Product("Tooth Paste Colgate", new BigDecimal("230.08"))));
 
+        // cleanup
+        testClass.clearMasterRoster();
     }
 
     @Test
@@ -76,13 +80,18 @@ public class InventoryTest {
         items.put(new Product("Mango Alphanso", new BigDecimal("500.00")), 300);
         items.put(new Product("Tooth Paste Colgate", new BigDecimal("230.08")), -2);
 
-        Inventory testClass = new Inventory();
+        Inventory testClass = Inventory.getInstance();
 
         thrown.expect(IllegalStateException.class);
         thrown.expectMessage("cannot add negative quantity for the product with name: Tooth Paste Colgate");
 
         // when, then
-        testClass.addItems(items);
+        try {
+            testClass.addItems(items);
+        } finally {
+            // cleanup
+            testClass.clearMasterRoster();
+        }
     }
 
 }

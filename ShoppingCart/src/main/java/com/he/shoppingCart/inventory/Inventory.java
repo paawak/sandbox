@@ -11,8 +11,7 @@ public class Inventory {
 
     private final Map<Product, Integer> masterRoster = new HashMap<>();
 
-    /** Visible for testing */
-    Inventory() {
+    private Inventory() {
 
     }
 
@@ -62,6 +61,13 @@ public class Inventory {
             return 0;
         }
         return quantity;
+    }
+
+    /**
+     * Added for testing only
+     */
+    void clearMasterRoster() {
+        masterRoster.clear();
     }
 
 }
