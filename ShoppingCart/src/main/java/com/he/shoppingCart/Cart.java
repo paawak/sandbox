@@ -2,8 +2,11 @@ package com.he.shoppingCart;
 
 public class Cart {
 
-    public Cart() {
+    private final Inventory inventory;
 
+    public Cart() {
+        // have scope for DI
+        inventory = Inventory.getInstance();
     }
 
     public void addItem(Product product, Integer amount) {
