@@ -1,18 +1,29 @@
-$.ajax({
-    url: 'rest/news/',
-    type: 'GET',
-    success: function(data){ 
-    	loadNewsItems(data);
-    },
-    error: function(data) {
-    	showAlert();
-    }
-});
+fetchNews('rest/news/');
 
 $("#btnSearchNews").click(function() {
-	  alert( "Handler for .click() called." );
-	  $(".row").remove();
+	var searchTerm = $('#inputSearchNews').val();
+	if (searchTerm.trim() == '') {
+		alert("The search term is blank, please enter a value");
+		return;
+	}
+	
+	fetchNews('rest/news/search/' + searchTerm.trim());	
+	
 });
+
+function fetchNews(url) {
+	$.ajax({
+	    url: url,
+	    type: 'GET',
+	    success: function(data){ 
+	    	$(".row").remove();
+	    	loadNewsItems(data);
+	    },
+	    error: function(data) {
+	    	showAlert();
+	    }
+	});
+}
 
 function loadNewsItems(newsItemsArray) {
 	addNewsTableHeader();
