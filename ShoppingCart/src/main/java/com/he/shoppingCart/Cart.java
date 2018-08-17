@@ -1,5 +1,7 @@
 package com.he.shoppingCart;
 
+import com.he.shoppingCart.inventory.Inventory;
+
 public class Cart {
 
     private final Inventory inventory;

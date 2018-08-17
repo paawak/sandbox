@@ -1,7 +1,9 @@
-package com.he.shoppingCart;
+package com.he.shoppingCart.inventory;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import com.he.shoppingCart.Product;
 
 public class Inventory {
 
@@ -9,7 +11,8 @@ public class Inventory {
 
     private final Map<Product, Integer> masterRoster = new HashMap<>();
 
-    private Inventory() {
+    /** Visible for testing */
+    Inventory() {
 
     }
 
