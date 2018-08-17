@@ -1,6 +1,21 @@
 # About
 
-A full satck news bulletin project. This uses the in-memory H2 DB
+A full stack news bulletin project. This uses the in-memory H2 DB.
+
+## Libraries used
+ * Spring Boot
+ * Spring JDBC
+ * Flyway to manage SQL scripts
+ * In-memory Database: H2
+ * Maven
+ * Bootstrap CSS
+ * JQuery
+ * JUnit
+ * Mockito for mocking
+ 
+## Code Coverage
+	* ArticleDaoImplTest
+	* NewsServiceImplTest 
 
 # Landing page
 	http://localhost:8080/news-bulletin
