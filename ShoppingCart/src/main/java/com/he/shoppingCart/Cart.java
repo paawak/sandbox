@@ -1,7 +1,10 @@
 package com.he.shoppingCart;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public class Cart {
 
@@ -18,19 +21,8 @@ public class Cart {
         if (amount <= 0) {
             throw new IllegalArgumentException("the quantity should be greater than 0");
         }
-        int availableQuantity = inventory.getAvailableAmount(product);
 
-        if (availableQuantity < amount) {
-            throw new IllegalStateException("stock is not available for the given product");
-        }
-
-        // add to cart
         items.put(product, amount);
-
-        // remove from inventory
-        Map<Product, Integer> itemsToRemove = new HashMap<>();
-        itemsToRemove.put(product, amount);
-        inventory.removeItems(itemsToRemove);
 
     }
 
@@ -39,27 +31,58 @@ public class Cart {
             throw new IllegalArgumentException("the product does not exist in the shopping cart");
         }
 
-        int existingQuantity = items.get(product);
-        // remove from cart
-        items.put(product, existingQuantity - 1);
-
-        // add to inventory
-        Map<Product, Integer> itemsToAdd = new HashMap<>();
-        itemsToAdd.put(product, existingQuantity - 1);
-        inventory.addItems(itemsToAdd);
+        items.remove(product);
 
     }
 
     public void generateInvoice() {
-        throw new UnsupportedOperationException();
+
+        String priceInfoTemplate = "%s %d %s";
+        items.entrySet().stream().map((Entry<Product, Integer> productEntry) -> {
+            return String.format(priceInfoTemplate, productEntry.getKey().getName(), productEntry.getValue(),
+                    productEntry.getKey().getPrice().setScale(2, BigDecimal.ROUND_HALF_EVEN));
+        }).forEach(System.out::println);
+
+        BigDecimal totalAmount = items.entrySet().stream().map((Entry<Product, Integer> productEntry) -> {
+            return productEntry.getKey().getPrice().multiply(new BigDecimal(productEntry.getValue()));
+        }).reduce((BigDecimal left, BigDecimal right) -> {
+            return left.add(right);
+        }).get().setScale(2, BigDecimal.ROUND_HALF_EVEN);
+
+        System.out.println("Total price: " + totalAmount);
     }
 
     public void checkOut() {
-        throw new UnsupportedOperationException();
+        if (items.isEmpty()) {
+            return;
+        }
+
+        Map<Product, Integer> itemsBought = items.entrySet().stream().filter((Entry<Product, Integer> productEntry) -> {
+            int availableQuantity = inventory.getAvailableAmount(productEntry.getKey());
+            boolean stockAvailable = availableQuantity >= productEntry.getValue();
+            if (!stockAvailable) {
+                System.err.println("Stock is not availble for the product: " + productEntry.getKey().getName() + ", ignoring");
+            }
+            return stockAvailable;
+        }).collect(Collectors.toMap((Entry<Product, Integer> productEntry) -> {
+            return productEntry.getKey();
+        }, (Entry<Product, Integer> productEntry) -> {
+            return productEntry.getValue();
+        }));
+
+        inventory.removeItems(itemsBought);
+
+        emptyCart();
     }
 
     public void emptyCart() {
-        throw new UnsupportedOperationException();
+
+        if (items.isEmpty()) {
+            return;
+        }
+
+        items.clear();
+
     }
 
 }
