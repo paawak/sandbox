@@ -56,6 +56,7 @@ public class NewsServiceImpl implements NewsService {
 
     Article parseArticle(String text) {
         String[] tokens = text.split("\",\"");
+
         return new Article(Long.parseLong(tokens[0].substring(1)), tokens[1], tokens[2], tokens[3], tokens[4], tokens[5],
                 new Date(Long.parseLong(tokens[6].substring(0, tokens[6].length() - 1))));
     }

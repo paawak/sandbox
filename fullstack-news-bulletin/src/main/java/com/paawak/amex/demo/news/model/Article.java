@@ -10,16 +10,16 @@ import java.sql.Date;
  */
 public class Article {
 
-    private final long id;
-    private final String headline;
-    private final String url;
-    private final String publisherName;
-    private final String classifier;
-    private final String publisherUrl;
-    private final Date publishedTime;
+    private long id;
+    private String headline;
+    private String url;
+    private String publisherName;
+    private String classifier;
+    private String publisherUrl;
+    private Date publishedTime;
 
     public Article() {
-        this(0, null, null, null, null, null, null);
+
     }
 
     public Article(long id, String headline, String url, String publisherName, String classifier, String publisherUrl, Date publishedTime) {
@@ -36,28 +36,56 @@ public class Article {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getHeadline() {
         return headline;
+    }
+
+    public void setHeadline(String headline) {
+        this.headline = headline;
     }
 
     public String getUrl() {
         return url;
     }
 
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public String getPublisherName() {
         return publisherName;
+    }
+
+    public void setPublisherName(String publisherName) {
+        this.publisherName = publisherName;
     }
 
     public String getClassifier() {
         return classifier;
     }
 
+    public void setClassifier(String classifier) {
+        this.classifier = classifier;
+    }
+
     public String getPublisherUrl() {
         return publisherUrl;
     }
 
+    public void setPublisherUrl(String publisherUrl) {
+        this.publisherUrl = publisherUrl;
+    }
+
     public Date getPublishedTime() {
         return publishedTime;
+    }
+
+    public void setPublishedTime(Date publishedTime) {
+        this.publishedTime = publishedTime;
     }
 
     @Override
