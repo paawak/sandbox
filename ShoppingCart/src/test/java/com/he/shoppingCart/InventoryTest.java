@@ -1,4 +1,4 @@
-package com.he.shoppingCart.inventory;
+package com.he.shoppingCart;
 
 import static org.junit.Assert.assertEquals;
 
