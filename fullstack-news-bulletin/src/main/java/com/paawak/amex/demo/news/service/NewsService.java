@@ -11,4 +11,6 @@ public interface NewsService {
 
     List<Article> getArticles();
 
+    List<Article> searchArticles(String searchTerm);
+
 }

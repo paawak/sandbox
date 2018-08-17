@@ -5,7 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +21,8 @@ import com.paawak.amex.demo.news.service.NewsService;
 @RestController
 @RequestMapping(path = "/rest/news")
 public class NewsRestController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(NewsRestController.class);
 
     private static final String CONTENT_TYPE_CSV = "text/csv";
 
@@ -59,6 +64,12 @@ public class NewsRestController {
     @GetMapping
     public List<Article> getArticles() {
         return newsService.getArticles();
+    }
+
+    @GetMapping(path = "/search/{searchTerm}")
+    public List<Article> searchArticles(@PathVariable("searchTerm") String searchTerm) {
+        LOGGER.debug("looking for the term {}", searchTerm);
+        return newsService.searchArticles(searchTerm);
     }
 
 }

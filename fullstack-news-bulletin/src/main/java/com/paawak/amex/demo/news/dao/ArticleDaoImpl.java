@@ -1,7 +1,9 @@
 package com.paawak.amex.demo.news.dao;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -36,6 +38,14 @@ public class ArticleDaoImpl implements ArticleDao {
         // To implement paging: SELECT * FROM ARTICLE LIMIT 10 OFFSET 3
         String sql = "SELECT ID, HEADLINE, URL, PUBLISHER_NAME, CLASSIFIER, PUBLISHER_URL, PUBLISHED_TIME FROM ARTICLE";
         return jdbcOperations.query(sql, new BeanPropertyRowMapper<Article>(Article.class));
+    }
+
+    @Override
+    public List<Article> searchArticles(String searchTerm) {
+        String sql = "SELECT ID, HEADLINE, URL, PUBLISHER_NAME, CLASSIFIER, PUBLISHER_URL, PUBLISHED_TIME FROM ARTICLE WHERE HEADLINE ILIKE :searchTerm";
+        Map<String, Object> params = new HashMap<>();
+        params.put("searchTerm", "%" + searchTerm + "%");
+        return jdbcOperations.query(sql, params, new BeanPropertyRowMapper<Article>(Article.class));
     }
 
 }

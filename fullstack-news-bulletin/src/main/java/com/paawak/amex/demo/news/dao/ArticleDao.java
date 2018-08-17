@@ -10,4 +10,6 @@ public interface ArticleDao {
 
     List<Article> getArticles();
 
+    List<Article> searchArticles(String searchTerm);
+
 }

@@ -54,6 +54,11 @@ public class NewsServiceImpl implements NewsService {
         return articleDao.getArticles();
     }
 
+    @Override
+    public List<Article> searchArticles(String searchTerm) {
+        return articleDao.searchArticles(searchTerm);
+    }
+
     Article parseArticle(String text) {
         String[] tokens = text.split("\",\"");
 
