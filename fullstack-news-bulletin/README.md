@@ -16,3 +16,5 @@ A full satck news bulletin project. This uses the in-memory H2 DB
 	POST: http://localhost:8080/news-bulletin/rest/news/
 ## Fetch News Headlines
 	GET: http://localhost:8080/news-bulletin/rest/news/
+## Search News Headlines
+	GET: http://localhost:8080/news-bulletin/rest/news/search/term-to-search	

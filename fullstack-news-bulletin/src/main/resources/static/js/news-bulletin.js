@@ -9,7 +9,13 @@ $.ajax({
     }
 });
 
+$("#btnSearchNews").click(function() {
+	  alert( "Handler for .click() called." );
+	  $(".row").remove();
+});
+
 function loadNewsItems(newsItemsArray) {
+	addNewsTableHeader();
 	newsItemsArray.forEach(function(newsItem) {
 		addNews(newsItem);
 	});
@@ -20,6 +26,15 @@ function addNews(newsItem) {
 	+ '<div class="col-6"><a href="' + newsItem.url + '">' + newsItem.headline + '</a></div>'
 	+ '<div class="col"><a href="http://' + newsItem.publisherUrl + '">' + newsItem.publisherName + '</a></div>'
 	+ '<div class="col">' + newsItem.publishedTime + '</div>'
+	+ '</div>'; 
+    $("#tableDiv").append(newDivRow);
+}
+
+function addNewsTableHeader() {
+    var newDivRow = '<div class="row">' 
+	+ '<div class="col-6">Headline</div>'
+	+ '<div class="col">Publisher</div>'
+	+ '<div class="col">Published On</div>'
 	+ '</div>'; 
     $("#tableDiv").append(newDivRow);
 }
