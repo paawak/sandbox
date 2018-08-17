@@ -139,10 +139,10 @@ public class CartTest {
         testClass.checkOut();
 
         // then
-        assertEquals(100, Inventory.getInstance().getAvailableAmount(new Product("Pitted Dates", 56.78)));
-        assertEquals(400, Inventory.getInstance().getAvailableAmount(new Product("Tooth Paste Colgate", 230.08)));
-        assertEquals(100, Inventory.getInstance().getAvailableAmount(new Product("Basmati Rice", 102.89)));
-        assertEquals(300, Inventory.getInstance().getAvailableAmount(new Product("Mango Alphanso", 500.00)));
+        assertEquals(100, Inventory.getInstance().getAvailableAmount(new Product("Pitted Dates", 56.78)).intValue());
+        assertEquals(400, Inventory.getInstance().getAvailableAmount(new Product("Tooth Paste Colgate", 230.08)).intValue());
+        assertEquals(100, Inventory.getInstance().getAvailableAmount(new Product("Basmati Rice", 102.89)).intValue());
+        assertEquals(300, Inventory.getInstance().getAvailableAmount(new Product("Mango Alphanso", 500.00)).intValue());
 
         assertEquals(0, testClass.getQuantityInCart(new Product("Pitted Dates", 56.78)));
         assertEquals(0, testClass.getQuantityInCart(new Product("Tooth Paste Colgate", 230.08)));

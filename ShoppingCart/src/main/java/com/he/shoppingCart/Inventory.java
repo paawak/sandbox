@@ -3,8 +3,6 @@ package com.he.shoppingCart;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.he.shoppingCart.Product;
-
 public class Inventory {
 
     private static final Inventory INSTANCE = new Inventory();
@@ -55,7 +53,7 @@ public class Inventory {
         });
     }
 
-    public int getAvailableAmount(Product product) {
+    public Integer getAvailableAmount(Product product) {
         Integer quantity = masterRoster.get(product);
         if (quantity == null) {
             return 0;

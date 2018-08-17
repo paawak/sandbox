@@ -29,11 +29,11 @@ public class InventoryTest {
         testClass.addItems(items);
 
         // then
-        assertEquals(100, testClass.getAvailableAmount(new Product("Basmati Rice", 102.89)));
-        assertEquals(200, testClass.getAvailableAmount(new Product("Pitted Dates", 56.78)));
-        assertEquals(300, testClass.getAvailableAmount(new Product("Mango Alphanso", 56.78)));
-        assertEquals(400, testClass.getAvailableAmount(new Product("Tooth Paste Colgate", 56.78)));
-        assertEquals(0, testClass.getAvailableAmount(new Product("Ashirvad Atta", 678.09)));
+        assertEquals(100, testClass.getAvailableAmount(new Product("Basmati Rice", 102.89)).intValue());
+        assertEquals(200, testClass.getAvailableAmount(new Product("Pitted Dates", 56.78)).intValue());
+        assertEquals(300, testClass.getAvailableAmount(new Product("Mango Alphanso", 56.78)).intValue());
+        assertEquals(400, testClass.getAvailableAmount(new Product("Tooth Paste Colgate", 56.78)).intValue());
+        assertEquals(0, testClass.getAvailableAmount(new Product("Ashirvad Atta", 678.09)).intValue());
 
         // cleanup
         testClass.clearMasterRoster();
@@ -59,10 +59,10 @@ public class InventoryTest {
         testClass.addItems(items2);
 
         // then
-        assertEquals(200, testClass.getAvailableAmount(new Product("Basmati Rice", 102.89)));
-        assertEquals(400, testClass.getAvailableAmount(new Product("Pitted Dates", 56.78)));
-        assertEquals(300, testClass.getAvailableAmount(new Product("Mango Alphanso", 56.78)));
-        assertEquals(400, testClass.getAvailableAmount(new Product("Tooth Paste Colgate", 56.78)));
+        assertEquals(200, testClass.getAvailableAmount(new Product("Basmati Rice", 102.89)).intValue());
+        assertEquals(400, testClass.getAvailableAmount(new Product("Pitted Dates", 56.78)).intValue());
+        assertEquals(300, testClass.getAvailableAmount(new Product("Mango Alphanso", 56.78)).intValue());
+        assertEquals(400, testClass.getAvailableAmount(new Product("Tooth Paste Colgate", 56.78)).intValue());
 
         // cleanup
         testClass.clearMasterRoster();
