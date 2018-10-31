@@ -36,8 +36,6 @@ public class WordAnalyser {
 		newWord = singleLetterMatches.get(0).transformedWord;
 	    } else {
 
-		LOGGER.info("trying to find 2 letter transforms, hold tight, might take some time...");
-
 		List<WordPair> twoLetterMatches = dictionaryMatchFunction().apply(apply2LetterTransforms(word));
 
 		if (!twoLetterMatches.isEmpty()) {
