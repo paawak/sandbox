@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,16 +42,8 @@ public class WordAnalyser {
 		newWord = singleLetterMatches.get(0).originalWord;
 	    } else {
 
-		List<WordPair> twoLetterMatches = Arrays.asList(word).stream().flatMap((String masterWord) -> {
-
-		    List<WordPair> twoLetteredTransforms = apply2LetterTransforms(masterWord);
-
-		    if (LOGGER.isTraceEnabled()) {
-			twoLetteredTransforms.forEach(wordPair -> LOGGER.trace(wordPair.toString()));
-		    }
-
-		    return twoLetteredTransforms.stream();
-		}).filter((WordPair wordPair) -> {
+		List<WordPair> twoLetterMatches = Arrays.asList(word).stream().flatMap(masterWord -> apply2LetterTransforms(masterWord)).filter((WordPair wordPair) -> {
+		    LOGGER.trace("{}", wordPair);
 		    return masterWordList.contains(wordPair.transformedWord);
 		}).collect(Collectors.toList());
 
@@ -65,6 +58,7 @@ public class WordAnalyser {
 	}
 
 	return "'" + word + "' -> '" + newWord + "'";
+
     }
 
     private List<WordPair> applySingleLetterTransforms(String word) {
@@ -78,7 +72,7 @@ public class WordAnalyser {
 	return transforms;
     }
 
-    private List<WordPair> apply2LetterTransforms(String word) {
+    private Stream<WordPair> apply2LetterTransforms(String word) {
 
 	List<WordPair> singleLetterTransforms = applySingleLetterTransforms(word);
 
@@ -87,7 +81,7 @@ public class WordAnalyser {
 	    return twoLetterTransforms.stream().map((WordPair twoLetterTransformedWord) -> {
 		return new WordPair(singleTransformedWord.originalWord, twoLetterTransformedWord.transformedWord);
 	    });
-	}).collect(Collectors.toList());
+	});
     }
 
     String deleteChar(String word, int index) {
