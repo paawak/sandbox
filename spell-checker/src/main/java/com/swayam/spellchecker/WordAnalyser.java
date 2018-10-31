@@ -47,7 +47,7 @@ public class WordAnalyser {
                 }).collect(Collectors.toList());
 
                 if (!twoLetterMatches.isEmpty()) {
-                    LOGGER.info("spell check applied for single letter transforms");
+                    LOGGER.info("spell check applied for 2 letter transforms");
                     newWord = twoLetterMatches.get(0).originalWord;
                 } else {
                     LOGGER.info("NO MATCH FOUND!!");
