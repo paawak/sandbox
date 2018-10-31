@@ -29,41 +29,34 @@ public class WordAnalyser {
 
             LOGGER.info("processing, hold tight, might take some time...");
 
-            List<WordPair> matches = masterWordList.stream().flatMap((String masterWord) -> {
-                return applyAllTransforms(masterWord).stream();
+            List<WordPair> singleLetterMatches = masterWordList.stream().flatMap((String masterWord) -> {
+                return applySingleLetterTransforms(masterWord).stream();
             }).filter((WordPair wordPair) -> {
                 return wordPair.transformedWord.equals(word);
             }).collect(Collectors.toList());
 
-            if (matches.isEmpty()) {
-                LOGGER.info("NO MATCH FOUND!!");
-                newWord = word;
+            if (!singleLetterMatches.isEmpty()) {
+                LOGGER.info("spell check applied for single letter transforms");
+                newWord = singleLetterMatches.get(0).originalWord;
             } else {
-                LOGGER.info("spell check applied");
-                newWord = matches.get(0).originalWord;
+
+                List<WordPair> twoLetterMatches = masterWordList.stream().flatMap((String masterWord) -> {
+                    return apply2LetterTransforms(masterWord).stream();
+                }).filter((WordPair wordPair) -> {
+                    return wordPair.transformedWord.equals(word);
+                }).collect(Collectors.toList());
+
+                if (!twoLetterMatches.isEmpty()) {
+                    LOGGER.info("spell check applied for single letter transforms");
+                    newWord = twoLetterMatches.get(0).originalWord;
+                } else {
+                    LOGGER.info("NO MATCH FOUND!!");
+                    newWord = word;
+                }
             }
         }
 
         return "'" + word + "' -> '" + newWord + "'";
-    }
-
-    private List<WordPair> applyAllTransforms(String word) {
-
-        List<WordPair> singleLetterTransforms = applySingleLetterTransforms(word);
-
-        // do 2 letter transforms
-
-        List<WordPair> doubleLetterTransforms = singleLetterTransforms.stream().flatMap((WordPair singleTransformedWord) -> {
-            List<WordPair> twoLetterTransforms = applySingleLetterTransforms(singleTransformedWord.transformedWord);
-            return twoLetterTransforms.stream().map((WordPair twoLetterTransformedWord) -> {
-                return new WordPair(singleTransformedWord.originalWord, twoLetterTransformedWord.transformedWord);
-            });
-        }).collect(Collectors.toList());
-
-        singleLetterTransforms.addAll(doubleLetterTransforms);
-
-        return singleLetterTransforms;
-
     }
 
     private List<WordPair> applySingleLetterTransforms(String word) {
@@ -75,6 +68,18 @@ public class WordAnalyser {
         transforms.addAll(applyInsertion(word));
 
         return transforms;
+    }
+
+    private List<WordPair> apply2LetterTransforms(String word) {
+
+        List<WordPair> singleLetterTransforms = applySingleLetterTransforms(word);
+
+        return singleLetterTransforms.stream().flatMap((WordPair singleTransformedWord) -> {
+            List<WordPair> twoLetterTransforms = applySingleLetterTransforms(singleTransformedWord.transformedWord);
+            return twoLetterTransforms.stream().map((WordPair twoLetterTransformedWord) -> {
+                return new WordPair(singleTransformedWord.originalWord, twoLetterTransformedWord.transformedWord);
+            });
+        }).collect(Collectors.toList());
     }
 
     String deleteChar(String word, int index) {
