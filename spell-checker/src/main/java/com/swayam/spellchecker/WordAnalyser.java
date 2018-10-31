@@ -3,6 +3,7 @@ package com.swayam.spellchecker;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -30,19 +31,14 @@ public class WordAnalyser {
 
 	    LOGGER.info("processing, hold tight, might take some time...");
 
-	    List<WordPair> singleLetterMatches = applySingleLetterTransforms(word).stream().filter((WordPair wordPair) -> {
-		return masterWordList.contains(wordPair.transformedWord);
-	    }).collect(Collectors.toList());
+	    List<WordPair> singleLetterMatches = dictionaryMatchFunction().apply(applySingleLetterTransforms(word).stream());
 
 	    if (!singleLetterMatches.isEmpty()) {
 		LOGGER.info("spell check applied for single letter transforms");
 		newWord = singleLetterMatches.get(0).transformedWord;
 	    } else {
 
-		List<WordPair> twoLetterMatches = apply2LetterTransforms(word).filter((WordPair wordPair) -> {
-		    LOGGER.trace("{}", wordPair);
-		    return masterWordList.contains(wordPair.transformedWord);
-		}).collect(Collectors.toList());
+		List<WordPair> twoLetterMatches = dictionaryMatchFunction().apply(apply2LetterTransforms(word));
 
 		if (!twoLetterMatches.isEmpty()) {
 		    LOGGER.info("spell check applied for 2 letter transforms");
@@ -56,6 +52,15 @@ public class WordAnalyser {
 
 	return "'" + word + "' -> '" + newWord + "'";
 
+    }
+
+    private Function<Stream<WordPair>, List<WordPair>> dictionaryMatchFunction() {
+	return (Stream<WordPair> words) -> {
+	    return words.filter((WordPair wordPair) -> {
+		LOGGER.trace("{}", wordPair);
+		return masterWordList.contains(wordPair.transformedWord);
+	    }).collect(Collectors.toList());
+	};
     }
 
     private List<WordPair> applySingleLetterTransforms(String word) {
