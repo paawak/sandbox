@@ -1,7 +1,6 @@
 package com.swayam.spellchecker;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,18 +30,16 @@ public class WordAnalyser {
 
 	    LOGGER.info("processing, hold tight, might take some time...");
 
-	    List<WordPair> singleLetterMatches = masterWordList.stream().flatMap((String masterWord) -> {
-		return applySingleLetterTransforms(masterWord).stream();
-	    }).filter((WordPair wordPair) -> {
-		return wordPair.transformedWord.equals(word);
+	    List<WordPair> singleLetterMatches = applySingleLetterTransforms(word).stream().filter((WordPair wordPair) -> {
+		return masterWordList.contains(wordPair.transformedWord);
 	    }).collect(Collectors.toList());
 
 	    if (!singleLetterMatches.isEmpty()) {
 		LOGGER.info("spell check applied for single letter transforms");
-		newWord = singleLetterMatches.get(0).originalWord;
+		newWord = singleLetterMatches.get(0).transformedWord;
 	    } else {
 
-		List<WordPair> twoLetterMatches = Arrays.asList(word).stream().flatMap(masterWord -> apply2LetterTransforms(masterWord)).filter((WordPair wordPair) -> {
+		List<WordPair> twoLetterMatches = apply2LetterTransforms(word).filter((WordPair wordPair) -> {
 		    LOGGER.trace("{}", wordPair);
 		    return masterWordList.contains(wordPair.transformedWord);
 		}).collect(Collectors.toList());
