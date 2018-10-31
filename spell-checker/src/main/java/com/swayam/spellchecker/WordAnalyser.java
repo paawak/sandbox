@@ -1,8 +1,9 @@
 package com.swayam.spellchecker;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,39 +14,8 @@ public class WordAnalyser {
 
     private final Set<String> masterWordList;
 
-    private final Map<String, String> singleLetterTransforms;
-    private final Map<String, String> twoLetterTransforms;
-
     public WordAnalyser(Set<String> masterWordList) {
         this.masterWordList = masterWordList;
-        singleLetterTransforms = new ConcurrentHashMap<>(15_000_000);
-        twoLetterTransforms = new ConcurrentHashMap<>(15_000_000);
-    }
-
-    public void initialize() {
-
-        LOGGER.info("START initializing single letter transforms");
-
-        masterWordList.parallelStream().forEach((String word) -> {
-            applyTransforms(singleLetterTransforms, word);
-        });
-
-        LOGGER.info("END single letter transforms, with a total count of {}", singleLetterTransforms.size());
-
-        LOGGER.info("START initializing two-letter transforms");
-
-        singleLetterTransforms.keySet().stream().forEach((String word) -> {
-            applyTransforms(twoLetterTransforms, word);
-        });
-
-        LOGGER.info("END two-letter transforms, with a total count of {}", twoLetterTransforms.size());
-    }
-
-    private void applyTransforms(Map<String, String> allPossibleWordCombinations, String word) {
-        applyDeletion(allPossibleWordCombinations, word);
-        applyReplacement(allPossibleWordCombinations, word);
-        applyTranspose(allPossibleWordCombinations, word);
-        applyInsertion(allPossibleWordCombinations, word);
     }
 
     public String doSpellCheck(String word) {
@@ -55,18 +25,56 @@ public class WordAnalyser {
         if (masterWordList.contains(word)) {
             LOGGER.info("word with correct spelling");
             newWord = word;
-        } else if (singleLetterTransforms.containsKey(word)) {
-            LOGGER.info("spell check applied for single letter transform");
-            newWord = singleLetterTransforms.get(word);
-        } else if (twoLetterTransforms.containsKey(word)) {
-            LOGGER.info("spell check applied for two-letter transform");
-            newWord = singleLetterTransforms.get(twoLetterTransforms.get(word));
         } else {
-            LOGGER.info("NO MATCH FOUND!!");
-            newWord = word;
+
+            LOGGER.info("processing, hold tight, might take some time...");
+
+            List<WordPair> matches = masterWordList.stream().flatMap((String masterWord) -> {
+                return applyAllTransforms(masterWord).stream();
+            }).filter((WordPair wordPair) -> {
+                return wordPair.transformedWord.equals(word);
+            }).collect(Collectors.toList());
+
+            if (matches.isEmpty()) {
+                LOGGER.info("NO MATCH FOUND!!");
+                newWord = word;
+            } else {
+                LOGGER.info("spell check applied");
+                newWord = matches.get(0).originalWord;
+            }
         }
 
         return "'" + word + "' -> '" + newWord + "'";
+    }
+
+    private List<WordPair> applyAllTransforms(String word) {
+
+        List<WordPair> singleLetterTransforms = applySingleLetterTransforms(word);
+
+        // do 2 letter transforms
+
+        List<WordPair> doubleLetterTransforms = singleLetterTransforms.stream().flatMap((WordPair singleTransformedWord) -> {
+            List<WordPair> twoLetterTransforms = applySingleLetterTransforms(singleTransformedWord.transformedWord);
+            return twoLetterTransforms.stream().map((WordPair twoLetterTransformedWord) -> {
+                return new WordPair(singleTransformedWord.originalWord, twoLetterTransformedWord.transformedWord);
+            });
+        }).collect(Collectors.toList());
+
+        singleLetterTransforms.addAll(doubleLetterTransforms);
+
+        return singleLetterTransforms;
+
+    }
+
+    private List<WordPair> applySingleLetterTransforms(String word) {
+        List<WordPair> transforms = new ArrayList<>();
+
+        transforms.addAll(applyDeletion(word));
+        transforms.addAll(applyReplacement(word));
+        transforms.addAll(applyTranspose(word));
+        transforms.addAll(applyInsertion(word));
+
+        return transforms;
     }
 
     String deleteChar(String word, int index) {
@@ -90,36 +98,53 @@ public class WordAnalyser {
         return new String(chars);
     }
 
-    private void applyDeletion(Map<String, String> allPossibleWordCombinations, String word) {
+    private List<WordPair> applyDeletion(String word) {
+        List<WordPair> wordPairs = new ArrayList<>();
         for (int i = 0; i < word.length(); i++) {
-            allPossibleWordCombinations.put(deleteChar(word, i), word);
+            wordPairs.add(new WordPair(word, deleteChar(word, i)));
         }
+        return wordPairs;
     }
 
-    private void applyReplacement(Map<String, String> allPossibleWordCombinations, String word) {
+    private List<WordPair> applyReplacement(String word) {
+        List<WordPair> wordPairs = new ArrayList<>();
         for (char c = 'a'; c <= 'z'; c++) {
             for (int i = 0; i < word.length(); i++) {
                 String newWord = replaceChar(word, i, c);
-                LOGGER.trace("{} -> {}", word, newWord);
-                allPossibleWordCombinations.put(newWord, word);
+                wordPairs.add(new WordPair(word, newWord));
             }
         }
+        return wordPairs;
     }
 
-    private void applyInsertion(Map<String, String> allPossibleWordCombinations, String word) {
+    private List<WordPair> applyInsertion(String word) {
+        List<WordPair> wordPairs = new ArrayList<>();
         for (char c = 'a'; c <= 'z'; c++) {
             for (int i = 0; i <= word.length(); i++) {
                 String newWord = insertChar(word, i, c);
-                LOGGER.trace("{} -> {}", word, newWord);
-                allPossibleWordCombinations.put(newWord, word);
+                wordPairs.add(new WordPair(word, newWord));
             }
         }
+        return wordPairs;
     }
 
-    private void applyTranspose(Map<String, String> allPossibleWordCombinations, String word) {
+    private List<WordPair> applyTranspose(String word) {
+        List<WordPair> wordPairs = new ArrayList<>();
         for (int i = 0; i < word.length() - 1; i++) {
-            allPossibleWordCombinations.put(transpose(word, i), word);
+            wordPairs.add(new WordPair(word, transpose(word, i)));
         }
+        return wordPairs;
+    }
+
+    private static class WordPair {
+        final String originalWord;
+        final String transformedWord;
+
+        public WordPair(String originalWord, String transformedWord) {
+            this.originalWord = originalWord;
+            this.transformedWord = transformedWord;
+        }
+
     }
 
 }

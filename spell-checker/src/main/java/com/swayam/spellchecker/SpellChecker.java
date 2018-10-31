@@ -15,7 +15,6 @@ public class SpellChecker {
         LOGGER.trace("allWords: {}", allWords);
 
         WordAnalyser wordAnalyser = new WordAnalyser(allWords);
-        wordAnalyser.initialize();
 
         LOGGER.info("Initialization complete, ready to accept input");
         try (Scanner scanner = new Scanner(System.in);) {
