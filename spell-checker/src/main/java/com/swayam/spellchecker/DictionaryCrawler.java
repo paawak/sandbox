@@ -7,7 +7,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,7 +23,7 @@ public class DictionaryCrawler {
 
     static final Pattern WORD = Pattern.compile("[A-Za-z]{2,}");
 
-    public Collection<String> crawl() {
+    public Set<String> crawl() {
 
 	LOGGER.debug("-------------------------START crawl of {}", DICTIONARY_URL);
 
