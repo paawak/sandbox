@@ -29,14 +29,14 @@ public class WordAnalyser {
 	    newWord = word;
 	} else {
 
-	    LOGGER.info("processing, hold tight, might take some time...");
-
 	    List<WordPair> singleLetterMatches = dictionaryMatchFunction().apply(applySingleLetterTransforms(word).stream());
 
 	    if (!singleLetterMatches.isEmpty()) {
 		LOGGER.info("spell check applied for single letter transforms");
 		newWord = singleLetterMatches.get(0).transformedWord;
 	    } else {
+
+		LOGGER.info("trying to find 2 letter transforms, hold tight, might take some time...");
 
 		List<WordPair> twoLetterMatches = dictionaryMatchFunction().apply(apply2LetterTransforms(word));
 
