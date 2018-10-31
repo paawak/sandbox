@@ -1,6 +1,7 @@
 package com.swayam.spellchecker;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,8 +41,11 @@ public class WordAnalyser {
                 newWord = singleLetterMatches.get(0).originalWord;
             } else {
 
-                List<WordPair> twoLetterMatches = masterWordList.stream().flatMap((String masterWord) -> {
-                    return apply2LetterTransforms(masterWord).stream();
+                List<WordPair> twoLetterMatches = Arrays.asList(word).stream().flatMap((String masterWord) -> {
+
+                    List<WordPair> trf = apply2LetterTransforms(masterWord);
+                    LOGGER.debug("2 letter transforms for {} : {}", word, trf);
+                    return trf.stream();
                 }).filter((WordPair wordPair) -> {
                     return wordPair.transformedWord.equals(word);
                 }).collect(Collectors.toList());
@@ -148,6 +152,17 @@ public class WordAnalyser {
         public WordPair(String originalWord, String transformedWord) {
             this.originalWord = originalWord;
             this.transformedWord = transformedWord;
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder builder = new StringBuilder();
+            builder.append("WordPair [originalWord=");
+            builder.append(originalWord);
+            builder.append(", transformedWord=");
+            builder.append(transformedWord);
+            builder.append("]");
+            return builder.toString();
         }
 
     }
