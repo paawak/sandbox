@@ -6,10 +6,13 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
@@ -23,7 +26,7 @@ public class DictionaryCrawler {
 
     static final Pattern WORD = Pattern.compile("[A-Za-z]{2,}");
 
-    public Set<String> crawl() {
+    public Collection<String> crawl() {
 
         LOGGER.debug("-------------------------START crawl of {}", DICTIONARY_URL);
 
@@ -34,7 +37,7 @@ public class DictionaryCrawler {
             throw new RuntimeException(e);
         }
 
-        Set<String> allWords = new HashSet<>();
+        Map<String, Integer> allWords = new HashMap<>();
 
         try (BufferedReader bf = new BufferedReader(new InputStreamReader(url.openStream(), Charset.forName("utf-8")));) {
             while (true) {
@@ -50,15 +53,52 @@ public class DictionaryCrawler {
 
         LOGGER.debug("-------------------------END crawl");
 
-        return Collections.unmodifiableSet(allWords);
+        Map<Integer, List<String>> frequencyMap = new HashMap<>();
+
+        for (String word : allWords.keySet()) {
+
+            int frequency = allWords.get(word);
+
+            if (frequencyMap.containsKey(frequency)) {
+                frequencyMap.get(frequency).add(word);
+            } else {
+                List<String> words = new ArrayList<>();
+                words.add(word);
+                frequencyMap.put(frequency, words);
+            }
+        }
+
+        // sort descending order by the frequency
+        List<Integer> sortedFrequency = new ArrayList<Integer>(frequencyMap.keySet());
+
+        Collections.sort(sortedFrequency, (Integer i, Integer j) -> {
+            return j - i;
+        });
+
+        LOGGER.trace("sortedFrequency: {}", sortedFrequency);
+
+        List<String> sortedWords = new ArrayList<>();
+        for (int frequency : sortedFrequency) {
+            sortedWords.addAll(frequencyMap.get(frequency));
+        }
+
+        return Collections.unmodifiableList(sortedWords);
 
     }
 
-    private void parseLine(Set<String> allWords, String line) {
+    private void parseLine(Map<String, Integer> allWords, String line) {
         String[] words = line.split("[\\s,\\.\"\\-\\*]");
         Arrays.stream(words).filter((String word) -> {
             return WORD.matcher(word).matches();
-        }).map(String::toLowerCase).forEach(allWords::add);
+        }).map(String::toLowerCase).forEach((String word) -> {
+
+            if (allWords.containsKey(word)) {
+                allWords.put(word, allWords.get(word) + 1);
+            } else {
+                allWords.put(word, 1);
+            }
+
+        });
     }
 
 }

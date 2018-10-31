@@ -1,7 +1,7 @@
 package com.swayam.spellchecker;
 
+import java.util.Collection;
 import java.util.Scanner;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +11,7 @@ public class SpellChecker {
     private static final Logger LOGGER = LoggerFactory.getLogger(SpellChecker.class);
 
     public static void main(String[] args) {
-        Set<String> allWords = new DictionaryCrawler().crawl();
+        Collection<String> allWords = new DictionaryCrawler().crawl();
         LOGGER.trace("allWords: {}", allWords);
 
         WordAnalyser wordAnalyser = new WordAnalyser(allWords);

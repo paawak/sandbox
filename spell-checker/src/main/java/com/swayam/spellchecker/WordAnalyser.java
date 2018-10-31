@@ -1,8 +1,8 @@
 package com.swayam.spellchecker;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -12,9 +12,9 @@ public class WordAnalyser {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WordAnalyser.class);
 
-    private final Set<String> masterWordList;
+    private final Collection<String> masterWordList;
 
-    public WordAnalyser(Set<String> masterWordList) {
+    public WordAnalyser(Collection<String> masterWordList) {
         this.masterWordList = masterWordList;
     }
 
