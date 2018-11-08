@@ -24,7 +24,10 @@ public class SpellChecker {
 		    LOGGER.warn("Wrong input: expecting only letters from A to Z in upper case or lower case");
 		    continue;
 		}
-		System.out.println(wordAnalyser.doSpellCheck(word));
+
+		String output = new StringBuilder().append("'").append(word).append("' -> '").append(wordAnalyser.doSpellCheck(word)).append("'").toString();
+
+		System.out.println(output);
 	    }
 	}
 

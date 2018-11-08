@@ -48,7 +48,7 @@ public class WordAnalyser {
 	    }
 	}
 
-	return "'" + word + "' -> '" + newWord + "'";
+	return newWord;
 
     }
 
