@@ -1,4 +1,6 @@
-(ns learnclojure.core)
+(ns learnclojure.core
+(:gen-class)
+)
 
 
 (defn findFact
@@ -11,7 +13,7 @@
 
 
 (defn -main
-  [& args]
+  []
   (
     (def y 20)
     (def x (findFact y))
