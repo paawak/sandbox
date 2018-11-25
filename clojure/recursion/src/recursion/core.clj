@@ -2,15 +2,23 @@
   (:gen-class)
   )
 
-(defn findFact
-  "I don't do a whole lot."
-  [x]
-  (println "Hello, World! " x))
+(def findFact
+  (fn [n]
+    (loop [currentNum n
+           result 1]
+       (if (= currentNum 1)
+            result
+          (recur (dec currentNum) (* result currentNum))
+          )
+       )
+    )
+  )
+
 
 (defn -main
   []
   (
-    (findFact 20)
+    (println "The factorial is: " (findFact 4))
     )
 
   )
