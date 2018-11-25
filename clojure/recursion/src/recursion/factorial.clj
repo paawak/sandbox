@@ -16,8 +16,5 @@
 
 (defn -main
   []
-  (
     (println "The factorial is: " (findFact 5))
-    )
-
   )
