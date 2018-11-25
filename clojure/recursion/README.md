@@ -1,14 +1,20 @@
-# recursion
+# Introduction to learn-clojure
 
-A Clojure library designed to ... well, that part is up to you.
+TODO: write [great documentation](http://jacobian.org/writing/what-to-write/)
 
-## Usage
+# Create a new project using lein
+lein new app clojure-noob
 
-FIXME
 
-## License
+# Run from lein when main module not defined
 
-Copyright © 2018 FIXME
+lein run -m recursion.factorial
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+
+
+# Run from lein when main module is defined
+
+lein run
+
+# Create uber jar
+lein uberjar

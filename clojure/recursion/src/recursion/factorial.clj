@@ -1,4 +1,4 @@
-(ns recursion.core
+(ns recursion.factorial
   (:gen-class)
   )
 
