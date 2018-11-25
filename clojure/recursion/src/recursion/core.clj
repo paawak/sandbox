@@ -2,8 +2,8 @@
   (:gen-class)
   )
 
-(def findFact
-  (fn [n]
+(defn findFact
+  [n]
     (loop [currentNum n
            result 1]
        (if (= currentNum 1)
@@ -11,14 +11,13 @@
           (recur (dec currentNum) (* result currentNum))
           )
        )
-    )
   )
 
 
 (defn -main
   []
   (
-    (println "The factorial is: " (findFact 4))
+    (println "The factorial is: " (findFact 5))
     )
 
   )
