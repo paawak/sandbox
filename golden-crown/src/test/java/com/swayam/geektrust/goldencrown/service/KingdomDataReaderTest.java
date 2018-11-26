@@ -1,7 +1,12 @@
 package com.swayam.geektrust.goldencrown.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
+import java.io.IOException;
+import java.io.Reader;
 import java.io.StringReader;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.HashMap;
@@ -118,6 +123,26 @@ public class KingdomDataReaderTest {
 
         // when
         Map<SoutherosKingdom, Kingdom> result = testClass.readAvailableKingdoms(new StringReader(inputLines));
+
+        // then
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testReadAvailableKingdoms_no() throws IOException {
+        // given
+        Reader mockReader = mock(Reader.class);
+
+        when(mockReader.read(any(char[].class), any(Integer.class), any(Integer.class))).thenThrow(IOException.class);
+
+        Map<SoutherosKingdom, Kingdom> expected = new HashMap<>();
+        expected.put(SoutherosKingdom.FIRE, new KingdomImpl("someAnimal1", "myKing"));
+        expected.put(SoutherosKingdom.ICE, new KingdomImpl("someAnimal2", null));
+
+        KingdomDataReader testClass = new KingdomDataReader();
+
+        // when
+        Map<SoutherosKingdom, Kingdom> result = testClass.readAvailableKingdoms(mockReader);
 
         // then
         assertEquals(expected, result);
