@@ -36,6 +36,42 @@ public class IncomingMessageCheckerImplTest {
     }
 
     @Test
+    public void testMessageAccepted_yes_1() {
+        // given
+        IncomingMessageCheckerImpl testClass = new IncomingMessageCheckerImpl();
+
+        // when
+        boolean result = testClass.messageAccepted(SoutherosKingdom.AIR, "Let’s swing the sword together");
+
+        // then
+        assertTrue(result);
+    }
+
+    @Test
+    public void testMessageAccepted_yes_2() {
+        // given
+        IncomingMessageCheckerImpl testClass = new IncomingMessageCheckerImpl();
+
+        // when
+        boolean result = testClass.messageAccepted(SoutherosKingdom.ICE, "Ahoy! Fight for me with men and money");
+
+        // then
+        assertTrue(result);
+    }
+
+    @Test
+    public void testMessageAccepted_yes_3() {
+        // given
+        IncomingMessageCheckerImpl testClass = new IncomingMessageCheckerImpl();
+
+        // when
+        boolean result = testClass.messageAccepted(SoutherosKingdom.FIRE, "Drag on Martin!");
+
+        // then
+        assertTrue(result);
+    }
+
+    @Test
     public void testMessageAccepted_no_1() {
         // given
         IncomingMessageCheckerImpl testClass = new IncomingMessageCheckerImpl();
@@ -54,6 +90,18 @@ public class IncomingMessageCheckerImplTest {
 
         // when
         boolean result = testClass.messageAccepted(SoutherosKingdom.FIRE, "peterpan345");
+
+        // then
+        assertFalse(result);
+    }
+
+    @Test
+    public void testMessageAccepted_no_3() {
+        // given
+        IncomingMessageCheckerImpl testClass = new IncomingMessageCheckerImpl();
+
+        // when
+        boolean result = testClass.messageAccepted(SoutherosKingdom.WATER, "Summer is coming");
 
         // then
         assertFalse(result);
