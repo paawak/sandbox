@@ -9,6 +9,8 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import com.swayam.geektrust.goldencrown.model.SoutherosKingdom;
+
 public class IncomingMessageCheckerImplTest {
 
     @Test

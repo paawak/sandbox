@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+import com.swayam.geektrust.goldencrown.model.Kingdom;
+
 public class IncomingMessageCheckerImpl implements IncomingMessageChecker {
 
     @Override
