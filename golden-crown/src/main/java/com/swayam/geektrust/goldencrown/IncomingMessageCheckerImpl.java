@@ -13,9 +13,9 @@ public class IncomingMessageCheckerImpl implements IncomingMessageChecker {
         Map<Character, Integer> animalEmblemWordFrequency = getCharacterFrequency(kingdom.getAnimalEmblem());
         Map<Character, Integer> rawMessageWordFrequency = getCharacterFrequency(rawMessage);
 
-        long noMatchCharacterCount = animalEmblemWordFrequency.entrySet().stream().filter((Entry<Character, Integer> entry) -> {
-            return !rawMessageWordFrequency.containsKey(entry.getKey()) || (rawMessageWordFrequency.get(entry.getKey()) < entry.getValue());
-        }).count();
+        long noMatchCharacterCount =
+                animalEmblemWordFrequency.entrySet().stream().filter((Entry<Character, Integer> entry) -> !rawMessageWordFrequency.containsKey(entry.getKey())
+                        || (rawMessageWordFrequency.get(entry.getKey()) < entry.getValue())).count();
 
         return noMatchCharacterCount == 0;
     }
