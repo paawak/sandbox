@@ -20,6 +20,7 @@ public class IncomingMessageCheckerImpl implements IncomingMessageChecker {
         return noMatchCharacterCount == 0;
     }
 
+    /* Visible for testing */
     Map<Character, Integer> getCharacterFrequency(String word) {
 
         Map<Character, Integer> characterFrequency = word.chars().mapToObj((int character) -> (char) character)
