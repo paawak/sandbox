@@ -66,4 +66,28 @@ public class KingdomDataReaderTest {
 
     }
 
+    @Test
+    public void testParseDataLine_no_empty_emblem() {
+        // given
+        KingdomDataReader testClass = new KingdomDataReader();
+
+        // when, then
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("The <Animal Emblem> cannot be empty");
+        testClass.parseDataLine("  fire  =   ");
+
+    }
+
+    @Test
+    public void testParseDataLine_no_more_than_2_data_elements() {
+        // given
+        KingdomDataReader testClass = new KingdomDataReader();
+
+        // when, then
+        thrown.expect(UnsupportedOperationException.class);
+        thrown.expectMessage("This <Kingdom Data> format is not yet supported");
+        testClass.parseDataLine("  fire  =  aaa,bbb,ccc ");
+
+    }
+
 }

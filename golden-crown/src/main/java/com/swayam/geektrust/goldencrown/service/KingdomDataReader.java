@@ -50,9 +50,6 @@ public class KingdomDataReader {
 
         if (kingdomDataParts.length == 2) {
             kingName = kingdomDataParts[1].trim();
-            if (kingName.length() == 0) {
-                kingName = null;
-            }
         } else if (kingdomDataParts.length >= 2) {
             throw new UnsupportedOperationException("This <Kingdom Data> format is not yet supported");
         }
