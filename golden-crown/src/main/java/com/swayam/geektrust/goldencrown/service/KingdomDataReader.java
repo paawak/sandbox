@@ -34,23 +34,32 @@ public class KingdomDataReader {
     Entry<SoutherosKingdom, Kingdom> parseDataLine(String line) {
         String[] keyValuePair = line.split("=");
         if (keyValuePair.length != 2) {
-            throw new IllegalStateException("Wrong input format: expecting the line to be of the format: <Kingdom Name>=<Kingdom Data>");
+            throw new IllegalArgumentException("Wrong input format: expecting the line to be of the format: <Kingdom Name>=<Kingdom Data>");
         }
         SoutherosKingdom southerosKingdom = SoutherosKingdom.valueOf(keyValuePair[0].trim());
         String kingdomData = keyValuePair[1].trim();
         String[] kingdomDataParts = kingdomData.split(",");
 
-        Entry<SoutherosKingdom, Kingdom> entry;
+        String animalEmblem;
+        String kingName = null;
 
         if (kingdomDataParts.length == 1) {
-            entry = new SimpleEntry<>(southerosKingdom, new KingdomImpl(kingdomData));
+            animalEmblem = kingdomData.trim();
         } else if (kingdomDataParts.length == 2) {
-            entry = new SimpleEntry<>(southerosKingdom, new KingdomImpl(kingdomDataParts[0].trim(), kingdomDataParts[1].trim()));
+            animalEmblem = kingdomDataParts[0].trim();
+            kingName = kingdomDataParts[1].trim();
+            if (kingName.length() == 0) {
+                kingName = null;
+            }
         } else {
             throw new UnsupportedOperationException("This <Kingdom Data> format is not yet supported");
         }
 
-        return entry;
+        if (animalEmblem.length() == 0) {
+            throw new IllegalArgumentException("The <Animal Emblem> cannot be empty");
+        }
+
+        return new SimpleEntry<>(southerosKingdom, new KingdomImpl(animalEmblem, kingName));
     }
 
 }

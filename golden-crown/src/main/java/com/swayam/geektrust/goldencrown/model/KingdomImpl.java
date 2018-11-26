@@ -7,10 +7,6 @@ public class KingdomImpl implements Kingdom {
     private final String animalEmblem;
     private final Optional<String> king;
 
-    public KingdomImpl(String animalEmblem) {
-        this(animalEmblem, null);
-    }
-
     public KingdomImpl(String animalEmblem, String king) {
         this.animalEmblem = animalEmblem;
         this.king = Optional.ofNullable(king);
