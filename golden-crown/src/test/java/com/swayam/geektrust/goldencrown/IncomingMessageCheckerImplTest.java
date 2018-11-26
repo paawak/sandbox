@@ -29,7 +29,7 @@ public class IncomingMessageCheckerImplTest {
         IncomingMessageCheckerImpl testClass = new IncomingMessageCheckerImpl();
 
         // when
-        boolean result = testClass.messageAccepted(SoutherosKingdom.LAND, "A1D22n333a4444p");
+        boolean result = testClass.messageAccepted(SoutherosKingdom.LAND, "A1D22n333a4444pPP");
 
         // then
         assertTrue(result);
