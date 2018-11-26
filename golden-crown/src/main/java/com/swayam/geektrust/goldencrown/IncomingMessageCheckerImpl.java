@@ -11,13 +11,9 @@ public class IncomingMessageCheckerImpl implements IncomingMessageChecker {
         return false;
     }
 
-    private Map<Character, Integer> getCharacterFrequency(String word) {
+    Map<Character, Integer> getCharacterFrequency(String word) {
 
-        return word.chars().mapToObj((int n) -> (char) n).collect(Collectors.toMap((Character c) -> {
-            return Character.toLowerCase(c);
-        }, (Character c) -> {
-            return 1;
-        }, (Integer val1, Integer val2) -> {
+        return word.chars().mapToObj((int n) -> (char) n).collect(Collectors.toMap(Character::toLowerCase, (Character c) -> 1, (Integer val1, Integer val2) -> {
             return val1 + val2;
         }));
 
