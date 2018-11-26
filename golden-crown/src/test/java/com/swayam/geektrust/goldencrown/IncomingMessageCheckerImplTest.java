@@ -36,12 +36,24 @@ public class IncomingMessageCheckerImplTest {
     }
 
     @Test
-    public void testMessageAccepted_no() {
+    public void testMessageAccepted_no_1() {
         // given
         IncomingMessageCheckerImpl testClass = new IncomingMessageCheckerImpl();
 
         // when
         boolean result = testClass.messageAccepted(SoutherosKingdom.LAND, "p1d22n333a4444p");
+
+        // then
+        assertFalse(result);
+    }
+
+    @Test
+    public void testMessageAccepted_no_2() {
+        // given
+        IncomingMessageCheckerImpl testClass = new IncomingMessageCheckerImpl();
+
+        // when
+        boolean result = testClass.messageAccepted(SoutherosKingdom.FIRE, "peterpan345");
 
         // then
         assertFalse(result);
