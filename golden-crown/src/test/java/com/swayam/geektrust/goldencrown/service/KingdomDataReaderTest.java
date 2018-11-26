@@ -2,7 +2,10 @@ package com.swayam.geektrust.goldencrown.service;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.StringReader;
 import java.util.AbstractMap.SimpleEntry;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.junit.Rule;
@@ -79,6 +82,18 @@ public class KingdomDataReaderTest {
     }
 
     @Test
+    public void testParseDataLine_no_invalid_kingdom() {
+        // given
+        KingdomDataReader testClass = new KingdomDataReader();
+
+        // when, then
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("No enum constant " + SoutherosKingdom.class.getName() + ".FIRE23");
+        testClass.parseDataLine("  fire23  =   ");
+
+    }
+
+    @Test
     public void testParseDataLine_no_more_than_2_data_elements() {
         // given
         KingdomDataReader testClass = new KingdomDataReader();
@@ -88,6 +103,24 @@ public class KingdomDataReaderTest {
         thrown.expectMessage("This <Kingdom Data> format is not yet supported");
         testClass.parseDataLine("  fire  =  aaa,bbb,ccc ");
 
+    }
+
+    @Test
+    public void testReadAvailableKingdoms_yes() {
+        // given
+        String inputLines = " fire  =  someAnimal1 , myKing \n" + " ice  =  someAnimal2 ,  \n";
+
+        Map<SoutherosKingdom, Kingdom> expected = new HashMap<>();
+        expected.put(SoutherosKingdom.FIRE, new KingdomImpl("someAnimal1", "myKing"));
+        expected.put(SoutherosKingdom.ICE, new KingdomImpl("someAnimal2", null));
+
+        KingdomDataReader testClass = new KingdomDataReader();
+
+        // when
+        Map<SoutherosKingdom, Kingdom> result = testClass.readAvailableKingdoms(new StringReader(inputLines));
+
+        // then
+        assertEquals(expected, result);
     }
 
 }
