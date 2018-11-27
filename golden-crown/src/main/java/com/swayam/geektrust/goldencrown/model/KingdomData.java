@@ -2,22 +2,20 @@ package com.swayam.geektrust.goldencrown.model;
 
 import java.util.Optional;
 
-public class KingdomImpl implements Kingdom {
+public class KingdomData {
 
     private final String animalEmblem;
     private final Optional<String> king;
 
-    public KingdomImpl(String animalEmblem, String king) {
+    public KingdomData(String animalEmblem, String king) {
         this.animalEmblem = animalEmblem;
         this.king = Optional.ofNullable(king);
     }
 
-    @Override
     public String getAnimalEmblem() {
         return animalEmblem;
     }
 
-    @Override
     public Optional<String> getKing() {
         return king;
     }
@@ -39,7 +37,7 @@ public class KingdomImpl implements Kingdom {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        KingdomImpl other = (KingdomImpl) obj;
+        KingdomData other = (KingdomData) obj;
         if (animalEmblem == null) {
             if (other.animalEmblem != null)
                 return false;

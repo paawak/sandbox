@@ -5,12 +5,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-import com.swayam.geektrust.goldencrown.model.Kingdom;
+import com.swayam.geektrust.goldencrown.model.KingdomData;
 
 public class IncomingMessageCheckerImpl implements IncomingMessageChecker {
 
     @Override
-    public boolean messageAccepted(Kingdom kingdom, String rawMessage) {
+    public boolean messageAccepted(KingdomData kingdom, String rawMessage) {
 
         Map<Character, Integer> animalEmblemWordFrequency = getCharacterFrequency(kingdom.getAnimalEmblem());
         Map<Character, Integer> rawMessageWordFrequency = getCharacterFrequency(rawMessage);

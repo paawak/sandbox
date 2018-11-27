@@ -1,9 +1,9 @@
 package com.swayam.geektrust.goldencrown;
 
-import com.swayam.geektrust.goldencrown.model.Kingdom;
+import com.swayam.geektrust.goldencrown.model.KingdomData;
 
 public interface IncomingMessageChecker {
 
-    boolean messageAccepted(Kingdom kingdom, String rawMessage);
+    boolean messageAccepted(KingdomData kingdom, String rawMessage);
 
 }

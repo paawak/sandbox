@@ -9,8 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-import com.swayam.geektrust.goldencrown.model.Kingdom;
-import com.swayam.geektrust.goldencrown.model.KingdomImpl;
+import com.swayam.geektrust.goldencrown.model.KingdomData;
 import com.swayam.geektrust.goldencrown.model.SoutherosKingdom;
 
 public class KingdomFileBasedRepository implements KingdomRepository {
@@ -22,11 +21,11 @@ public class KingdomFileBasedRepository implements KingdomRepository {
     }
 
     @Override
-    public Map<SoutherosKingdom, Kingdom> getAvailableKingdoms() {
+    public Map<SoutherosKingdom, KingdomData> getAvailableKingdoms() {
 
         try (BufferedReader br = new BufferedReader(dataReader)) {
 
-            Map<SoutherosKingdom, Kingdom> availableKingdoms = br.lines().filter(line -> line.trim().length() > 0).map(line -> parseDataLine(line))
+            Map<SoutherosKingdom, KingdomData> availableKingdoms = br.lines().filter(line -> line.trim().length() > 0).map(line -> parseDataLine(line))
                     .collect(Collectors.toMap(Entry::getKey, Entry::getValue));
 
             return Collections.unmodifiableMap(availableKingdoms);
@@ -38,7 +37,7 @@ public class KingdomFileBasedRepository implements KingdomRepository {
     }
 
     /* Visible for testing */
-    Entry<SoutherosKingdom, Kingdom> parseDataLine(String line) {
+    Entry<SoutherosKingdom, KingdomData> parseDataLine(String line) {
         String[] keyValuePair = line.split("=");
         if (keyValuePair.length != 2) {
             throw new IllegalArgumentException("Wrong input format: expecting the line to be of the format: <Kingdom Name>=<Kingdom Data>");
@@ -61,7 +60,7 @@ public class KingdomFileBasedRepository implements KingdomRepository {
             throw new UnsupportedOperationException("This <Kingdom Data> format is not yet supported");
         }
 
-        return new SimpleEntry<>(southerosKingdom, new KingdomImpl(animalEmblem, kingName));
+        return new SimpleEntry<>(southerosKingdom, new KingdomData(animalEmblem, kingName));
     }
 
 }

@@ -9,7 +9,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.swayam.geektrust.goldencrown.model.KingdomImpl;
+import com.swayam.geektrust.goldencrown.model.KingdomData;
 
 public class IncomingMessageCheckerImplTest {
 
@@ -19,7 +19,7 @@ public class IncomingMessageCheckerImplTest {
         IncomingMessageCheckerImpl testClass = new IncomingMessageCheckerImpl();
 
         // when
-        boolean result = testClass.messageAccepted(new KingdomImpl("PANDA", null), "a1d22n333a4444p");
+        boolean result = testClass.messageAccepted(new KingdomData("PANDA", null), "a1d22n333a4444p");
 
         // then
         assertTrue(result);
@@ -31,7 +31,7 @@ public class IncomingMessageCheckerImplTest {
         IncomingMessageCheckerImpl testClass = new IncomingMessageCheckerImpl();
 
         // when
-        boolean result = testClass.messageAccepted(new KingdomImpl("PANDA", null), "A1D22n333a4444pPP");
+        boolean result = testClass.messageAccepted(new KingdomData("PANDA", null), "A1D22n333a4444pPP");
 
         // then
         assertTrue(result);
@@ -43,7 +43,7 @@ public class IncomingMessageCheckerImplTest {
         IncomingMessageCheckerImpl testClass = new IncomingMessageCheckerImpl();
 
         // when
-        boolean result = testClass.messageAccepted(new KingdomImpl("owl", null), "Let’s swing the sword together");
+        boolean result = testClass.messageAccepted(new KingdomData("owl", null), "Let’s swing the sword together");
 
         // then
         assertTrue(result);
@@ -55,7 +55,7 @@ public class IncomingMessageCheckerImplTest {
         IncomingMessageCheckerImpl testClass = new IncomingMessageCheckerImpl();
 
         // when
-        boolean result = testClass.messageAccepted(new KingdomImpl("mammoTH", null), "Ahoy! Fight for me with men and money");
+        boolean result = testClass.messageAccepted(new KingdomData("mammoTH", null), "Ahoy! Fight for me with men and money");
 
         // then
         assertTrue(result);
@@ -67,7 +67,7 @@ public class IncomingMessageCheckerImplTest {
         IncomingMessageCheckerImpl testClass = new IncomingMessageCheckerImpl();
 
         // when
-        boolean result = testClass.messageAccepted(new KingdomImpl("Dragon", null), "Drag on Martin!");
+        boolean result = testClass.messageAccepted(new KingdomData("Dragon", null), "Drag on Martin!");
 
         // then
         assertTrue(result);
@@ -79,7 +79,7 @@ public class IncomingMessageCheckerImplTest {
         IncomingMessageCheckerImpl testClass = new IncomingMessageCheckerImpl();
 
         // when
-        boolean result = testClass.messageAccepted(new KingdomImpl("PANDA", null), "p1d22n333a4444p");
+        boolean result = testClass.messageAccepted(new KingdomData("PANDA", null), "p1d22n333a4444p");
 
         // then
         assertFalse(result);
@@ -91,7 +91,7 @@ public class IncomingMessageCheckerImplTest {
         IncomingMessageCheckerImpl testClass = new IncomingMessageCheckerImpl();
 
         // when
-        boolean result = testClass.messageAccepted(new KingdomImpl("Dragon", null), "peterpan345");
+        boolean result = testClass.messageAccepted(new KingdomData("Dragon", null), "peterpan345");
 
         // then
         assertFalse(result);
@@ -103,7 +103,7 @@ public class IncomingMessageCheckerImplTest {
         IncomingMessageCheckerImpl testClass = new IncomingMessageCheckerImpl();
 
         // when
-        boolean result = testClass.messageAccepted(new KingdomImpl("Octopus", null), "Summer is coming");
+        boolean result = testClass.messageAccepted(new KingdomData("Octopus", null), "Summer is coming");
 
         // then
         assertFalse(result);
