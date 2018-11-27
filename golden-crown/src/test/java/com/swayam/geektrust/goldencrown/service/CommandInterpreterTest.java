@@ -57,7 +57,7 @@ public class CommandInterpreterTest {
     }
 
     @Test
-    public void testParseCommand_FIND_ALLIES_OF_RULER_1() {
+    public void testParseCommand_FIND_ALLIES_OF_RULER() {
 	// given
 	CommandInterpreter testClass = new CommandInterpreter();
 
@@ -69,7 +69,7 @@ public class CommandInterpreterTest {
     }
 
     @Test
-    public void testParseCommand_FIND_ALLIES_OF_RULER_2() {
+    public void testParseCommand_FIND_ALLIES_OF_KING() {
 	// given
 	CommandInterpreter testClass = new CommandInterpreter();
 
@@ -77,7 +77,7 @@ public class CommandInterpreterTest {
 	Command result = testClass.parseCommand("Allies of King Shan?");
 
 	// then
-	assertEquals(Command.FIND_ALLIES_OF_RULER, result);
+	assertEquals(Command.FIND_ALLIES_OF_KING, result);
     }
 
 }
