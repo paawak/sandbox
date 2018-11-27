@@ -1,4 +1,4 @@
-package com.swayam.geektrust.goldencrown;
+package com.swayam.geektrust.goldencrown.service;
 
 import com.swayam.geektrust.goldencrown.model.KingdomData;
 

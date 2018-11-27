@@ -1,4 +1,4 @@
-package com.swayam.geektrust.goldencrown;
+package com.swayam.geektrust.goldencrown.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import com.swayam.geektrust.goldencrown.model.Kingdom;
 import com.swayam.geektrust.goldencrown.model.KingdomData;
+import com.swayam.geektrust.goldencrown.service.IncomingMessageCheckerImpl;
 
 public class IncomingMessageCheckerImplTest {
 
