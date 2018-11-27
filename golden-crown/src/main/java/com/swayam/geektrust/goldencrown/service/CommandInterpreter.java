@@ -7,7 +7,7 @@ import com.swayam.geektrust.goldencrown.model.Command;
 public class CommandInterpreter {
 
     private static final String FIND_RULER_REGEX = "^who\\s+is\\s+the\\s+ruler\\s+of\\s+southeros\\s*\\?$";
-    private static final String FIND_ALLIES_OF_RULER_REGEX = "^allies\\s+of[\\w\\s]+\\?$";
+    private static final String FIND_ALLIES_OF_RULER_REGEX = "^allies\\s+of\\s+(ruler|king\\s+\\w+)\\?$";
 
     public Command parseCommand(String rawCommand) {
 	String rawCommandInLowerCase = rawCommand.toLowerCase();
