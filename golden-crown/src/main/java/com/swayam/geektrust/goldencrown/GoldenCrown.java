@@ -21,13 +21,29 @@ public class GoldenCrown {
 		String rawCommand = scanner.nextLine();
 
 		try {
-		    Command command = commandInterpreter.parseCommand(rawCommand);
 
-		    int repeatCount = command.repeatTimes();
+		    Command command;
 
-		    if ((currentRepeatCount == 0) && (repeatCount > 0)) {
-			currentRepeatCount = repeatCount;
-			commandToRepeat = command;
+		    if (currentRepeatCount > 0) {
+			currentRepeatCount--;
+			command = commandToRepeat;
+		    } else {
+			command = commandInterpreter.parseCommand(rawCommand);
+			int repeatCount = command.repeatTimes();
+
+			if (repeatCount > 0) {
+			    currentRepeatCount = repeatCount;
+			    commandToRepeat = command;
+			} else {
+			    currentRepeatCount = 0;
+			    commandToRepeat = null;
+			}
+		    }
+
+		    String result = command.execute(rawCommand);
+
+		    if ((result != null) && (result.trim().length() > 0)) {
+			System.out.println(result);
 		    }
 
 		} catch (Exception e) {
