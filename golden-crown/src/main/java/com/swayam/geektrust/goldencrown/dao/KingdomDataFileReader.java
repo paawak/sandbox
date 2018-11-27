@@ -49,7 +49,7 @@ public class KingdomDataFileReader {
 
 	if (kingdomDataParts.length == 2) {
 	    kingName = kingdomDataParts[1].trim();
-	} else if (kingdomDataParts.length >= 2) {
+	} else if (kingdomDataParts.length > 2) {
 	    throw new UnsupportedOperationException("This <Kingdom Data> format is not yet supported");
 	}
 
