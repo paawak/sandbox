@@ -1,0 +1,47 @@
+package com.swayam.geektrust.goldencrown.service;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
+import com.swayam.geektrust.goldencrown.model.Command;
+
+public class CommandInterpreterTest {
+
+    @Test
+    public void testParseCommand_FIND_RULER() {
+	// given
+	CommandInterpreter testClass = new CommandInterpreter();
+
+	// when
+	Command result = testClass.parseCommand("Who is the ruler of Southeros?");
+
+	// then
+	assertEquals(Command.FIND_RULER, result);
+    }
+
+    @Test
+    public void testParseCommand_FIND_ALLIES_OF_RULER_1() {
+	// given
+	CommandInterpreter testClass = new CommandInterpreter();
+
+	// when
+	Command result = testClass.parseCommand("Allies of Ruler?");
+
+	// then
+	assertEquals(Command.FIND_ALLIES_OF_RULER, result);
+    }
+
+    @Test
+    public void testParseCommand_FIND_ALLIES_OF_RULER_2() {
+	// given
+	CommandInterpreter testClass = new CommandInterpreter();
+
+	// when
+	Command result = testClass.parseCommand("Allies of King Shan?");
+
+	// then
+	assertEquals(Command.FIND_ALLIES_OF_RULER, result);
+    }
+
+}
