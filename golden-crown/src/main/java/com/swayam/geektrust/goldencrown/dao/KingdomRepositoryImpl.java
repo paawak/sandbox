@@ -30,6 +30,12 @@ public class KingdomRepositoryImpl implements KingdomRepository {
         return availableKingdoms;
     }
 
+    @Override
+    public void markSuccessfulMessage(Kingdom from, Kingdom to) {
+        // TODO Auto-generated method stub
+
+    }
+
     /* Visible for testing */
     Map<Kingdom, KingdomData> getAvailableKingdoms(Reader dataReader) {
 
