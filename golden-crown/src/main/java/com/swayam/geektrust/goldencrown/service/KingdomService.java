@@ -14,4 +14,6 @@ public interface KingdomService {
 
     Set<KingdomData> getAlliesOfKingdom(Kingdom kingdom);
 
+    Set<KingdomData> getKingdomsInSoutheros();
+
 }
