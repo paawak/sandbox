@@ -23,7 +23,7 @@ public class KingdomRepositoryImpl implements KingdomRepository {
     private final Map<Kingdom, KingdomData> availableKingdoms;
 
     public KingdomRepositoryImpl(Reader dataReader) {
-	availableKingdoms = getAvailableKingdoms(dataReader);
+	availableKingdoms = readFileForAvailableKingdoms(dataReader);
     }
 
     /* Visible for testing */
@@ -52,7 +52,7 @@ public class KingdomRepositoryImpl implements KingdomRepository {
     }
 
     /* Visible for testing */
-    Map<Kingdom, KingdomData> getAvailableKingdoms(Reader dataReader) {
+    Map<Kingdom, KingdomData> readFileForAvailableKingdoms(Reader dataReader) {
 
 	try (BufferedReader br = new BufferedReader(dataReader)) {
 

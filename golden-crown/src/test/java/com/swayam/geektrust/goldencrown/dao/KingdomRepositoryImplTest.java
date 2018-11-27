@@ -114,7 +114,7 @@ public class KingdomRepositoryImplTest {
     }
 
     @Test
-    public void testGetAvailableKingdoms_yes() {
+    public void testReadFileForAvailableKingdoms_yes() {
 	// given
 	String inputLines = " fire  =  someAnimal1 , myKing \n" + " ice  =  someAnimal2 ,  \n";
 
@@ -125,14 +125,14 @@ public class KingdomRepositoryImplTest {
 	KingdomRepositoryImpl testClass = new KingdomRepositoryImpl();
 
 	// when
-	Map<Kingdom, KingdomData> result = testClass.getAvailableKingdoms(new StringReader(inputLines));
+	Map<Kingdom, KingdomData> result = testClass.readFileForAvailableKingdoms(new StringReader(inputLines));
 
 	// then
 	assertEquals(expected, result);
     }
 
     @Test
-    public void testGetAvailableKingdoms_no() throws IOException {
+    public void testReadFileForAvailableKingdoms_no() throws IOException {
 	// given
 	Reader mockReader = mock(Reader.class);
 
@@ -142,7 +142,7 @@ public class KingdomRepositoryImplTest {
 
 	// when, then
 	thrown.expect(UncheckedIOException.class);
-	testClass.getAvailableKingdoms(mockReader);
+	testClass.readFileForAvailableKingdoms(mockReader);
 
     }
 
