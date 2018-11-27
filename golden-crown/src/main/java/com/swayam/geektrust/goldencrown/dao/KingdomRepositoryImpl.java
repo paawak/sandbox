@@ -5,14 +5,18 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.swayam.geektrust.goldencrown.model.Kingdom;
 import com.swayam.geektrust.goldencrown.model.KingdomData;
 
 public class KingdomRepositoryImpl implements KingdomRepository {
+
+    private final Map<Kingdom, Set<Kingdom>> successfulMessages = new HashMap<>();
 
     private final Map<Kingdom, KingdomData> availableKingdoms;
 
@@ -31,7 +35,7 @@ public class KingdomRepositoryImpl implements KingdomRepository {
     }
 
     @Override
-    public void markSuccessfulMessage(Kingdom from, Kingdom to) {
+    public void saveSuccessfulMessage(Kingdom from, Kingdom to) {
         // TODO Auto-generated method stub
 
     }

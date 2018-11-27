@@ -9,6 +9,6 @@ public interface KingdomRepository {
 
     Map<Kingdom, KingdomData> getAvailableKingdoms();
 
-    void markSuccessfulMessage(Kingdom from, Kingdom to);
+    void saveSuccessfulMessage(Kingdom from, Kingdom to);
 
 }
