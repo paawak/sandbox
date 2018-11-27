@@ -4,12 +4,18 @@ import java.util.Optional;
 
 public class KingdomData {
 
+    private final Kingdom kingdom;
     private final String animalEmblem;
     private final Optional<String> king;
 
-    public KingdomData(String animalEmblem, String king) {
+    public KingdomData(Kingdom kingdom, String animalEmblem, String king) {
+        this.kingdom = kingdom;
         this.animalEmblem = animalEmblem;
         this.king = Optional.ofNullable(king);
+    }
+
+    public Kingdom getKingdom() {
+        return kingdom;
     }
 
     public String getAnimalEmblem() {
@@ -26,6 +32,7 @@ public class KingdomData {
         int result = 1;
         result = prime * result + ((animalEmblem == null) ? 0 : animalEmblem.hashCode());
         result = prime * result + ((king == null) ? 0 : king.hashCode());
+        result = prime * result + ((kingdom == null) ? 0 : kingdom.hashCode());
         return result;
     }
 
@@ -48,13 +55,17 @@ public class KingdomData {
                 return false;
         } else if (!king.equals(other.king))
             return false;
+        if (kingdom != other.kingdom)
+            return false;
         return true;
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("KingdomImpl [animalEmblem=");
+        builder.append("KingdomData [kingdom=");
+        builder.append(kingdom);
+        builder.append(", animalEmblem=");
         builder.append(animalEmblem);
         builder.append(", king=");
         builder.append(king);

@@ -9,8 +9,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-import com.swayam.geektrust.goldencrown.model.KingdomData;
 import com.swayam.geektrust.goldencrown.model.Kingdom;
+import com.swayam.geektrust.goldencrown.model.KingdomData;
 
 public class KingdomFileBasedRepository implements KingdomRepository {
 
@@ -42,7 +42,7 @@ public class KingdomFileBasedRepository implements KingdomRepository {
         if (keyValuePair.length != 2) {
             throw new IllegalArgumentException("Wrong input format: expecting the line to be of the format: <Kingdom Name>=<Kingdom Data>");
         }
-        Kingdom southerosKingdom = Kingdom.valueOf(keyValuePair[0].trim().toUpperCase());
+        Kingdom kingdom = Kingdom.valueOf(keyValuePair[0].trim().toUpperCase());
         String kingdomData = keyValuePair[1].trim();
         String[] kingdomDataParts = kingdomData.split(",");
 
@@ -60,7 +60,7 @@ public class KingdomFileBasedRepository implements KingdomRepository {
             throw new UnsupportedOperationException("This <Kingdom Data> format is not yet supported");
         }
 
-        return new SimpleEntry<>(southerosKingdom, new KingdomData(animalEmblem, kingName));
+        return new SimpleEntry<>(kingdom, new KingdomData(kingdom, animalEmblem, kingName));
     }
 
 }

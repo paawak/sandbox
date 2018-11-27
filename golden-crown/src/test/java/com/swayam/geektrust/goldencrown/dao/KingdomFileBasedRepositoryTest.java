@@ -18,8 +18,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import com.swayam.geektrust.goldencrown.model.KingdomData;
 import com.swayam.geektrust.goldencrown.model.Kingdom;
+import com.swayam.geektrust.goldencrown.model.KingdomData;
 
 public class KingdomFileBasedRepositoryTest {
 
@@ -35,7 +35,7 @@ public class KingdomFileBasedRepositoryTest {
         Entry<Kingdom, KingdomData> result = testClass.parseDataLine(" fire  =  someAnimal , ");
 
         // then
-        assertEquals(new SimpleEntry<>(Kingdom.FIRE, new KingdomData("someAnimal", null)), result);
+        assertEquals(new SimpleEntry<>(Kingdom.FIRE, new KingdomData(Kingdom.FIRE, "someAnimal", null)), result);
     }
 
     @Test
@@ -47,7 +47,7 @@ public class KingdomFileBasedRepositoryTest {
         Entry<Kingdom, KingdomData> result = testClass.parseDataLine(" fire  =  someAnimal  ");
 
         // then
-        assertEquals(new SimpleEntry<>(Kingdom.FIRE, new KingdomData("someAnimal", null)), result);
+        assertEquals(new SimpleEntry<>(Kingdom.FIRE, new KingdomData(Kingdom.FIRE, "someAnimal", null)), result);
     }
 
     @Test
@@ -59,7 +59,7 @@ public class KingdomFileBasedRepositoryTest {
         Entry<Kingdom, KingdomData> result = testClass.parseDataLine(" fire  =  someAnimal , myKing ");
 
         // then
-        assertEquals(new SimpleEntry<>(Kingdom.FIRE, new KingdomData("someAnimal", "myKing")), result);
+        assertEquals(new SimpleEntry<>(Kingdom.FIRE, new KingdomData(Kingdom.FIRE, "someAnimal", "myKing")), result);
     }
 
     @Test
@@ -116,8 +116,8 @@ public class KingdomFileBasedRepositoryTest {
         String inputLines = " fire  =  someAnimal1 , myKing \n" + " ice  =  someAnimal2 ,  \n";
 
         Map<Kingdom, KingdomData> expected = new HashMap<>();
-        expected.put(Kingdom.FIRE, new KingdomData("someAnimal1", "myKing"));
-        expected.put(Kingdom.ICE, new KingdomData("someAnimal2", null));
+        expected.put(Kingdom.FIRE, new KingdomData(Kingdom.FIRE, "someAnimal1", "myKing"));
+        expected.put(Kingdom.ICE, new KingdomData(Kingdom.ICE, "someAnimal2", null));
 
         KingdomRepository testClass = new KingdomFileBasedRepository(new StringReader(inputLines));
 
