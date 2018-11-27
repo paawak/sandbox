@@ -14,14 +14,24 @@ import com.swayam.geektrust.goldencrown.model.KingdomData;
 
 public class KingdomRepositoryImpl implements KingdomRepository {
 
-    private final Reader dataReader;
+    private final Map<Kingdom, KingdomData> availableKingdoms;
 
     public KingdomRepositoryImpl(Reader dataReader) {
-        this.dataReader = dataReader;
+        availableKingdoms = getAvailableKingdoms(dataReader);
+    }
+
+    /* Visible for testing */
+    KingdomRepositoryImpl() {
+        availableKingdoms = null;
     }
 
     @Override
     public Map<Kingdom, KingdomData> getAvailableKingdoms() {
+        return availableKingdoms;
+    }
+
+    /* Visible for testing */
+    Map<Kingdom, KingdomData> getAvailableKingdoms(Reader dataReader) {
 
         try (BufferedReader br = new BufferedReader(dataReader)) {
 

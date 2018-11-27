@@ -29,7 +29,7 @@ public class KingdomRepositoryImplTest {
     @Test
     public void testParseDataLine_yes_only_emblem_1() {
         // given
-        KingdomRepositoryImpl testClass = new KingdomRepositoryImpl(null);
+        KingdomRepositoryImpl testClass = new KingdomRepositoryImpl();
 
         // when
         Entry<Kingdom, KingdomData> result = testClass.parseDataLine(" fire  =  someAnimal , ");
@@ -41,7 +41,7 @@ public class KingdomRepositoryImplTest {
     @Test
     public void testParseDataLine_yes_only_emblem_2() {
         // given
-        KingdomRepositoryImpl testClass = new KingdomRepositoryImpl(null);
+        KingdomRepositoryImpl testClass = new KingdomRepositoryImpl();
 
         // when
         Entry<Kingdom, KingdomData> result = testClass.parseDataLine(" fire  =  someAnimal  ");
@@ -53,7 +53,7 @@ public class KingdomRepositoryImplTest {
     @Test
     public void testParseDataLine_yes_emblem_and_king() {
         // given
-        KingdomRepositoryImpl testClass = new KingdomRepositoryImpl(null);
+        KingdomRepositoryImpl testClass = new KingdomRepositoryImpl();
 
         // when
         Entry<Kingdom, KingdomData> result = testClass.parseDataLine(" fire  =  someAnimal , myKing ");
@@ -65,7 +65,7 @@ public class KingdomRepositoryImplTest {
     @Test
     public void testParseDataLine_no_empty_line() {
         // given
-        KingdomRepositoryImpl testClass = new KingdomRepositoryImpl(null);
+        KingdomRepositoryImpl testClass = new KingdomRepositoryImpl();
 
         // when, then
         thrown.expect(IllegalArgumentException.class);
@@ -77,7 +77,7 @@ public class KingdomRepositoryImplTest {
     @Test
     public void testParseDataLine_no_empty_emblem() {
         // given
-        KingdomRepositoryImpl testClass = new KingdomRepositoryImpl(null);
+        KingdomRepositoryImpl testClass = new KingdomRepositoryImpl();
 
         // when, then
         thrown.expect(IllegalArgumentException.class);
@@ -89,7 +89,7 @@ public class KingdomRepositoryImplTest {
     @Test
     public void testParseDataLine_no_invalid_kingdom() {
         // given
-        KingdomRepositoryImpl testClass = new KingdomRepositoryImpl(null);
+        KingdomRepositoryImpl testClass = new KingdomRepositoryImpl();
 
         // when, then
         thrown.expect(IllegalArgumentException.class);
@@ -101,7 +101,7 @@ public class KingdomRepositoryImplTest {
     @Test
     public void testParseDataLine_no_more_than_2_data_elements() {
         // given
-        KingdomRepositoryImpl testClass = new KingdomRepositoryImpl(null);
+        KingdomRepositoryImpl testClass = new KingdomRepositoryImpl();
 
         // when, then
         thrown.expect(UnsupportedOperationException.class);
@@ -119,10 +119,10 @@ public class KingdomRepositoryImplTest {
         expected.put(Kingdom.FIRE, new KingdomData(Kingdom.FIRE, "someAnimal1", "myKing"));
         expected.put(Kingdom.ICE, new KingdomData(Kingdom.ICE, "someAnimal2", null));
 
-        KingdomRepository testClass = new KingdomRepositoryImpl(new StringReader(inputLines));
+        KingdomRepositoryImpl testClass = new KingdomRepositoryImpl();
 
         // when
-        Map<Kingdom, KingdomData> result = testClass.getAvailableKingdoms();
+        Map<Kingdom, KingdomData> result = testClass.getAvailableKingdoms(new StringReader(inputLines));
 
         // then
         assertEquals(expected, result);
@@ -135,11 +135,11 @@ public class KingdomRepositoryImplTest {
 
         doThrow(IOException.class).when(mockReader).read(any(char[].class), any(Integer.class), any(Integer.class));
 
-        KingdomRepository testClass = new KingdomRepositoryImpl(mockReader);
+        KingdomRepositoryImpl testClass = new KingdomRepositoryImpl();
 
         // when, then
         thrown.expect(UncheckedIOException.class);
-        testClass.getAvailableKingdoms();
+        testClass.getAvailableKingdoms(mockReader);
 
     }
 
