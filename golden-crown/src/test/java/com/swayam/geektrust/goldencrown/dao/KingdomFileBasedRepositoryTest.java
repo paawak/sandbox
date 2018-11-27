@@ -19,7 +19,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import com.swayam.geektrust.goldencrown.model.KingdomData;
-import com.swayam.geektrust.goldencrown.model.SoutherosKingdom;
+import com.swayam.geektrust.goldencrown.model.Kingdom;
 
 public class KingdomFileBasedRepositoryTest {
 
@@ -32,10 +32,10 @@ public class KingdomFileBasedRepositoryTest {
         KingdomFileBasedRepository testClass = new KingdomFileBasedRepository(null);
 
         // when
-        Entry<SoutherosKingdom, KingdomData> result = testClass.parseDataLine(" fire  =  someAnimal , ");
+        Entry<Kingdom, KingdomData> result = testClass.parseDataLine(" fire  =  someAnimal , ");
 
         // then
-        assertEquals(new SimpleEntry<>(SoutherosKingdom.FIRE, new KingdomData("someAnimal", null)), result);
+        assertEquals(new SimpleEntry<>(Kingdom.FIRE, new KingdomData("someAnimal", null)), result);
     }
 
     @Test
@@ -44,10 +44,10 @@ public class KingdomFileBasedRepositoryTest {
         KingdomFileBasedRepository testClass = new KingdomFileBasedRepository(null);
 
         // when
-        Entry<SoutherosKingdom, KingdomData> result = testClass.parseDataLine(" fire  =  someAnimal  ");
+        Entry<Kingdom, KingdomData> result = testClass.parseDataLine(" fire  =  someAnimal  ");
 
         // then
-        assertEquals(new SimpleEntry<>(SoutherosKingdom.FIRE, new KingdomData("someAnimal", null)), result);
+        assertEquals(new SimpleEntry<>(Kingdom.FIRE, new KingdomData("someAnimal", null)), result);
     }
 
     @Test
@@ -56,10 +56,10 @@ public class KingdomFileBasedRepositoryTest {
         KingdomFileBasedRepository testClass = new KingdomFileBasedRepository(null);
 
         // when
-        Entry<SoutherosKingdom, KingdomData> result = testClass.parseDataLine(" fire  =  someAnimal , myKing ");
+        Entry<Kingdom, KingdomData> result = testClass.parseDataLine(" fire  =  someAnimal , myKing ");
 
         // then
-        assertEquals(new SimpleEntry<>(SoutherosKingdom.FIRE, new KingdomData("someAnimal", "myKing")), result);
+        assertEquals(new SimpleEntry<>(Kingdom.FIRE, new KingdomData("someAnimal", "myKing")), result);
     }
 
     @Test
@@ -93,7 +93,7 @@ public class KingdomFileBasedRepositoryTest {
 
         // when, then
         thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("No enum constant " + SoutherosKingdom.class.getName() + ".FIRE23");
+        thrown.expectMessage("No enum constant " + Kingdom.class.getName() + ".FIRE23");
         testClass.parseDataLine("  fire23  =   ");
 
     }
@@ -115,14 +115,14 @@ public class KingdomFileBasedRepositoryTest {
         // given
         String inputLines = " fire  =  someAnimal1 , myKing \n" + " ice  =  someAnimal2 ,  \n";
 
-        Map<SoutherosKingdom, KingdomData> expected = new HashMap<>();
-        expected.put(SoutherosKingdom.FIRE, new KingdomData("someAnimal1", "myKing"));
-        expected.put(SoutherosKingdom.ICE, new KingdomData("someAnimal2", null));
+        Map<Kingdom, KingdomData> expected = new HashMap<>();
+        expected.put(Kingdom.FIRE, new KingdomData("someAnimal1", "myKing"));
+        expected.put(Kingdom.ICE, new KingdomData("someAnimal2", null));
 
         KingdomRepository testClass = new KingdomFileBasedRepository(new StringReader(inputLines));
 
         // when
-        Map<SoutherosKingdom, KingdomData> result = testClass.getAvailableKingdoms();
+        Map<Kingdom, KingdomData> result = testClass.getAvailableKingdoms();
 
         // then
         assertEquals(expected, result);

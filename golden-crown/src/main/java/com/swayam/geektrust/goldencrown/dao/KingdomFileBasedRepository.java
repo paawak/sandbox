@@ -10,7 +10,7 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import com.swayam.geektrust.goldencrown.model.KingdomData;
-import com.swayam.geektrust.goldencrown.model.SoutherosKingdom;
+import com.swayam.geektrust.goldencrown.model.Kingdom;
 
 public class KingdomFileBasedRepository implements KingdomRepository {
 
@@ -21,11 +21,11 @@ public class KingdomFileBasedRepository implements KingdomRepository {
     }
 
     @Override
-    public Map<SoutherosKingdom, KingdomData> getAvailableKingdoms() {
+    public Map<Kingdom, KingdomData> getAvailableKingdoms() {
 
         try (BufferedReader br = new BufferedReader(dataReader)) {
 
-            Map<SoutherosKingdom, KingdomData> availableKingdoms = br.lines().filter(line -> line.trim().length() > 0).map(line -> parseDataLine(line))
+            Map<Kingdom, KingdomData> availableKingdoms = br.lines().filter(line -> line.trim().length() > 0).map(line -> parseDataLine(line))
                     .collect(Collectors.toMap(Entry::getKey, Entry::getValue));
 
             return Collections.unmodifiableMap(availableKingdoms);
@@ -37,12 +37,12 @@ public class KingdomFileBasedRepository implements KingdomRepository {
     }
 
     /* Visible for testing */
-    Entry<SoutherosKingdom, KingdomData> parseDataLine(String line) {
+    Entry<Kingdom, KingdomData> parseDataLine(String line) {
         String[] keyValuePair = line.split("=");
         if (keyValuePair.length != 2) {
             throw new IllegalArgumentException("Wrong input format: expecting the line to be of the format: <Kingdom Name>=<Kingdom Data>");
         }
-        SoutherosKingdom southerosKingdom = SoutherosKingdom.valueOf(keyValuePair[0].trim().toUpperCase());
+        Kingdom southerosKingdom = Kingdom.valueOf(keyValuePair[0].trim().toUpperCase());
         String kingdomData = keyValuePair[1].trim();
         String[] kingdomDataParts = kingdomData.split(",");
 
