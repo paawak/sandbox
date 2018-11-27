@@ -136,10 +136,6 @@ public class KingdomDataReaderTest {
 
         doThrow(IOException.class).when(mockReader).read(any(char[].class), any(Integer.class), any(Integer.class));
 
-        Map<SoutherosKingdom, Kingdom> expected = new HashMap<>();
-        expected.put(SoutherosKingdom.FIRE, new KingdomImpl("someAnimal1", "myKing"));
-        expected.put(SoutherosKingdom.ICE, new KingdomImpl("someAnimal2", null));
-
         KingdomDataReader testClass = new KingdomDataReader();
 
         // when, then
