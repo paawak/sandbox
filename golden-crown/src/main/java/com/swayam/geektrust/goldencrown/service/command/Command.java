@@ -4,4 +4,8 @@ public interface Command {
 
     String execute(String rawCommand);
 
+    default int repeatTimes() {
+	return 0;
+    }
+
 }
