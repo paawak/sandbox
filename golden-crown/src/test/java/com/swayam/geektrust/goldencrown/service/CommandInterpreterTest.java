@@ -1,83 +1,86 @@
 package com.swayam.geektrust.goldencrown.service;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.swayam.geektrust.goldencrown.model.Action;
+import com.swayam.geektrust.goldencrown.service.command.AlliesOfKingFinderCommand;
+import com.swayam.geektrust.goldencrown.service.command.AlliesOfRulerFinderCommand;
+import com.swayam.geektrust.goldencrown.service.command.Command;
+import com.swayam.geektrust.goldencrown.service.command.RulerFinderCommand;
 
 public class CommandInterpreterTest {
 
     @Test
     public void testParseCommand_FIND_RULER_mixed_case() {
 	// given
-	CommandInterpreter testClass = new CommandInterpreter();
+	CommandInterpreter testClass = new CommandInterpreter(null);
 
 	// when
-	Action result = testClass.parseCommand("Who is the ruler of Southeros?");
+	Command result = testClass.parseCommand("Who is the ruler of Southeros?");
 
 	// then
-	assertEquals(Action.FIND_RULER, result);
+	assertTrue(result instanceof RulerFinderCommand);
     }
 
     @Test
     public void testParseCommand_FIND_RULER_lower_case() {
 	// given
-	CommandInterpreter testClass = new CommandInterpreter();
+	CommandInterpreter testClass = new CommandInterpreter(null);
 
 	// when
-	Action result = testClass.parseCommand("who is the ruler of southeros?");
+	Command result = testClass.parseCommand("who is the ruler of southeros?");
 
 	// then
-	assertEquals(Action.FIND_RULER, result);
+	assertTrue(result instanceof RulerFinderCommand);
     }
 
     @Test
     public void testParseCommand_FIND_RULER_upper_case() {
 	// given
-	CommandInterpreter testClass = new CommandInterpreter();
+	CommandInterpreter testClass = new CommandInterpreter(null);
 
 	// when
-	Action result = testClass.parseCommand("WHO IS THE RULER OF SOUTHEROS?");
+	Command result = testClass.parseCommand("WHO IS THE RULER OF SOUTHEROS?");
 
 	// then
-	assertEquals(Action.FIND_RULER, result);
+	assertTrue(result instanceof RulerFinderCommand);
     }
 
     @Test
     public void testParseCommand_FIND_RULER_many_spaces() {
 	// given
-	CommandInterpreter testClass = new CommandInterpreter();
+	CommandInterpreter testClass = new CommandInterpreter(null);
 
 	// when
-	Action result = testClass.parseCommand("Who     is    the    ruler    of    Southeros   ?");
+	Command result = testClass.parseCommand("Who     is    the    ruler    of    Southeros   ?");
 
 	// then
-	assertEquals(Action.FIND_RULER, result);
+	assertTrue(result instanceof RulerFinderCommand);
     }
 
     @Test
     public void testParseCommand_FIND_ALLIES_OF_RULER() {
 	// given
-	CommandInterpreter testClass = new CommandInterpreter();
+	CommandInterpreter testClass = new CommandInterpreter(null);
 
 	// when
-	Action result = testClass.parseCommand("Allies of Ruler?");
+	Command result = testClass.parseCommand("Allies of Ruler?");
 
 	// then
-	assertEquals(Action.FIND_ALLIES_OF_RULER, result);
+	assertTrue(result instanceof AlliesOfRulerFinderCommand);
     }
 
     @Test
     public void testParseCommand_FIND_ALLIES_OF_KING() {
 	// given
-	CommandInterpreter testClass = new CommandInterpreter();
+	CommandInterpreter testClass = new CommandInterpreter(null);
 
 	// when
-	Action result = testClass.parseCommand("Allies of King Shan?");
+	Command result = testClass.parseCommand("Allies of King Shan?");
 
 	// then
-	assertEquals(Action.FIND_ALLIES_OF_KING, result);
+	assertTrue(result instanceof AlliesOfKingFinderCommand);
     }
 
 }
