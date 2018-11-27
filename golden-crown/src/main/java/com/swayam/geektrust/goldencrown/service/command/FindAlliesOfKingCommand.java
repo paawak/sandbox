@@ -1,18 +1,25 @@
 package com.swayam.geektrust.goldencrown.service.command;
 
+import java.util.Set;
+
+import com.swayam.geektrust.goldencrown.model.Kingdom;
+import com.swayam.geektrust.goldencrown.model.KingdomData;
 import com.swayam.geektrust.goldencrown.service.KingdomService;
 
-public class FindAlliesOfKingCommand implements Command {
-
-    private final KingdomService kingdomService;
+public class FindAlliesOfKingCommand extends FindAlliesOfRulerCommand {
 
     public FindAlliesOfKingCommand(KingdomService kingdomService) {
-	this.kingdomService = kingdomService;
+	super(kingdomService);
     }
 
     @Override
     public String execute(String rawCommand) {
-	// TODO Auto-generated method stub
+	Set<KingdomData> allies = getKingdomService().getAlliesOfKingdom(getKingdomFromRawCommand(rawCommand));
+	return formatAllies(allies);
+    }
+
+    /* visible for testing */
+    Kingdom getKingdomFromRawCommand(String rawCommand) {
 	return null;
     }
 

@@ -17,10 +17,18 @@ public class FindAlliesOfRulerCommand implements Command {
     @Override
     public String execute(String rawCommand) {
 	Set<KingdomData> allies = kingdomService.getAlliesOfRuler();
+	return formatAllies(allies);
+    }
+
+    String formatAllies(Set<KingdomData> allies) {
 	if (allies.isEmpty()) {
 	    return "None";
 	}
 	return allies.stream().map(KingdomData::getKingdom).map(Kingdom::name).sorted().reduce((first, second) -> first + ", " + second).get();
+    }
+
+    KingdomService getKingdomService() {
+	return kingdomService;
     }
 
 }
