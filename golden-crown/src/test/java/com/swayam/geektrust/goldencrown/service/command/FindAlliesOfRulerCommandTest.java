@@ -47,7 +47,23 @@ public class FindAlliesOfRulerCommandTest {
     }
 
     @Test
-    public void testExecute_multiple_allies() {
+    public void testExecute_multiple_allies_1() {
+	// given
+	KingdomService kingdomService = mock(KingdomService.class);
+	when(kingdomService.getAlliesOfRuler()).thenReturn(
+		new HashSet<>(Arrays.asList(new KingdomData(Kingdom.LAND, "someAnimal", null), new KingdomData(Kingdom.WATER, "someAnimal", null), new KingdomData(Kingdom.ICE, "someAnimal", null))));
+
+	FindAlliesOfRulerCommand testClass = new FindAlliesOfRulerCommand(kingdomService);
+
+	// when
+	String result = testClass.execute(null);
+
+	// then
+	assertEquals("ICE, LAND, WATER", result);
+    }
+
+    @Test
+    public void testExecute_multiple_allies_2() {
 	// given
 	KingdomService kingdomService = mock(KingdomService.class);
 	when(kingdomService.getAlliesOfRuler()).thenReturn(new HashSet<>(Arrays.asList(new KingdomData(Kingdom.AIR, "someAnimal", null), new KingdomData(Kingdom.LAND, "someAnimal", null),
