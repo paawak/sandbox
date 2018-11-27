@@ -1,0 +1,12 @@
+package com.swayam.geektrust.goldencrown.dao;
+
+import java.util.Map;
+
+import com.swayam.geektrust.goldencrown.model.Kingdom;
+import com.swayam.geektrust.goldencrown.model.SoutherosKingdom;
+
+public interface KingdomRepository {
+
+    Map<SoutherosKingdom, Kingdom> getAvailableKingdoms();
+
+}

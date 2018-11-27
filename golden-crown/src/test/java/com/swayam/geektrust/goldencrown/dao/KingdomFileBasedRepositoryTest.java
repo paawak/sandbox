@@ -1,4 +1,4 @@
-package com.swayam.geektrust.goldencrown.service;
+package com.swayam.geektrust.goldencrown.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -18,11 +18,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import com.swayam.geektrust.goldencrown.dao.KingdomFileBasedRepository;
+import com.swayam.geektrust.goldencrown.dao.KingdomRepository;
 import com.swayam.geektrust.goldencrown.model.Kingdom;
 import com.swayam.geektrust.goldencrown.model.KingdomImpl;
 import com.swayam.geektrust.goldencrown.model.SoutherosKingdom;
 
-public class KingdomDataReaderTest {
+public class KingdomFileBasedRepositoryTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -30,7 +32,7 @@ public class KingdomDataReaderTest {
     @Test
     public void testParseDataLine_yes_only_emblem_1() {
         // given
-        KingdomDataReader testClass = new KingdomDataReader();
+        KingdomFileBasedRepository testClass = new KingdomFileBasedRepository(null);
 
         // when
         Entry<SoutherosKingdom, Kingdom> result = testClass.parseDataLine(" fire  =  someAnimal , ");
@@ -42,7 +44,7 @@ public class KingdomDataReaderTest {
     @Test
     public void testParseDataLine_yes_only_emblem_2() {
         // given
-        KingdomDataReader testClass = new KingdomDataReader();
+        KingdomFileBasedRepository testClass = new KingdomFileBasedRepository(null);
 
         // when
         Entry<SoutherosKingdom, Kingdom> result = testClass.parseDataLine(" fire  =  someAnimal  ");
@@ -54,7 +56,7 @@ public class KingdomDataReaderTest {
     @Test
     public void testParseDataLine_yes_emblem_and_king() {
         // given
-        KingdomDataReader testClass = new KingdomDataReader();
+        KingdomFileBasedRepository testClass = new KingdomFileBasedRepository(null);
 
         // when
         Entry<SoutherosKingdom, Kingdom> result = testClass.parseDataLine(" fire  =  someAnimal , myKing ");
@@ -66,7 +68,7 @@ public class KingdomDataReaderTest {
     @Test
     public void testParseDataLine_no_empty_line() {
         // given
-        KingdomDataReader testClass = new KingdomDataReader();
+        KingdomFileBasedRepository testClass = new KingdomFileBasedRepository(null);
 
         // when, then
         thrown.expect(IllegalArgumentException.class);
@@ -78,7 +80,7 @@ public class KingdomDataReaderTest {
     @Test
     public void testParseDataLine_no_empty_emblem() {
         // given
-        KingdomDataReader testClass = new KingdomDataReader();
+        KingdomFileBasedRepository testClass = new KingdomFileBasedRepository(null);
 
         // when, then
         thrown.expect(IllegalArgumentException.class);
@@ -90,7 +92,7 @@ public class KingdomDataReaderTest {
     @Test
     public void testParseDataLine_no_invalid_kingdom() {
         // given
-        KingdomDataReader testClass = new KingdomDataReader();
+        KingdomFileBasedRepository testClass = new KingdomFileBasedRepository(null);
 
         // when, then
         thrown.expect(IllegalArgumentException.class);
@@ -102,7 +104,7 @@ public class KingdomDataReaderTest {
     @Test
     public void testParseDataLine_no_more_than_2_data_elements() {
         // given
-        KingdomDataReader testClass = new KingdomDataReader();
+        KingdomFileBasedRepository testClass = new KingdomFileBasedRepository(null);
 
         // when, then
         thrown.expect(UnsupportedOperationException.class);
@@ -112,7 +114,7 @@ public class KingdomDataReaderTest {
     }
 
     @Test
-    public void testReadAvailableKingdoms_yes() {
+    public void testGetAvailableKingdoms_yes() {
         // given
         String inputLines = " fire  =  someAnimal1 , myKing \n" + " ice  =  someAnimal2 ,  \n";
 
@@ -120,27 +122,27 @@ public class KingdomDataReaderTest {
         expected.put(SoutherosKingdom.FIRE, new KingdomImpl("someAnimal1", "myKing"));
         expected.put(SoutherosKingdom.ICE, new KingdomImpl("someAnimal2", null));
 
-        KingdomDataReader testClass = new KingdomDataReader();
+        KingdomRepository testClass = new KingdomFileBasedRepository(new StringReader(inputLines));
 
         // when
-        Map<SoutherosKingdom, Kingdom> result = testClass.readAvailableKingdoms(new StringReader(inputLines));
+        Map<SoutherosKingdom, Kingdom> result = testClass.getAvailableKingdoms();
 
         // then
         assertEquals(expected, result);
     }
 
     @Test
-    public void testReadAvailableKingdoms_no() throws IOException {
+    public void testGetAvailableKingdoms_no() throws IOException {
         // given
         Reader mockReader = mock(Reader.class);
 
         doThrow(IOException.class).when(mockReader).read(any(char[].class), any(Integer.class), any(Integer.class));
 
-        KingdomDataReader testClass = new KingdomDataReader();
+        KingdomRepository testClass = new KingdomFileBasedRepository(mockReader);
 
         // when, then
         thrown.expect(UncheckedIOException.class);
-        testClass.readAvailableKingdoms(mockReader);
+        testClass.getAvailableKingdoms();
 
     }
 

@@ -1,4 +1,4 @@
-package com.swayam.geektrust.goldencrown.service;
+package com.swayam.geektrust.goldencrown.dao;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,9 +13,16 @@ import com.swayam.geektrust.goldencrown.model.Kingdom;
 import com.swayam.geektrust.goldencrown.model.KingdomImpl;
 import com.swayam.geektrust.goldencrown.model.SoutherosKingdom;
 
-public class KingdomDataReader {
+public class KingdomFileBasedRepository implements KingdomRepository {
 
-    public Map<SoutherosKingdom, Kingdom> readAvailableKingdoms(Reader dataReader) {
+    private final Reader dataReader;
+
+    public KingdomFileBasedRepository(Reader dataReader) {
+        this.dataReader = dataReader;
+    }
+
+    @Override
+    public Map<SoutherosKingdom, Kingdom> getAvailableKingdoms() {
 
         try (BufferedReader br = new BufferedReader(dataReader)) {
 
