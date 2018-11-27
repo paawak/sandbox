@@ -5,11 +5,11 @@ import java.util.Optional;
 import com.swayam.geektrust.goldencrown.model.KingdomData;
 import com.swayam.geektrust.goldencrown.service.KingdomService;
 
-public class FindRulerCommand implements Command {
+public class RulerFinderCommand implements Command {
 
     private final KingdomService kingdomService;
 
-    public FindRulerCommand(KingdomService kingdomService) {
+    public RulerFinderCommand(KingdomService kingdomService) {
 	this.kingdomService = kingdomService;
     }
 

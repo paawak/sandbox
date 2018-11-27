@@ -14,7 +14,7 @@ import com.swayam.geektrust.goldencrown.model.Kingdom;
 import com.swayam.geektrust.goldencrown.model.KingdomData;
 import com.swayam.geektrust.goldencrown.service.KingdomService;
 
-public class FindAlliesOfRulerCommandTest {
+public class AlliesOfRulerFinderCommandTest {
 
     @Test
     public void testExecute_no_allies() {
@@ -22,7 +22,7 @@ public class FindAlliesOfRulerCommandTest {
 	KingdomService kingdomService = mock(KingdomService.class);
 	when(kingdomService.getAlliesOfRuler()).thenReturn(Collections.emptySet());
 
-	FindAlliesOfRulerCommand testClass = new FindAlliesOfRulerCommand(kingdomService);
+	AlliesOfRulerFinderCommand testClass = new AlliesOfRulerFinderCommand(kingdomService);
 
 	// when
 	String result = testClass.execute(null);
@@ -37,7 +37,7 @@ public class FindAlliesOfRulerCommandTest {
 	KingdomService kingdomService = mock(KingdomService.class);
 	when(kingdomService.getAlliesOfRuler()).thenReturn(new HashSet<>(Arrays.asList(new KingdomData(Kingdom.AIR, "someAnimal", null))));
 
-	FindAlliesOfRulerCommand testClass = new FindAlliesOfRulerCommand(kingdomService);
+	AlliesOfRulerFinderCommand testClass = new AlliesOfRulerFinderCommand(kingdomService);
 
 	// when
 	String result = testClass.execute(null);
@@ -53,7 +53,7 @@ public class FindAlliesOfRulerCommandTest {
 	when(kingdomService.getAlliesOfRuler()).thenReturn(
 		new HashSet<>(Arrays.asList(new KingdomData(Kingdom.LAND, "someAnimal", null), new KingdomData(Kingdom.WATER, "someAnimal", null), new KingdomData(Kingdom.ICE, "someAnimal", null))));
 
-	FindAlliesOfRulerCommand testClass = new FindAlliesOfRulerCommand(kingdomService);
+	AlliesOfRulerFinderCommand testClass = new AlliesOfRulerFinderCommand(kingdomService);
 
 	// when
 	String result = testClass.execute(null);
@@ -69,7 +69,7 @@ public class FindAlliesOfRulerCommandTest {
 	when(kingdomService.getAlliesOfRuler()).thenReturn(new HashSet<>(Arrays.asList(new KingdomData(Kingdom.AIR, "someAnimal", null), new KingdomData(Kingdom.LAND, "someAnimal", null),
 		new KingdomData(Kingdom.WATER, "someAnimal", null), new KingdomData(Kingdom.ICE, "someAnimal", null))));
 
-	FindAlliesOfRulerCommand testClass = new FindAlliesOfRulerCommand(kingdomService);
+	AlliesOfRulerFinderCommand testClass = new AlliesOfRulerFinderCommand(kingdomService);
 
 	// when
 	String result = testClass.execute(null);

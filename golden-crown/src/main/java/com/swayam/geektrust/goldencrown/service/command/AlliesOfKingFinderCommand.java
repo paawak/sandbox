@@ -6,9 +6,9 @@ import com.swayam.geektrust.goldencrown.model.Kingdom;
 import com.swayam.geektrust.goldencrown.model.KingdomData;
 import com.swayam.geektrust.goldencrown.service.KingdomService;
 
-public class FindAlliesOfKingCommand extends FindAlliesOfRulerCommand {
+public class AlliesOfKingFinderCommand extends AlliesOfRulerFinderCommand {
 
-    public FindAlliesOfKingCommand(KingdomService kingdomService) {
+    public AlliesOfKingFinderCommand(KingdomService kingdomService) {
 	super(kingdomService);
     }
 

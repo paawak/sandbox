@@ -6,11 +6,11 @@ import com.swayam.geektrust.goldencrown.model.Kingdom;
 import com.swayam.geektrust.goldencrown.model.KingdomData;
 import com.swayam.geektrust.goldencrown.service.KingdomService;
 
-public class FindAlliesOfRulerCommand implements Command {
+public class AlliesOfRulerFinderCommand implements Command {
 
     private final KingdomService kingdomService;
 
-    public FindAlliesOfRulerCommand(KingdomService kingdomService) {
+    public AlliesOfRulerFinderCommand(KingdomService kingdomService) {
 	this.kingdomService = kingdomService;
     }
 
