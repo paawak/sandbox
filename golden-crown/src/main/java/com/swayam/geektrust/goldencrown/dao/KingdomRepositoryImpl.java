@@ -12,11 +12,11 @@ import java.util.stream.Collectors;
 import com.swayam.geektrust.goldencrown.model.Kingdom;
 import com.swayam.geektrust.goldencrown.model.KingdomData;
 
-public class KingdomFileBasedRepository implements KingdomRepository {
+public class KingdomRepositoryImpl implements KingdomRepository {
 
     private final Reader dataReader;
 
-    public KingdomFileBasedRepository(Reader dataReader) {
+    public KingdomRepositoryImpl(Reader dataReader) {
         this.dataReader = dataReader;
     }
 

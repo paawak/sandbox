@@ -21,7 +21,7 @@ import org.junit.rules.ExpectedException;
 import com.swayam.geektrust.goldencrown.model.Kingdom;
 import com.swayam.geektrust.goldencrown.model.KingdomData;
 
-public class KingdomFileBasedRepositoryTest {
+public class KingdomRepositoryImplTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -29,7 +29,7 @@ public class KingdomFileBasedRepositoryTest {
     @Test
     public void testParseDataLine_yes_only_emblem_1() {
         // given
-        KingdomFileBasedRepository testClass = new KingdomFileBasedRepository(null);
+        KingdomRepositoryImpl testClass = new KingdomRepositoryImpl(null);
 
         // when
         Entry<Kingdom, KingdomData> result = testClass.parseDataLine(" fire  =  someAnimal , ");
@@ -41,7 +41,7 @@ public class KingdomFileBasedRepositoryTest {
     @Test
     public void testParseDataLine_yes_only_emblem_2() {
         // given
-        KingdomFileBasedRepository testClass = new KingdomFileBasedRepository(null);
+        KingdomRepositoryImpl testClass = new KingdomRepositoryImpl(null);
 
         // when
         Entry<Kingdom, KingdomData> result = testClass.parseDataLine(" fire  =  someAnimal  ");
@@ -53,7 +53,7 @@ public class KingdomFileBasedRepositoryTest {
     @Test
     public void testParseDataLine_yes_emblem_and_king() {
         // given
-        KingdomFileBasedRepository testClass = new KingdomFileBasedRepository(null);
+        KingdomRepositoryImpl testClass = new KingdomRepositoryImpl(null);
 
         // when
         Entry<Kingdom, KingdomData> result = testClass.parseDataLine(" fire  =  someAnimal , myKing ");
@@ -65,7 +65,7 @@ public class KingdomFileBasedRepositoryTest {
     @Test
     public void testParseDataLine_no_empty_line() {
         // given
-        KingdomFileBasedRepository testClass = new KingdomFileBasedRepository(null);
+        KingdomRepositoryImpl testClass = new KingdomRepositoryImpl(null);
 
         // when, then
         thrown.expect(IllegalArgumentException.class);
@@ -77,7 +77,7 @@ public class KingdomFileBasedRepositoryTest {
     @Test
     public void testParseDataLine_no_empty_emblem() {
         // given
-        KingdomFileBasedRepository testClass = new KingdomFileBasedRepository(null);
+        KingdomRepositoryImpl testClass = new KingdomRepositoryImpl(null);
 
         // when, then
         thrown.expect(IllegalArgumentException.class);
@@ -89,7 +89,7 @@ public class KingdomFileBasedRepositoryTest {
     @Test
     public void testParseDataLine_no_invalid_kingdom() {
         // given
-        KingdomFileBasedRepository testClass = new KingdomFileBasedRepository(null);
+        KingdomRepositoryImpl testClass = new KingdomRepositoryImpl(null);
 
         // when, then
         thrown.expect(IllegalArgumentException.class);
@@ -101,7 +101,7 @@ public class KingdomFileBasedRepositoryTest {
     @Test
     public void testParseDataLine_no_more_than_2_data_elements() {
         // given
-        KingdomFileBasedRepository testClass = new KingdomFileBasedRepository(null);
+        KingdomRepositoryImpl testClass = new KingdomRepositoryImpl(null);
 
         // when, then
         thrown.expect(UnsupportedOperationException.class);
@@ -119,7 +119,7 @@ public class KingdomFileBasedRepositoryTest {
         expected.put(Kingdom.FIRE, new KingdomData(Kingdom.FIRE, "someAnimal1", "myKing"));
         expected.put(Kingdom.ICE, new KingdomData(Kingdom.ICE, "someAnimal2", null));
 
-        KingdomRepository testClass = new KingdomFileBasedRepository(new StringReader(inputLines));
+        KingdomRepository testClass = new KingdomRepositoryImpl(new StringReader(inputLines));
 
         // when
         Map<Kingdom, KingdomData> result = testClass.getAvailableKingdoms();
@@ -135,7 +135,7 @@ public class KingdomFileBasedRepositoryTest {
 
         doThrow(IOException.class).when(mockReader).read(any(char[].class), any(Integer.class), any(Integer.class));
 
-        KingdomRepository testClass = new KingdomFileBasedRepository(mockReader);
+        KingdomRepository testClass = new KingdomRepositoryImpl(mockReader);
 
         // when, then
         thrown.expect(UncheckedIOException.class);
