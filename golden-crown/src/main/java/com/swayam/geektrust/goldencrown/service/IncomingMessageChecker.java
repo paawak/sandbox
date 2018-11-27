@@ -4,6 +4,6 @@ import com.swayam.geektrust.goldencrown.model.KingdomData;
 
 public interface IncomingMessageChecker {
 
-    boolean messageAccepted(KingdomData kingdom, String rawMessage);
+    boolean isMessageAccepted(KingdomData kingdom, String rawMessage);
 
 }
