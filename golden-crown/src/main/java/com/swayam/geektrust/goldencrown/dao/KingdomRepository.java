@@ -14,4 +14,8 @@ public interface KingdomRepository {
 
     Set<Kingdom> getSuccessfulMessages(Kingdom from);
 
+    Map<Kingdom, Set<Kingdom>> getSuccessfulMessages();
+
+    KingdomData getKingdomData(Kingdom kingdom);
+
 }
