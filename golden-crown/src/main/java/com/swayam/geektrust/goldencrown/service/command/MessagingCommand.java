@@ -5,6 +5,8 @@ import com.swayam.geektrust.goldencrown.service.KingdomService;
 
 class MessagingCommand implements Command {
 
+    private static final String INPUT_MESSAGE_REGEX = "^\\w+\\,\\s+\".+\"$";
+
     private final KingdomService kingdomService;
     private final Kingdom from;
     private final int repeatTime;
@@ -17,12 +19,18 @@ class MessagingCommand implements Command {
 
     @Override
     public String execute(String rawCommand) {
+	System.out.println("******** " + rawCommand);
 	return "";
     }
 
     @Override
     public int getRepeatTime() {
 	return repeatTime;
+    }
+
+    /* added for testing */
+    Kingdom getFrom() {
+	return from;
     }
 
 }

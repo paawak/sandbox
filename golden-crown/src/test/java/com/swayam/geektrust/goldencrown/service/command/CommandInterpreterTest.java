@@ -1,14 +1,15 @@
 package com.swayam.geektrust.goldencrown.service.command;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import org.junit.Test;
 
-import com.swayam.geektrust.goldencrown.service.command.AlliesOfKingFinderCommand;
-import com.swayam.geektrust.goldencrown.service.command.AlliesOfRulerFinderCommand;
-import com.swayam.geektrust.goldencrown.service.command.Command;
-import com.swayam.geektrust.goldencrown.service.command.CommandInterpreter;
-import com.swayam.geektrust.goldencrown.service.command.RulerFinderCommand;
+import com.swayam.geektrust.goldencrown.model.Kingdom;
+import com.swayam.geektrust.goldencrown.model.KingdomData;
+import com.swayam.geektrust.goldencrown.service.KingdomService;
 
 public class CommandInterpreterTest {
 
@@ -82,6 +83,27 @@ public class CommandInterpreterTest {
 
 	// then
 	assertTrue(result instanceof AlliesOfKingFinderCommand);
+    }
+
+    @Test
+    public void testParseCommand_START_SENDING_MESSAGES_REGEX() {
+
+	// given
+	KingdomService kingdomService = mock(KingdomService.class);
+	when(kingdomService.getKingdomData("shan")).thenReturn(new KingdomData(Kingdom.AIR, "aaa", "Shan"));
+
+	CommandInterpreter testClass = new CommandInterpreter(kingdomService);
+
+	// when
+	Command result = testClass.parseCommand("MessaGes   to 3  Kingdoms from King Shan");
+
+	// then
+	assertTrue(result instanceof MessagingCommand);
+
+	MessagingCommand messagingCommand = (MessagingCommand) result;
+
+	assertEquals(3, messagingCommand.getRepeatTime());
+	assertEquals(Kingdom.AIR, messagingCommand.getFrom());
     }
 
 }
