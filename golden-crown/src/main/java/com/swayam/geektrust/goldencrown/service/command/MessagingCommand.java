@@ -45,4 +45,16 @@ class MessagingCommand implements Command {
 	return from;
     }
 
+    /* added for testing */
+    Kingdom getKingdomToSendMessage(String rawCommand) {
+	String kingdom = rawCommand.split(",")[0].trim().toUpperCase();
+	return Kingdom.valueOf(kingdom);
+    }
+
+    /* added for testing */
+    String getMessageToSend(String rawCommand) {
+	String messageWithQuote = rawCommand.split(",")[1].trim();
+	return messageWithQuote.substring(1, messageWithQuote.length() - 1);
+    }
+
 }

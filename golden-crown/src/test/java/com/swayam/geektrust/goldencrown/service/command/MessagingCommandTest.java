@@ -1,10 +1,13 @@
 package com.swayam.geektrust.goldencrown.service.command;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import com.swayam.geektrust.goldencrown.model.Kingdom;
 
 public class MessagingCommandTest {
 
@@ -32,7 +35,30 @@ public class MessagingCommandTest {
 	thrown.expect(IllegalArgumentException.class);
 	thrown.expectMessage("Invalid message format");
 	testClass.execute("abrcadabra");
+    }
 
+    @Test
+    public void testGetKingdomToSendMessage() {
+	// given
+	MessagingCommand testClass = new MessagingCommand(null, null, 0);
+
+	// when
+	Kingdom result = testClass.getKingdomToSendMessage("Air, \"Let’s swing the sword together\"");
+
+	// then
+	assertEquals(Kingdom.AIR, result);
+    }
+
+    @Test
+    public void testGetMessageToSend() {
+	// given
+	MessagingCommand testClass = new MessagingCommand(null, null, 0);
+
+	// when
+	String result = testClass.getMessageToSend("Air, \"Let’s swing the sword together\"");
+
+	// then
+	assertEquals("Let’s swing the sword together", result);
     }
 
 }
