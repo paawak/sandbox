@@ -1,0 +1,10 @@
+Welcome to the Tame of Thrones! Please key-in your questions.
+None
+None
+Enter the messages to send
+This command is invalid!
+Message sent from SPACE to AIR was successful
+Message sent from SPACE to LAND was successful
+Message sent from SPACE to ICE was successful
+King Shan
+AIR, ICE, LAND

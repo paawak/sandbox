@@ -18,14 +18,13 @@ public class GoldenCrown {
 
         InputStream inputStream = System.in;
         PrintStream standardOut = System.out;
-        PrintStream errorOut = System.err;
 
         KingdomRepository kingdomRepository = new KingdomRepositoryImpl("/goldencrown/data/kingdom_data.properties");
         IncomingMessageChecker incomingMessageChecker = new IncomingMessageCheckerImpl();
         KingdomService kingdomService = new KingdomServiceImpl(kingdomRepository, incomingMessageChecker);
         CommandFactory commandFactory = new CommandFactory(kingdomService);
 
-        new InputOutputHandler(commandFactory).invokeAndWait(inputStream, standardOut, errorOut);
+        new InputOutputHandler(commandFactory).invokeAndWait(inputStream, standardOut);
 
     }
 

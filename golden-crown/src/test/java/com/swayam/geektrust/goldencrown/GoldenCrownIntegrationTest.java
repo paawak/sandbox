@@ -18,12 +18,14 @@ public class GoldenCrownIntegrationTest {
     private static final String EXPECTED_TEST_OUTPUT_TEST_FILE_PATH = "/goldencrown/testdata/expected_test_output_data";
 
     @Test
-    public void integrationTest() throws IOException {
+    public void integrationTest_1() throws IOException {
 
-        String inputFilePath = INPUT_TEST_FILE_PATH + "_1.txt";
-        String expectedOutputFilePath = EXPECTED_TEST_OUTPUT_TEST_FILE_PATH + "_1.txt";
+        for (int i = 1; i <= 4; i++) {
+            String inputFilePath = INPUT_TEST_FILE_PATH + "_" + i + ".txt";
+            String expectedOutputFilePath = EXPECTED_TEST_OUTPUT_TEST_FILE_PATH + "_" + i + ".txt";
 
-        testAgainstGivenInput(inputFilePath, expectedOutputFilePath);
+            testAgainstGivenInput(inputFilePath, expectedOutputFilePath);
+        }
     }
 
     private void testAgainstGivenInput(String inputFilePath, String expectedOutputFilePath) throws IOException {

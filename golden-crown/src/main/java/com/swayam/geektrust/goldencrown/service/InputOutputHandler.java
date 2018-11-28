@@ -22,7 +22,7 @@ public class InputOutputHandler {
         this.commandFactory = commandFactory;
     }
 
-    public void invokeAndWait(InputStream inputStream, PrintStream standardOut, PrintStream errorOut) {
+    public void invokeAndWait(InputStream inputStream, PrintStream standardOut) {
 
         Map<String, Object> context = new HashMap<>();
 
@@ -49,7 +49,7 @@ public class InputOutputHandler {
                     }
 
                 } catch (Exception e) {
-                    errorOut.println(e.getMessage());
+                    standardOut.println(e.getMessage());
                 }
 
             }
