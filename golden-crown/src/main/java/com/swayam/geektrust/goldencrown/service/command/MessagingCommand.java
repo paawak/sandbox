@@ -1,6 +1,6 @@
 package com.swayam.geektrust.goldencrown.service.command;
 
-public class MessagingCommand implements Command {
+class MessagingCommand implements Command {
 
     @Override
     public String execute(String rawCommand) {

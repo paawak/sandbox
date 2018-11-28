@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 import com.swayam.geektrust.goldencrown.dao.KingdomRepository;
 import com.swayam.geektrust.goldencrown.dao.KingdomRepositoryImpl;
-import com.swayam.geektrust.goldencrown.service.CommandInterpreter;
 import com.swayam.geektrust.goldencrown.service.KingdomService;
 import com.swayam.geektrust.goldencrown.service.KingdomServiceImpl;
 import com.swayam.geektrust.goldencrown.service.command.Command;
+import com.swayam.geektrust.goldencrown.service.command.CommandInterpreter;
 
 public class GoldenCrown {
 

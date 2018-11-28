@@ -1,4 +1,4 @@
-package com.swayam.geektrust.goldencrown.service;
+package com.swayam.geektrust.goldencrown.service.command;
 
 import static org.junit.Assert.assertTrue;
 
@@ -7,6 +7,7 @@ import org.junit.Test;
 import com.swayam.geektrust.goldencrown.service.command.AlliesOfKingFinderCommand;
 import com.swayam.geektrust.goldencrown.service.command.AlliesOfRulerFinderCommand;
 import com.swayam.geektrust.goldencrown.service.command.Command;
+import com.swayam.geektrust.goldencrown.service.command.CommandInterpreter;
 import com.swayam.geektrust.goldencrown.service.command.RulerFinderCommand;
 
 public class CommandInterpreterTest {

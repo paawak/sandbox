@@ -1,12 +1,8 @@
-package com.swayam.geektrust.goldencrown.service;
+package com.swayam.geektrust.goldencrown.service.command;
 
 import java.util.regex.Pattern;
 
-import com.swayam.geektrust.goldencrown.service.command.AlliesOfKingFinderCommand;
-import com.swayam.geektrust.goldencrown.service.command.AlliesOfRulerFinderCommand;
-import com.swayam.geektrust.goldencrown.service.command.Command;
-import com.swayam.geektrust.goldencrown.service.command.InvalidCommand;
-import com.swayam.geektrust.goldencrown.service.command.RulerFinderCommand;
+import com.swayam.geektrust.goldencrown.service.KingdomService;
 
 public class CommandInterpreter {
 

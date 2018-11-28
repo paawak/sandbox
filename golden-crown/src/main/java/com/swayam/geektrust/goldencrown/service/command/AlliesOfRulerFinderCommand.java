@@ -6,7 +6,7 @@ import com.swayam.geektrust.goldencrown.model.Kingdom;
 import com.swayam.geektrust.goldencrown.model.KingdomData;
 import com.swayam.geektrust.goldencrown.service.KingdomService;
 
-public class AlliesOfRulerFinderCommand implements Command {
+class AlliesOfRulerFinderCommand implements Command {
 
     private final KingdomService kingdomService;
 
