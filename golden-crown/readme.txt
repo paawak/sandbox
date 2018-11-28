@@ -14,9 +14,9 @@ Allies of Ruler?
 Output: None
 
 Input Messages to kingdoms from King Shan:
-Input: Air, “oaaawaala”
-Input: Land, “a1d22n333a4444p”
-Input: Ice, “zmzmzmzaztzozh”
+Input: Air, "oaaawaala"
+Input: Land, "a1d22n333a4444p"
+Input: Ice, "zmzmzmzaztzozh"
 
 Who is the ruler of Southeros?
 Output: King Shan
@@ -31,11 +31,11 @@ Allies of King Shan?
 Output: None
 
 Input Messages to kingdoms from King Shan:
-Input: Air, “Let’s swing the sword together”
-Input: Land, “Die or play the tame of thrones”
-Input: Ice, “Ahoy! Fight for me with men and money”
-Input: Water, “Summer is coming”
-Input: Fire, “Drag on Martin!”
+Input: Air, "Let’s swing the sword together"
+Input: Land, "Die or play the tame of thrones"
+Input: Ice, "Ahoy! Fight for me with men and money"
+Input: Water, "Summer is coming"
+Input: Fire, "Drag on Martin!"
 
 Who is the ruler of Southeros?
 Output: King Shan
@@ -45,4 +45,3 @@ Output: Air, Land, Ice, Fire
 ======================================================
 
 
-Messages to 3 kingdoms from King Shan
