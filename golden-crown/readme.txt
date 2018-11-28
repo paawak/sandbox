@@ -42,4 +42,7 @@ Output: King Shan
 Allies of King Shan?
 Output: Air, Land, Ice, Fire
 
+======================================================
 
+
+Start sending messages to 3 kingdoms
