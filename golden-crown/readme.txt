@@ -1,5 +1,5 @@
 ** How to build it?
-This project needs Java 8 for building and running. The project uses Maven. There are no dependencies on the project 
+This project needs *Java 8* for building and running. The project uses Maven. There are no dependencies on the project 
 apart from JUnit and Mockito, both with scope "test". I am using the Maven Jar plugin to create an executable jar.
 Use the below command to create an executable jar:
 
