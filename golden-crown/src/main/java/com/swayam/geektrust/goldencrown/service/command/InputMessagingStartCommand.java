@@ -12,7 +12,7 @@ class InputMessagingStartCommand extends AbstractPatternMatchingCommand {
 
     public static final String INPUT_MESSAGE_FROM_KINDOM_KEY = "_INPUT_MESSAGE_FROM_KINDOM_KEY_";
 
-    private static final String START_SENDING_MESSAGES_REGEX = "^messages\\s+to\\s+kingdoms\\s+from\\s+king\\s+\\w+\\s*$";
+    private static final String START_SENDING_MESSAGES_REGEX = "^input\\s+messages\\s+to\\s+kingdoms\\s+from\\s+king\\s+\\w+:$";
 
     private final KingdomService kingdomService;
 
@@ -25,8 +25,7 @@ class InputMessagingStartCommand extends AbstractPatternMatchingCommand {
     @Override
     public String execute(Map<String, Object> context, String rawCommand) {
 
-        String[] tokens = rawCommand.trim().split("\\s");
-        String kingName = tokens[tokens.length - 1].trim();
+        String kingName = getKingName(rawCommand);
         from = kingdomService.getKingdomData(kingName).getKingdom();
 
         return "Enter the messages to send";
@@ -43,6 +42,13 @@ class InputMessagingStartCommand extends AbstractPatternMatchingCommand {
     @Override
     String getRegexPattern() {
         return START_SENDING_MESSAGES_REGEX;
+    }
+
+    /* visible for testing */
+    String getKingName(String rawCommand) {
+        String[] tokens = rawCommand.trim().split("\\s");
+        String kingName = tokens[tokens.length - 1].trim().split(":")[0].trim();
+        return kingName;
     }
 
 }

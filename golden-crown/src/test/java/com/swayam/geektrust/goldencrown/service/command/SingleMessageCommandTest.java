@@ -16,7 +16,7 @@ public class SingleMessageCommandTest {
         SingleMessageCommand testClass = new SingleMessageCommand(null);
 
         // when
-        boolean result = testClass.canExecute("Air, \"Let’s swing the sword together\"");
+        boolean result = testClass.canExecute("Input: Air, \"Let’s swing the sword together\"");
 
         // then
         assertTrue(result);
@@ -40,7 +40,7 @@ public class SingleMessageCommandTest {
         SingleMessageCommand testClass = new SingleMessageCommand(null);
 
         // when
-        Kingdom result = testClass.getKingdomToSendMessage("Air, \"Let’s swing the sword together\"");
+        Kingdom result = testClass.getKingdomToSendMessage("Input: Air, \"Let’s swing the sword together\"");
 
         // then
         assertEquals(Kingdom.AIR, result);
@@ -52,7 +52,7 @@ public class SingleMessageCommandTest {
         SingleMessageCommand testClass = new SingleMessageCommand(null);
 
         // when
-        String result = testClass.getMessageToSend("Air, \"Let’s swing the sword together\"");
+        String result = testClass.getMessageToSend("Input: Air, \"Let’s swing the sword together\"");
 
         // then
         assertEquals("Let’s swing the sword together", result);

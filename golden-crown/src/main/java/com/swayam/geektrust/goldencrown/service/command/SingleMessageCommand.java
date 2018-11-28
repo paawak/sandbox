@@ -7,7 +7,7 @@ import com.swayam.geektrust.goldencrown.service.KingdomService;
 
 class SingleMessageCommand extends AbstractPatternMatchingCommand {
 
-    private static final String INPUT_MESSAGE_REGEX = "^\\w+\\,\\s+\".+\"$";
+    private static final String INPUT_MESSAGE_REGEX = "^(input:)\\s+\\w+\\,\\s+\".+\"$";
 
     private final KingdomService kingdomService;
 
@@ -38,7 +38,7 @@ class SingleMessageCommand extends AbstractPatternMatchingCommand {
 
     /* added for testing */
     Kingdom getKingdomToSendMessage(String rawCommand) {
-        String kingdom = rawCommand.split(",")[0].trim().toUpperCase();
+        String kingdom = rawCommand.split(",")[0].trim().split(":")[1].trim().toUpperCase();
         return Kingdom.valueOf(kingdom);
     }
 
