@@ -18,4 +18,6 @@ public interface KingdomService {
 
     KingdomData getKingdomData(String kingName);
 
+    boolean sendMessage(Kingdom from, Kingdom to, String message);
+
 }

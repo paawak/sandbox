@@ -32,7 +32,12 @@ class MessagingCommand implements Command {
 	    throw new IllegalArgumentException("Invalid message format");
 	}
 
-	return "Message sent to " + "" + " successfully";
+	Kingdom to = getKingdomToSendMessage(rawCommand);
+	String message = getMessageToSend(rawCommand);
+
+	boolean accepted = kingdomService.sendMessage(from, to, message);
+
+	return "Message sent from " + from + " to " + to + " was" + (accepted ? " " : " NOT ") + "successful";
     }
 
     @Override

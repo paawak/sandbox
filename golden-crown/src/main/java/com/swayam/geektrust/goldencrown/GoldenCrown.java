@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 import com.swayam.geektrust.goldencrown.dao.KingdomRepository;
 import com.swayam.geektrust.goldencrown.dao.KingdomRepositoryImpl;
+import com.swayam.geektrust.goldencrown.service.IncomingMessageChecker;
+import com.swayam.geektrust.goldencrown.service.IncomingMessageCheckerImpl;
 import com.swayam.geektrust.goldencrown.service.KingdomService;
 import com.swayam.geektrust.goldencrown.service.KingdomServiceImpl;
 import com.swayam.geektrust.goldencrown.service.command.Command;
@@ -14,7 +16,8 @@ public class GoldenCrown {
     public static void main(String[] args) {
 
 	KingdomRepository kingdomRepository = new KingdomRepositoryImpl("/goldencrown/data/kingdom_data.properties");
-	KingdomService kingdomService = new KingdomServiceImpl(kingdomRepository);
+	IncomingMessageChecker incomingMessageChecker = new IncomingMessageCheckerImpl();
+	KingdomService kingdomService = new KingdomServiceImpl(kingdomRepository, incomingMessageChecker);
 	CommandInterpreter commandInterpreter = new CommandInterpreter(kingdomService);
 
 	Command commandToRepeat = null;

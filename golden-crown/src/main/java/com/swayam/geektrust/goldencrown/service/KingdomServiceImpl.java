@@ -15,9 +15,11 @@ import com.swayam.geektrust.goldencrown.model.KingdomData;
 public class KingdomServiceImpl implements KingdomService {
 
     private final KingdomRepository kingdomRepository;
+    private final IncomingMessageChecker incomingMessageChecker;
 
-    public KingdomServiceImpl(KingdomRepository kingdomRepository) {
+    public KingdomServiceImpl(KingdomRepository kingdomRepository, IncomingMessageChecker incomingMessageChecker) {
 	this.kingdomRepository = kingdomRepository;
+	this.incomingMessageChecker = incomingMessageChecker;
     }
 
     @Override
@@ -59,6 +61,17 @@ public class KingdomServiceImpl implements KingdomService {
 		.filter(kingdomData -> kingdomData.getKing().get().equalsIgnoreCase(kingName)).findFirst().orElseThrow(() -> {
 		    return new IllegalArgumentException("Invalid King name: " + kingName);
 		});
+    }
+
+    @Override
+    public boolean sendMessage(Kingdom from, Kingdom to, String message) {
+	KingdomData toData = kingdomRepository.getKingdomData(to);
+	if (!incomingMessageChecker.isMessageAccepted(toData, message)) {
+	    return false;
+	}
+
+	kingdomRepository.saveSuccessfulMessage(from, to);
+	return true;
     }
 
     private Set<KingdomData> toKingdomData(Set<Kingdom> kingdoms) {
