@@ -11,7 +11,6 @@ public class CommandInterpreter {
     private static final String FIND_RULER_REGEX = "^who\\s+is\\s+the\\s+ruler\\s+of\\s+southeros\\s*\\?$";
     private static final String FIND_ALLIES_OF_RULER_REGEX = "^allies\\s+of\\s+ruler\\s*\\?$";
     private static final String FIND_ALLIES_OF_KING_REGEX = "^allies\\s+of\\s+king\\s+\\w+\\s*\\?$";
-    private static final String START_SENDING_MESSAGES_REGEX = "^messages\\s+to\\s+\\d\\s+kingdoms\\s+from\\s+king\\s+shan\\s*$";
 
     private static final Pattern SINGLE_DIGIT = Pattern.compile("\\d");
 
@@ -29,7 +28,7 @@ public class CommandInterpreter {
 	    return new AlliesOfRulerFinderCommand(kingdomService);
 	} else if (Pattern.matches(FIND_ALLIES_OF_KING_REGEX, rawCommandInLowerCase)) {
 	    return new AlliesOfKingFinderCommand(kingdomService);
-	} else if (Pattern.matches(START_SENDING_MESSAGES_REGEX, rawCommandInLowerCase)) {
+	} else if (Pattern.matches(MessagingCommand.START_SENDING_MESSAGES_REGEX, rawCommandInLowerCase)) {
 	    Matcher matcher = SINGLE_DIGIT.matcher(rawCommandInLowerCase);
 	    if (matcher.find()) {
 		int repeatTime = Integer.parseInt(matcher.group());
