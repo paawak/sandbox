@@ -1,7 +1,6 @@
 package com.swayam.geektrust.goldencrown.service.command;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -23,7 +22,7 @@ public class MessagingCommandTest {
 	String result = testClass.execute("Messages to 3   Kingdoms   from King Shan");
 
 	// then
-	assertTrue(result.length() == 0);
+	assertEquals("Enter the 3 messages to send", result);
     }
 
     @Test

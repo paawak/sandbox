@@ -26,8 +26,7 @@ class MessagingCommand implements Command {
 
 	String rawCommandInLowerCase = rawCommand.toLowerCase();
 	if (Pattern.matches(START_SENDING_MESSAGES_REGEX, rawCommandInLowerCase)) {
-	    // ignore silently
-	    return "";
+	    return "Enter the " + repeatTime + " messages to send";
 	} else if (!Pattern.matches(INPUT_MESSAGE_REGEX, rawCommandInLowerCase)) {
 	    throw new IllegalArgumentException("Invalid message format");
 	}
