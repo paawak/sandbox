@@ -1,6 +1,7 @@
 package com.swayam.geektrust.goldencrown.service.command;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -21,45 +22,58 @@ public class AlliesOfKingFinderCommandTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
+    public void testCanExecute_yes() {
+        // given
+        AlliesOfKingFinderCommand testClass = new AlliesOfKingFinderCommand(null);
+
+        // when
+        boolean result = testClass.canExecute("Allies of King Shan?");
+
+        // then
+        assertTrue(result);
+    }
+
+    @Test
     public void testGetNameOfKing() {
-	// given
-	AlliesOfKingFinderCommand testClass = new AlliesOfKingFinderCommand(null);
+        // given
+        AlliesOfKingFinderCommand testClass = new AlliesOfKingFinderCommand(null);
 
-	// when
-	String result = testClass.getNameOfKing("Allies of   King   ABCDEFG  ?");
+        // when
+        String result = testClass.getNameOfKing("Allies of   King   ABCDEFG  ?");
 
-	// then
-	assertEquals("abcdefg", result);
+        // then
+        assertEquals("abcdefg", result);
     }
 
     @Test
     public void testGetKingdom_found_match() {
-	// given
-	KingdomService kingdomService = mock(KingdomService.class);
+        // given
+        KingdomService kingdomService = mock(KingdomService.class);
 
-	when(kingdomService.getKingdomsInSoutheros()).thenReturn(new HashSet<>(Arrays.asList(new KingdomData(Kingdom.AIR, "someAnimal", "ShaN"), new KingdomData(Kingdom.LAND, "someAnimal", "ShaN34"),
-		new KingdomData(Kingdom.WATER, "someAnimal", "67shan"), new KingdomData(Kingdom.ICE, "someAnimal", null))));
+        when(kingdomService.getKingdomsInSoutheros()).thenReturn(
+                new HashSet<>(Arrays.asList(new KingdomData(Kingdom.AIR, "someAnimal", "ShaN"), new KingdomData(Kingdom.LAND, "someAnimal", "ShaN34"),
+                        new KingdomData(Kingdom.WATER, "someAnimal", "67shan"), new KingdomData(Kingdom.ICE, "someAnimal", null))));
 
-	AlliesOfKingFinderCommand testClass = new AlliesOfKingFinderCommand(kingdomService);
+        AlliesOfKingFinderCommand testClass = new AlliesOfKingFinderCommand(kingdomService);
 
-	// when
-	Kingdom result = testClass.getKingdom("shan");
+        // when
+        Kingdom result = testClass.getKingdom("shan");
 
-	// then
-	assertEquals(Kingdom.AIR, result);
+        // then
+        assertEquals(Kingdom.AIR, result);
     }
 
     @Test
     public void testGetKingdom_no_match() {
-	// given
-	KingdomService kingdomService = mock(KingdomService.class);
+        // given
+        KingdomService kingdomService = mock(KingdomService.class);
 
-	AlliesOfKingFinderCommand testClass = new AlliesOfKingFinderCommand(kingdomService);
+        AlliesOfKingFinderCommand testClass = new AlliesOfKingFinderCommand(kingdomService);
 
-	// when, then
-	thrown.expect(IllegalArgumentException.class);
-	thrown.expectMessage("No matching Kingdom found for the King named shan");
-	testClass.getKingdom("shan");
+        // when, then
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("No matching Kingdom found for the King named shan");
+        testClass.getKingdom("shan");
 
     }
 

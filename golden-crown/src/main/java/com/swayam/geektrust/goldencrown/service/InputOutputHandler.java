@@ -2,23 +2,31 @@ package com.swayam.geektrust.goldencrown.service;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
-import com.swayam.geektrust.goldencrown.dao.KingdomRepository;
-import com.swayam.geektrust.goldencrown.dao.KingdomRepositoryImpl;
 import com.swayam.geektrust.goldencrown.service.command.Command;
-import com.swayam.geektrust.goldencrown.service.command.CommandInterpreter;
+import com.swayam.geektrust.goldencrown.service.command.CommandFactory;
 
 public class InputOutputHandler {
 
-    public void invokeAndWait(InputStream inputStream, PrintStream standardOut, PrintStream errorOut) {
-        KingdomRepository kingdomRepository = new KingdomRepositoryImpl("/goldencrown/data/kingdom_data.properties");
-        IncomingMessageChecker incomingMessageChecker = new IncomingMessageCheckerImpl();
-        KingdomService kingdomService = new KingdomServiceImpl(kingdomRepository, incomingMessageChecker);
-        CommandInterpreter commandInterpreter = new CommandInterpreter(kingdomService);
+    private final CommandFactory commandFactory;
 
-        Command commandToRepeat = null;
-        int currentRepeatCount = 0;
+    public InputOutputHandler(CommandFactory commandFactory) {
+        this.commandFactory = commandFactory;
+    }
+
+    public void invokeAndWait(InputStream inputStream, PrintStream standardOut, PrintStream errorOut) {
+
+        Map<String, Object> context = new HashMap<>();
+
+        standardOut.println("Welcome to the Tame of Thrones! Please key-in your questions.");
 
         try (Scanner scanner = new Scanner(inputStream);) {
             while (scanner.hasNextLine()) {
@@ -26,28 +34,18 @@ public class InputOutputHandler {
 
                 try {
 
-                    Command command;
+                    Command command = getCommandToExecute(rawCommand);
 
-                    if (currentRepeatCount > 0) {
-                        currentRepeatCount--;
-                        command = commandToRepeat;
-                    } else {
-                        command = commandInterpreter.parseCommand(rawCommand);
-                        int repeatCount = command.getRepeatTime();
-
-                        if (repeatCount > 0) {
-                            currentRepeatCount = repeatCount;
-                            commandToRepeat = command;
-                        } else {
-                            currentRepeatCount = 0;
-                            commandToRepeat = null;
-                        }
-                    }
-
-                    String result = command.execute(rawCommand);
+                    String result = command.execute(Collections.unmodifiableMap(context), rawCommand);
 
                     if ((result != null) && (result.trim().length() > 0)) {
                         standardOut.println(result);
+                    }
+
+                    Optional<Entry<String, Object>> contextEntry = command.newContextEntry();
+
+                    if (contextEntry.isPresent()) {
+                        context.put(contextEntry.get().getKey(), contextEntry.get().getValue());
                     }
 
                 } catch (Exception e) {
@@ -56,6 +54,19 @@ public class InputOutputHandler {
 
             }
         }
+    }
+
+    private Command getCommandToExecute(String rawCommand) {
+        List<Command> commandsThatCanExecute =
+                commandFactory.getAllAvailableCommands().stream().filter(command -> command.canExecute(rawCommand)).collect(Collectors.toList());
+
+        if (commandsThatCanExecute.isEmpty()) {
+            return commandFactory.getUnhandledCommand();
+        } else if (commandsThatCanExecute.size() > 1) {
+            throw new IllegalArgumentException("Too many commands that can potentially execute: " + commandsThatCanExecute);
+        }
+
+        return commandsThatCanExecute.get(0);
     }
 
 }

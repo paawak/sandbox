@@ -1,11 +1,17 @@
 package com.swayam.geektrust.goldencrown.service.command;
 
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Optional;
+
 public interface Command {
 
-    String execute(String rawCommand);
+    boolean canExecute(String rawCommand);
 
-    default int getRepeatTime() {
-	return 0;
+    String execute(Map<String, Object> context, String rawCommand);
+
+    default Optional<Entry<String, Object>> newContextEntry() {
+        return Optional.empty();
     }
 
 }
