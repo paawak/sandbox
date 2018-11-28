@@ -14,16 +14,24 @@ import org.junit.Test;
 
 public class GoldenCrownIntegrationTest {
 
-    private static final String INPUT_TEST_FILE_PATH = "/goldencrown/testdata/integration_test_input_data.txt";
-    private static final String EXPECTED_TEST_OUTPUT_TEST_FILE_PATH = "/goldencrown/testdata/expected_test_output_data.txt";
+    private static final String INPUT_TEST_FILE_PATH = "/goldencrown/testdata/integration_test_input_data";
+    private static final String EXPECTED_TEST_OUTPUT_TEST_FILE_PATH = "/goldencrown/testdata/expected_test_output_data";
 
     @Test
     public void integrationTest() throws IOException {
+
+        String inputFilePath = INPUT_TEST_FILE_PATH + "_1.txt";
+        String expectedOutputFilePath = EXPECTED_TEST_OUTPUT_TEST_FILE_PATH + "_1.txt";
+
+        testAgainstGivenInput(inputFilePath, expectedOutputFilePath);
+    }
+
+    private void testAgainstGivenInput(String inputFilePath, String expectedOutputFilePath) throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         PrintStream out = new PrintStream(bos);
         System.setOut(out);
 
-        InputStream inputStream = GoldenCrownIntegrationTest.class.getResourceAsStream(INPUT_TEST_FILE_PATH);
+        InputStream inputStream = GoldenCrownIntegrationTest.class.getResourceAsStream(inputFilePath);
         System.setIn(inputStream);
 
         GoldenCrown.main(null);
@@ -32,7 +40,7 @@ public class GoldenCrownIntegrationTest {
 
         String allOutput = new String(bos.toByteArray());
 
-        assertEquals(Files.readAllLines(Paths.get(GoldenCrownIntegrationTest.class.getResource(EXPECTED_TEST_OUTPUT_TEST_FILE_PATH).getPath())),
+        assertEquals(Files.readAllLines(Paths.get(GoldenCrownIntegrationTest.class.getResource(expectedOutputFilePath).getPath())),
                 Arrays.asList(allOutput.split("\n")));
     }
 
