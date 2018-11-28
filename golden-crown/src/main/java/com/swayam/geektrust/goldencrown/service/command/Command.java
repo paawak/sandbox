@@ -4,7 +4,7 @@ public interface Command {
 
     String execute(String rawCommand);
 
-    default int repeatTimes() {
+    default int getRepeatTime() {
 	return 0;
     }
 

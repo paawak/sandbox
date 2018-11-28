@@ -16,4 +16,6 @@ public interface KingdomService {
 
     Set<KingdomData> getKingdomsInSoutheros();
 
+    KingdomData getKingdomData(String kingName);
+
 }

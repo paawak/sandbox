@@ -53,6 +53,14 @@ public class KingdomServiceImpl implements KingdomService {
 	return Collections.unmodifiableSet(new HashSet<>(kingdomRepository.getAvailableKingdoms().values()));
     }
 
+    @Override
+    public KingdomData getKingdomData(String kingName) {
+	return kingdomRepository.getAvailableKingdoms().values().stream().filter(kingdomData -> kingdomData.getKing().isPresent())
+		.filter(kingdomData -> kingdomData.getKing().get().equalsIgnoreCase(kingName)).findFirst().orElseThrow(() -> {
+		    return new IllegalArgumentException("Invalid King name: " + kingName);
+		});
+    }
+
     private Set<KingdomData> toKingdomData(Set<Kingdom> kingdoms) {
 	return Collections.unmodifiableSet(kingdoms.stream().map(kingdomRepository::getKingdomData).collect(Collectors.toSet()));
     }

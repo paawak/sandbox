@@ -33,7 +33,7 @@ public class GoldenCrown {
 			command = commandToRepeat;
 		    } else {
 			command = commandInterpreter.parseCommand(rawCommand);
-			int repeatCount = command.repeatTimes();
+			int repeatCount = command.getRepeatTime();
 
 			if (repeatCount > 0) {
 			    currentRepeatCount = repeatCount;

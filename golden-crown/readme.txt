@@ -45,4 +45,4 @@ Output: Air, Land, Ice, Fire
 ======================================================
 
 
-Start sending messages to 3 kingdoms
+Messages to 3 kingdoms from King Shan
