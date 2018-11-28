@@ -16,13 +16,13 @@ public class MessagingCommandTest {
     @Test
     public void testExecute_initialMessage() {
 	// given
-	MessagingCommand testClass = new MessagingCommand(null, null, 0);
+	MessagingCommand testClass = new MessagingCommand(null, null, 4);
 
 	// when
-	String result = testClass.execute("Messages to 3   Kingdoms   from King Shan");
+	String result = testClass.execute("Messages to 7   Kingdoms   from King Shan");
 
 	// then
-	assertEquals("Enter the 3 messages to send", result);
+	assertEquals("Enter the 4 messages to send", result);
     }
 
     @Test
