@@ -23,7 +23,7 @@
                 (do
                   (println "Left")
                   (if (nil? (:left @currentNode))
-                    (do (swap! currentNode assoc :left (atom (->Node n nil nil))) (println "The currentNode is: " currentNode))
+                    (swap! currentNode assoc :left (atom (->Node n nil nil)))
                     )
                 )
                 (> n (:value @currentNode))
