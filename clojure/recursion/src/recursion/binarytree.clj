@@ -4,28 +4,41 @@
 
 (defrecord Node[value left right])
 
-(def root nil)
+(def root (atom (->Node nil nil nil)))
 
 (defn addNode [n]
     (println "Trying to add " n " into the Tree")
-    (if (nil? root)
+    (if (nil? (:value @root))
       (do
             (println "Assigning the newNode to root")
-            (def root (map->Node {:value n}))
+            (swap! root assoc :value n)
         )
       (do
         (println "Root exists")
-        (loop [currentNode root]
-          (cond (< n (:value currentNode))
-                (println "Left")
+        (loop [currentNode @root]
+          (if (= n (:value currentNode))
+            (println "Ignore silently, as duplicates are not allowed")
+            (do
+              (cond (< n (:value currentNode))
+                (do
+                  (println "Left")
+                  (if (nil? (:left currentNode))
+                    (do (assoc currentNode :left 10) (println "The currentNode is: " currentNode))
+                    )
+                )
                 (> n (:value currentNode))
-                (println "Right")
-                :else (println "Ignore silently, as duplicates are not allowed")
+                (do
+                  (println "Right")
+                  (println "2222")
+                )
+                )
+              )
             )
+          
           )
         )
       )
-    (println "Added a new Node")
+    (println "--------------Added a new Node")
   )
 
 (defn -main
