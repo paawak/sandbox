@@ -42,18 +42,11 @@
 
 (defn -main
   []
-    (addNode 4 )
-    (addNode 3 )
-    (addNode 6 )
-    (addNode 14 )
-    (addNode 36 )
-    (addNode 100 )
-    (addNode 20 )
-    (addNode 19 )
-    (addNode 70 )
-    (addNode 81 )
-    (addNode 97 )
-    (addNode 200 )
+
+    (doseq [x [4 3 6 14 36 21 100 20 19 70 81 7 97 200]]
+      (addNode x)
+      )
+    
     (println "-------------- Printing elements")
     (printElements root)
   )
