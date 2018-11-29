@@ -45,12 +45,23 @@
     (println "--------------Added a new Node")
   )
 
+(defn printElements
+  [node]
+    (println (:value @node))
+    (if (:left @node)
+      (printElements (:left @node))
+      )
+    (if (:right @node)
+      (printElements (:right @node))
+      )    
+  )
+
 (defn -main
   []
     (addNode 4)
     (addNode 3)
     (addNode 6)
     (addNode 4)
-    (println "The root of the tree is: " root)
+    (printElements root)
   )
 
