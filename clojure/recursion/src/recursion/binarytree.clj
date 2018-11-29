@@ -15,18 +15,18 @@
         )
       (do
         (println "Root exists")
-        (loop [currentNode @root]
-          (if (= n (:value currentNode))
+        (loop [currentNode root]
+          (if (= n (:value @currentNode))
             (println "Ignore silently, as duplicates are not allowed")
             (do
-              (cond (< n (:value currentNode))
+              (cond (< n (:value @currentNode))
                 (do
                   (println "Left")
-                  (if (nil? (:left currentNode))
-                    (do (assoc currentNode :left 10) (println "The currentNode is: " currentNode))
+                  (if (nil? (:left @currentNode))
+                    (do (swap! currentNode assoc :left (atom (->Node n nil nil))) (println "The currentNode is: " currentNode))
                     )
                 )
-                (> n (:value currentNode))
+                (> n (:value @currentNode))
                 (do
                   (println "Right")
                   (println "2222")
