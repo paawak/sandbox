@@ -1,6 +1,11 @@
-# client-account
+# DB details
+	
+	postgres db name: druto-chithhi-client-account
+	
+## Logging into psql
+	psql -h localhost druto-chithhi-client-account -U postgres	
 
-FIXME
+
 
 ## Getting Started
 
