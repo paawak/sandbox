@@ -23,18 +23,14 @@
     (let [newCountry (Country. nil name shortName)
           ]
       (println "trying to insert " newCountry "...")
-;      (let ([generatedKeys (dao/add-new-country newCountry)]
-;             (println "generatedKeys: " generatedKeys) 
-;         ))
-
-	    (let [generatedKeys (dao/add-new-country newCountry)]
+	    (let [generatedKeys (dao/add-new-country newCountry) newId (get generatedKeys :id)]
         (println "generatedKeys: " generatedKeys)
+        (println "newId: " newId)
+        (ring-resp/response (str newId))
 	      )
-
       )
-
     )
-  (ring-resp/response "Add new country"))
+  )
 
 (defn modify-country
   [request]

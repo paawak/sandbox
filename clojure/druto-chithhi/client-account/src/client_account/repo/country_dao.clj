@@ -14,7 +14,7 @@
 
 (defn add-new-country
   [country]
-  (jdbc/insert! db-spec :country country)
+  (jdbc/insert! db-spec :country {:name (:name country) :shortname (:shortName country)})
   )
 
 
