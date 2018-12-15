@@ -26,7 +26,7 @@
 	    (let [generatedKeys (dao/add-new-country newCountry) newId (get (first generatedKeys) :id)]
         (println "generatedKeys: " generatedKeys)
         (println "newId: " newId)
-        (ring-resp/response newId)
+        (ring-resp/response (str newId))
 	      )
       )
     )
