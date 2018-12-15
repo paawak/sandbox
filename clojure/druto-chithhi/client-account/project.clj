@@ -11,6 +11,8 @@
                  [io.pedestal/pedestal.jetty "0.5.4"]
                  ;; [io.pedestal/pedestal.immutant "0.5.4"]
                  ;; [io.pedestal/pedestal.tomcat "0.5.4"]
+                 [org.clojure/java.jdbc "0.7.8"]
+                 [org.postgresql/postgresql "42.2.5"]
 
                  [ch.qos.logback/logback-classic "1.2.3" :exclusions [org.slf4j/slf4j-api]]
                  [org.slf4j/jul-to-slf4j "1.7.25"]
