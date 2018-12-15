@@ -4,6 +4,7 @@
             [io.pedestal.http.body-params :as body-params]
             [ring.util.response :as ring-resp]
             [client_account.model.country_model :as model]
+            [client_account.repo.country_dao :as dao]
          )
   (:import [client_account.model.country_model Country])
   )
@@ -21,8 +22,17 @@
     (println name "--" shortName)
     (let [newCountry (Country. nil name shortName)
           ]
-      (println newCountry)
+      (println "trying to insert " newCountry "...")
+;      (let ([generatedKeys (dao/add-new-country newCountry)]
+;             (println "generatedKeys: " generatedKeys) 
+;         ))
+
+	    (let [generatedKeys (dao/add-new-country newCountry)]
+        (println "generatedKeys: " generatedKeys)
+	      )
+
       )
+
     )
   (ring-resp/response "Add new country"))
 
