@@ -11,7 +11,7 @@
 (defn add-new-country
   [request]
   (doseq [[key value](select-keys request [:form-params])]
-    (prn key value)
+    (println (str "Key: `" key "`, Value: `" value "`"))
     )
   (ring-resp/response "Add new country"))
 
