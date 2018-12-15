@@ -5,6 +5,7 @@
             [ring.util.response :as ring-resp]
             [client_account.model.country_model :as model]
          )
+  (:import [client_account.model.country_model Country])
   )
 
 (defn list-countries
@@ -18,10 +19,10 @@
         name (get formParams :name) 
         shortName (get formParams :shortname)]
     (println name "--" shortName)
-;    (let [newCountry (model/Country. nil name shortName)
-;          ]
-;      (println newCountry)
-;      )
+    (let [newCountry (Country. nil name shortName)
+          ]
+      (println newCountry)
+      )
     )
   (ring-resp/response "Add new country"))
 
