@@ -8,3 +8,11 @@
   [request]
   (ring-resp/response "List countries"))
 
+(defn add-new-country
+  [request]
+  (ring-resp/response "Add new country"))
+
+(defn modify-country
+  [request]
+  (ring-resp/response "Modify country"))
+

@@ -25,6 +25,8 @@
 (def routes #{["/" :get (conj common-interceptors `home-page)]
               ["/about" :get (conj common-interceptors `about-page)]
               ["/country" :get (conj common-interceptors `country/list-countries)]
+              ["/country" :post (conj common-interceptors `country/add-new-country)]
+              ["/country" :put (conj common-interceptors `country/modify-country)]
            })
 
 ;; Map-based routes
