@@ -10,6 +10,9 @@
 
 (defn add-new-country
   [request]
+  (doseq [[key value](select-keys request [:form-params])]
+    (prn key value)
+    )
   (ring-resp/response "Add new country"))
 
 (defn modify-country
