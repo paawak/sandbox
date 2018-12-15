@@ -10,8 +10,8 @@
 
 (defn add-new-country
   [request]
-  (doseq [[key value](select-keys request [:form-params])]
-    (println (str "Key: `" key "`, Value: `" value "`"))
+  (let [formParams (get (select-keys request [:form-params]) :form-params) name (get formParams :name) shortName (get formParams :shortname)]
+    (println name "--" shortName)
     )
   (ring-resp/response "Add new country"))
 
