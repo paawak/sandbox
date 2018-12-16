@@ -1,9 +1,9 @@
-(ns client-account.service
+(ns com.swayam.products.drutochithhi.clientaccount.service
   (:require [io.pedestal.http :as http]
             [io.pedestal.http.route :as route]
             [io.pedestal.http.body-params :as body-params]
             [ring.util.response :as ring-resp]
-            [client_account.country :as country]
+            [com.swayam.products.drutochithhi.clientaccount.country :as country]
           ))
 
 (defn about-page
@@ -41,7 +41,7 @@
 ;      ["/about" {:get about-page}]]]])
 
 
-;; Consumed by client-account.server/create-server
+;; Consumed by com.swayam.products.drutochithhi.clientaccount.server/create-server
 ;; See http/default-interceptors for additional options you can configure
 (def service {:env :prod
               ;; You can bring your own non-default interceptors. Make

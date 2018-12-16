@@ -1,8 +1,8 @@
-(ns client-account.service-test
+(ns com.swayam.products.drutochithhi.clientaccount.service-test
   (:require [clojure.test :refer :all]
             [io.pedestal.test :refer :all]
             [io.pedestal.http :as bootstrap]
-            [client-account.service :as service]))
+            [com.swayam.products.drutochithhi.clientaccount.service :as service]))
 
 (def service
   (::bootstrap/service-fn (bootstrap/create-servlet service/service)))

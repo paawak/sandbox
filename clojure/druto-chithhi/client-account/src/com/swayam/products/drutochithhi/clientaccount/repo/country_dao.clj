@@ -1,8 +1,8 @@
-(ns client_account.repo.country_dao
+(ns com.swayam.products.drutochithhi.clientaccount.repo.country_dao
   (:require [clojure.java.jdbc :as jdbc]
-            [client_account.model.country_model :as model]
+            [com.swayam.products.drutochithhi.clientaccount.model.country_model :as model]
   )
-  (:import [client_account.model.country_model Country])
+  (:import [com.swayam.products.drutochithhi.clientaccount.model.country_model Country])
  )
 
 
