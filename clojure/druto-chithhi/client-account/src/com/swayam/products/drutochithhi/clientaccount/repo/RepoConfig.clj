@@ -1,6 +1,4 @@
 (ns com.swayam.products.drutochithhi.clientaccount.repo.RepoConfig
-;  (:require [clojure.java.jdbc :as jdbc]
-;  )
   (:import (com.zaxxer.hikari HikariDataSource)
    )
 )
