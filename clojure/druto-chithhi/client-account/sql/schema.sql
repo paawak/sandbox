@@ -14,16 +14,17 @@ DROP TABLE country;
 
 CREATE TABLE country (
   id SMALLINT NOT NULL DEFAULT NEXTVAL('SEQ_COUNTRY'),
-  name VARCHAR(250) NOT NULL,
-  shortname VARCHAR(15),
+  name VARCHAR(250) NOT NULL UNIQUE,
+  shortname VARCHAR(15) UNIQUE,
+  active BOOLEAN NOT NULL DEFAULT TRUE,
   PRIMARY KEY  (id)
 );
 
 
 CREATE TABLE state (
   id INTEGER NOT NULL DEFAULT NEXTVAL('SEQ_STATE'),
-  name VARCHAR(250) NOT NULL,
-  shortname VARCHAR(15),
+  name VARCHAR(250) NOT NULL UNIQUE,
+  shortname VARCHAR(15) NOT NULL UNIQUE,
   country SMALLINT NOT NULL REFERENCES country(id),
   PRIMARY KEY  (id)
 );
@@ -34,13 +35,14 @@ CREATE TABLE city (
   name VARCHAR(250) NOT NULL,
   shortname VARCHAR(15),
   state INTEGER NOT NULL REFERENCES state(id),
-  PRIMARY KEY  (id)
+  PRIMARY KEY  (id),
+  UNIQUE (name, state)
 );
 
 
 CREATE TABLE clientaccount (
   accnum INTEGER NOT NULL DEFAULT NEXTVAL('SEQ_CLIENTACCOUNT'),
-  name VARCHAR(250) NOT NULL,
+  name VARCHAR(250) NOT NULL UNIQUE,
   shortname VARCHAR(15),
   contactfirstname VARCHAR(15) NOT NULL,
   contactmiddlename VARCHAR(15),
@@ -55,7 +57,7 @@ CREATE TABLE clientaccount (
   city INTEGER NOT NULL REFERENCES city(id),
   pincode VARCHAR(100) NOT NULL,
   isorganization BOOLEAN NOT NULL DEFAULT FALSE,
-  status BOOLEAN NOT NULL DEFAULT TRUE,
+  active BOOLEAN NOT NULL DEFAULT TRUE,
   PRIMARY KEY  (accnum)
 );
 
