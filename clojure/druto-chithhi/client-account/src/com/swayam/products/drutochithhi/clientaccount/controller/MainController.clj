@@ -3,6 +3,7 @@
             [io.pedestal.http.route :as route]
             [io.pedestal.http.body-params :as body-params]
             [ring.util.response :as ring-resp]
+            [io.pedestal.http.content-negotiation :as conneg]
             [com.swayam.products.drutochithhi.clientaccount.controller.CountryController :as countryController]
           ))
 
@@ -19,7 +20,12 @@
 ;; Defines "/" and "/about" routes with their associated :get handlers.
 ;; The interceptors defined after the verb map (e.g., {:get home-page}
 ;; apply to / and its children (/about).
-(def common-interceptors [(body-params/body-params) http/html-body])
+(def common-interceptors [
+                          (body-params/body-params) 
+                          ;http/html-body
+                          http/json-body
+                          ;(conneg/negotiate-content ["application/json" "text/html"])
+                          ])
 
 ;; Tabular routes
 (def routes #{["/" :get (conj common-interceptors `home-page)]
