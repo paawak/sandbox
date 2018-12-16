@@ -3,7 +3,6 @@
             [io.pedestal.http.route :as route]
             [io.pedestal.http.body-params :as body-params]
             [ring.util.response :as ring-resp]
-            [io.pedestal.http.content-negotiation :as conneg]
             [com.swayam.products.drutochithhi.clientaccount.controller.CountryController :as countryController]
           ))
 
@@ -22,9 +21,8 @@
 ;; apply to / and its children (/about).
 (def common-interceptors [
                           (body-params/body-params) 
-                          ;http/html-body
+                          http/html-body
                           http/json-body
-                          ;(conneg/negotiate-content ["application/json" "text/html"])
                           ])
 
 ;; Tabular routes
