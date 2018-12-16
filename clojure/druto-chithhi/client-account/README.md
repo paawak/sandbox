@@ -2,6 +2,8 @@
 ## Country
 ### Create a new country
 	curl -X POST -d "name=India&shortname=IN" "http://localhost:8080/country"
+### List all countries	
+	curl -i localhost:8080/country
 
 
 # DB details
