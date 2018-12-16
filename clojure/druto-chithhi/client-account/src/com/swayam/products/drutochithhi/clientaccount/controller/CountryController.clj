@@ -3,10 +3,10 @@
             [io.pedestal.http.route :as route]
             [io.pedestal.http.body-params :as body-params]
             [ring.util.response :as ring-resp]
-            [com.swayam.products.drutochithhi.clientaccount.model.countrymodel :as model]
+            [com.swayam.products.drutochithhi.clientaccount.model.Models :as models]
             [com.swayam.products.drutochithhi.clientaccount.repo.CountryDao :as dao]
          )
-  (:import [com.swayam.products.drutochithhi.clientaccount.model.countrymodel Country])
+  (:import [com.swayam.products.drutochithhi.clientaccount.model.Models Country])
   )
 
 (defn list-countries
