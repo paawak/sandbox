@@ -10,7 +10,8 @@
 
 (defn list-countries
   [request]
-  (ring-resp/response "List countries"))
+  {:status 200 :body (dao/list-countries)}
+  )
 
 (defn add-new-country
   [request]

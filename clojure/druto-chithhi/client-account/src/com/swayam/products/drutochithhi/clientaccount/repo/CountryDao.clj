@@ -12,4 +12,7 @@
   (jdbc/insert! config/datasource :country (dissoc country :id))
   )
 
-
+(defn list-countries
+  []
+  (jdbc/query config/datasource ["SELECT * FROM COUNTRY WHERE ACTIVE=TRUE"])
+  )
