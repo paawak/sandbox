@@ -3,7 +3,7 @@
             [io.pedestal.http.route :as route]
             [io.pedestal.http.body-params :as body-params]
             [ring.util.response :as ring-resp]
-            [com.swayam.products.drutochithhi.clientaccount.country :as country]
+            [com.swayam.products.drutochithhi.clientaccount.controller.CountryController :as countryController]
           ))
 
 (defn about-page
@@ -24,9 +24,9 @@
 ;; Tabular routes
 (def routes #{["/" :get (conj common-interceptors `home-page)]
               ["/about" :get (conj common-interceptors `about-page)]
-              ["/country" :get (conj common-interceptors `country/list-countries)]
-              ["/country" :post (conj common-interceptors `country/add-new-country)]
-              ["/country" :put (conj common-interceptors `country/modify-country)]
+              ["/country" :get (conj common-interceptors `countryController/list-countries)]
+              ["/country" :post (conj common-interceptors `countryController/add-new-country)]
+              ["/country" :put (conj common-interceptors `countryController/modify-country)]
            })
 
 ;; Map-based routes

@@ -1,12 +1,12 @@
-(ns com.swayam.products.drutochithhi.clientaccount.country
+(ns com.swayam.products.drutochithhi.clientaccount.controller.CountryController
   (:require [io.pedestal.http :as http]
             [io.pedestal.http.route :as route]
             [io.pedestal.http.body-params :as body-params]
             [ring.util.response :as ring-resp]
-            [com.swayam.products.drutochithhi.clientaccount.model.country_model :as model]
-            [com.swayam.products.drutochithhi.clientaccount.repo.country_dao :as dao]
+            [com.swayam.products.drutochithhi.clientaccount.model.countrymodel :as model]
+            [com.swayam.products.drutochithhi.clientaccount.repo.CountryDao :as dao]
          )
-  (:import [com.swayam.products.drutochithhi.clientaccount.model.country_model Country])
+  (:import [com.swayam.products.drutochithhi.clientaccount.model.countrymodel Country])
   )
 
 (defn list-countries
