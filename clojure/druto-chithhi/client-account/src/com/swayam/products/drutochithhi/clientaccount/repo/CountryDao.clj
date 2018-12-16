@@ -10,7 +10,7 @@
 (defn add-new-country
   [country]
   ;; remove the id field before insert
-  (jdbc/insert! config/db-spec :country (dissoc country :id))
+  (jdbc/insert! config/datasource :country (dissoc country :id))
   )
 
 
