@@ -14,7 +14,8 @@
 
 (defn add-new-country
   [country]
-  (jdbc/insert! db-spec :country {:name (:name country) :shortname (:shortName country)})
+  ;; remove the id field before insert
+  (jdbc/insert! db-spec :country (dissoc country :id))
   )
 
 
