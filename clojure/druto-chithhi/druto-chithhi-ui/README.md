@@ -1,4 +1,5 @@
-# DrutoChithhiUi
+## DrutoChithhiUi
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.3.
 
 # Building docker image
     docker build -t paawak/druto-chithhi-ui:1.0 .
@@ -6,8 +7,7 @@
 # Running docker image
     docker run -p 4200:80 paawak/druto-chithhi-ui:1.0
 
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.3.
+Then go to http://localhost:4200/
 
 ## Development server
 
