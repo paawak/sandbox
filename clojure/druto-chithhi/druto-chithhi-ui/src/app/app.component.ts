@@ -9,7 +9,7 @@ export class AppComponent {
   title = 'druto-chithhi-ui';
 
   clickHandler() {
-    alert("I am clicked");
+    alert('I am clicked');
   }
 
 }
