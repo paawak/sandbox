@@ -3,3 +3,11 @@
 html, body, p {
     color: $main-text-color;
 }
+
+#labelAndInput {
+    .title {
+      font-size: 30px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+  }
