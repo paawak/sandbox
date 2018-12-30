@@ -5,23 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HeaderComponent } from './common/header/header.component';
-import { CountryComponent } from './country/country.component';
+import { CountryModule } from './country/country.module';
 import { StateComponent } from './state/state.component';
-import { CountryListComponent } from './country/country-list/country-list.component';
-import { CountryListItemComponent } from './country/country-list-item/country-list-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    CountryComponent,
-    StateComponent,
-    CountryListComponent,
-    CountryListItemComponent
+    StateComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CountryModule
   ],
   providers: [],
   bootstrap: [AppComponent]
