@@ -8,6 +8,7 @@ import { HeaderComponent } from './common/header/header.component';
 import { CountryComponent } from './country/country.component';
 import { StateComponent } from './state/state.component';
 import { CountryListComponent } from './country/country-list/country-list.component';
+import { CountryListItemComponent } from './country/country-list-item/country-list-item.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { CountryListComponent } from './country/country-list/country-list.compon
     HeaderComponent,
     CountryComponent,
     StateComponent,
-    CountryListComponent
+    CountryListComponent,
+    CountryListItemComponent
   ],
   imports: [
     BrowserModule,
