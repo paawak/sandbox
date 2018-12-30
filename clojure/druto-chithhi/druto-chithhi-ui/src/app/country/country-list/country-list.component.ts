@@ -14,7 +14,18 @@ export class CountryListComponent implements OnInit {
   constructor(private countryService: CountryService) { }
 
   ngOnInit() {
-    this.countries = this.countryService.getCountries();
+    const countriesObservable = this.countryService.getCountries();
+    countriesObservable.subscribe(
+      (data) => {
+        this.countries = data;
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        console.log('Completed fetching countries data');
+      }
+    );
   }
 
 }

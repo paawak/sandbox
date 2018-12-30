@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { Observable, observable } from 'rxjs';
+
 @Injectable()
 export class CountryService {
 
@@ -21,8 +23,19 @@ export class CountryService {
         }
       ];
 
-      public getCountries(): any[] {
-          return this.countries;
+      public getCountries(): Observable<any> {
+          const countriesObservable = new Observable((observer) => {
+
+            setTimeout(() => {
+                observer.next(this.countries);
+            }, 1000);
+
+            setTimeout(() => {
+                observer.complete();
+            }, 2000);
+
+          });
+          return countriesObservable;
       }
 
 }
