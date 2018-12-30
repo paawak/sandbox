@@ -7,6 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CountryListComponent implements OnInit {
 
+  countries: any[] = [
+    {
+      id: 1,
+      code: 'IN',
+      name: 'India'
+    },
+    {
+      id: 2,
+      code: 'US',
+      name: 'United States Of America'
+    },
+    {
+      id: 3,
+      code: 'BN',
+      name: 'Bangladesh'
+    }
+  ];
+
   constructor() { }
 
   ngOnInit() {
