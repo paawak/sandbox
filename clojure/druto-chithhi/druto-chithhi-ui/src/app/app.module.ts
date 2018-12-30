@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './common/header/header.component';
 import { CountryComponent } from './country/country.component';
 import { StateComponent } from './state/state.component';
+import { CountryListComponent } from './country/country-list/country-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     CountryComponent,
-    StateComponent
+    StateComponent,
+    CountryListComponent
   ],
   imports: [
     BrowserModule,
