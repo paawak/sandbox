@@ -9,6 +9,7 @@ import { CountryComponent } from './country.component';
 import { CountryListComponent } from './country-list/country-list.component';
 import { CountryListItemComponent } from './country-list-item/country-list-item.component';
 import { CountryDetailItemComponent } from './country-detail-item/country-detail-item.component';
+import { CountryCreateComponent } from './country-create/country-create.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { CountryDetailItemComponent } from './country-detail-item/country-detail
     CountryComponent,
     CountryListComponent,
     CountryListItemComponent,
-    CountryDetailItemComponent
+    CountryDetailItemComponent,
+    CountryCreateComponent
   ],
   imports: [
     CommonModule,
