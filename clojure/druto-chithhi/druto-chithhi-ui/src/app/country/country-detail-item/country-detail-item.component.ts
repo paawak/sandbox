@@ -17,6 +17,7 @@ export class CountryDetailItemComponent implements OnInit {
   constructor(private route: ActivatedRoute, private countryService: CountryService) { }
 
   ngOnInit() {
+
     this.route.params.subscribe(
       (params) => {
         const countryId = params['countryId'];

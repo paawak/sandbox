@@ -1,24 +1,26 @@
-<div class="row">
-  <div class="col">
-    ID:
+<div *ngIf="country">
+  <div class="row">
+    <div class="col">
+      ID:
+    </div>
+    <div class="col">
+      {{country.id}}
+    </div>
   </div>
-  <div class="col">
-    {{country.id}}
+  <div class="row">
+    <div class="col">
+      Code:
+    </div>
+    <div class="col">
+      {{country.code}}
+    </div>
   </div>
-</div>
-<div class="row">
-<div class="col">
-  Code:
-</div>
-<div class="col">
-  {{country.code}}
-</div>
-</div>
-<div class="row">
-<div class="col">
-  Name:
-</div>
-<div class="col">
-  {{country.name}}
-</div>
+  <div class="row">
+    <div class="col">
+      Name:
+    </div>
+    <div class="col">
+      {{country.name}}
+    </div>
+  </div>
 </div>
