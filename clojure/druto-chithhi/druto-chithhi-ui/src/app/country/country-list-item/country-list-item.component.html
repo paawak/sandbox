@@ -1,24 +1,26 @@
-<div class="row">
+<a routerLink="/country/{{currentCountry.id}}" >
+  <div class="row">
+      <div class="col">
+        ID:
+      </div>
+      <div class="col">
+        {{currentCountry.id}}
+      </div>
+    </div>
+  <div class="row">
     <div class="col">
-      ID:
+      Code:
     </div>
     <div class="col">
-      {{currentCountry.id}}
+      {{currentCountry.code}}
     </div>
   </div>
-<div class="row">
-  <div class="col">
-    Code:
+  <div class="row">
+    <div class="col">
+      Name:
+    </div>
+    <div class="col">
+      {{currentCountry.name}}
+    </div>
   </div>
-  <div class="col">
-    {{currentCountry.code}}
-  </div>
-</div>
-<div class="row">
-  <div class="col">
-    Name:
-  </div>
-  <div class="col">
-    {{currentCountry.name}}
-  </div>
-</div>
+</a>
