@@ -5,7 +5,6 @@ import { StateComponent } from './state/state.component';
 
 const routes: Routes = [
   {path: '', component: CountryComponent},
-  {path: 'country', component: CountryComponent},
   {path: 'state', component: StateComponent}
 ];
 
