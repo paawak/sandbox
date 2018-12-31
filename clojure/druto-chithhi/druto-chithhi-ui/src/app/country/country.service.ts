@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
+import { Country } from './country.model';
+
 @Injectable()
 export class CountryService {
 
-    private countries: any[] = [
+    private countries: Country[] = [
         {
           id: 1,
           code: 'IN',
@@ -23,8 +25,8 @@ export class CountryService {
         }
       ];
 
-      public getCountries(): Observable<any> {
-          const countriesObservable = new Observable((observer) => {
+      public getCountries(): Observable<Country[]> {
+          const countriesObservable = new Observable<Country[]>((observer) => {
 
             setTimeout(() => {
                 observer.next(this.countries);
