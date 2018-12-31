@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { Country } from '../country.model';
+import { CountryService } from '../country.service';
+
+
 @Component({
   selector: 'app-country-detail-item',
   templateUrl: './country-detail-item.component.html',
@@ -8,14 +12,26 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CountryDetailItemComponent implements OnInit {
 
-  private  countryId: string;
+  country: Country;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private countryService: CountryService) { }
 
   ngOnInit() {
     this.route.params.subscribe(
       (params) => {
-        this.countryId = params['countryId'];
+        const countryId = params['countryId'];
+        const countryObservable = this.countryService.getCountry(countryId);
+        countryObservable.subscribe(
+          (data: Country) => {
+            this.country = data;
+          },
+          (error) => {
+            console.log(error);
+          },
+          () => {
+            console.log('Completed fetching country data');
+          }
+        );
       }
     );
   }

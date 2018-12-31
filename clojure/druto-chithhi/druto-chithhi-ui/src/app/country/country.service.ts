@@ -40,4 +40,24 @@ export class CountryService {
           return countriesObservable;
       }
 
+      public getCountry(countryId: number): Observable<Country> {
+        const countryObservable = new Observable<Country>((observer) => {
+
+          setTimeout(() => {
+              const country = {
+                id: 1,
+                code: 'IN',
+                name: 'India'
+              };
+              observer.next(country);
+          }, 100);
+
+          setTimeout(() => {
+              observer.complete();
+          }, 150);
+
+        });
+        return countryObservable;
+    }
+
 }
