@@ -7,8 +7,8 @@ services:
     ports:
       - "8080:8080"
     networks:
-      simulation:
-        ipv4_address: 172.16.238.10
+      druto-chithhi-app-network:
+        ipv4_address: 172.28.169.11
 
   druto-chithhi-ui:
     container_name: druto-chithhi-ui
@@ -18,10 +18,10 @@ services:
     ports:
       - "4200:80"
     networks:
-    - simulation    
+    - druto-chithhi-app-network    
 
 networks:
-  simulation:
+  druto-chithhi-app-network:
     driver: bridge
     driver_opts:
       com.docker.network.enable_ipv4: "true"
@@ -29,5 +29,5 @@ networks:
         driver: default
         config:
           - 
-            subnet: 172.16.238.0/24
+            subnet: 172.28.169.0/24
 
