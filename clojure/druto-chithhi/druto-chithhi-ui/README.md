@@ -1,6 +1,10 @@
 ## DrutoChithhiUi
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.3.
 
+# Adding Javascript library
+    npm install  jquery@3.3.1 --save
+The above command will also add an entry to the package.json and package-lock.json. In addition to that, add an entry manually in the angular.json file.
+
 # Building docker image
     docker build -t paawak/druto-chithhi-ui:1.0 .
 
