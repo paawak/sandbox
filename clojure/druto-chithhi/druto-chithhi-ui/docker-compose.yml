@@ -1,0 +1,33 @@
+version: "3.3"
+services: 
+
+  client-account:
+    container_name: client-account
+    image: docker.io/paawak/client-account:0.0.1-SNAPSHOT
+    ports:
+      - "8080:8080"
+    networks:
+      simulation:
+        ipv4_address: 172.16.238.10
+
+  druto-chithhi-ui:
+    container_name: druto-chithhi-ui
+    image: docker.io/paawak/druto-chithhi-ui:1.0
+    depends_on:
+      - client-account
+    ports:
+      - "4200:80"
+    networks:
+    - simulation    
+
+networks:
+  simulation:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv4: "true"
+    ipam:
+        driver: default
+        config:
+          - 
+            subnet: 172.16.238.0/24
+
