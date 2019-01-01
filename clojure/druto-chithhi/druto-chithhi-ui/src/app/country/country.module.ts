@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import { CountryService } from './country.service';
 
@@ -22,7 +23,8 @@ import { CountryCreateComponent } from './country-create/country-create.componen
   ],
   imports: [
     CommonModule,
-    CountryRoutingModule
+    CountryRoutingModule,
+    HttpClientModule
   ],
   providers: [
     CountryService

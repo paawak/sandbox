@@ -1,5 +1,5 @@
 export class Country {
     id: number;
-    code: string;
+    shortname: string;
     name: string;
 }
