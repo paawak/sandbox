@@ -41,8 +41,8 @@ To learn more about configuring Logback, read its [documentation](http://logback
 ### [Docker](https://www.docker.com/) container support
 
 1. Build an uberjar of your service: `lein uberjar`
-2. Build a Docker image: `sudo docker build -t client-account .`
-3. Run your Docker image: `docker run -p 8080:8080 client-account`
+2. Build a Docker image: `docker build -t client-account:0.0.1-SNAPSHOT .`
+3. Run your Docker image: `docker run -p 8080:8080 client-account:0.0.1-SNAPSHOT`
 
 ### [OSv](http://osv.io/) unikernel support with [Capstan](http://osv.io/capstan/)
 
