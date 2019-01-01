@@ -10,7 +10,7 @@
                  ;; use Immutant or Tomcat instead of Jetty:
                  [io.pedestal/pedestal.jetty "0.5.4"]
                  ;; [io.pedestal/pedestal.immutant "0.5.4"]
-                 ;; [io.pedestal/pedestal.tomcat "0.5.4"]
+                 [io.pedestal/pedestal.tomcat "0.5.4"]
                  [org.clojure/java.jdbc "0.7.8"]
                  [org.postgresql/postgresql "42.2.5"]
                  [com.zaxxer/HikariCP "3.1.0"]

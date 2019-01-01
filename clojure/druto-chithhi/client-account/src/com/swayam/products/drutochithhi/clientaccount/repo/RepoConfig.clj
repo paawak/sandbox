@@ -5,7 +5,7 @@
 
 (def db-config
   {:driver "org.postgresql.Driver"
-   :url "jdbc:postgresql://localhost:5432/druto-chithhi-client-account"
+   :url "jdbc:postgresql://192.168.1.4:5432/druto-chithhi-client-account"
    :user "postgres"
    :password "postgres"})
 
