@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
@@ -37,7 +37,9 @@ export class CountryService {
     }
 
     public addNewCountry(country: Country): Observable<any> {
-      return this.httpClient.post(CountryService.COUNTRY_URL_PREFIX, country);
+      const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+      const formBody = 'name=' + country.name + '&shortname=' + country.shortname;
+      return this.httpClient.post(CountryService.COUNTRY_URL_PREFIX, formBody, { headers });
     }
 
 }
