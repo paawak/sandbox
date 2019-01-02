@@ -36,4 +36,8 @@ export class CountryService {
         return countryObservable;
     }
 
+    public addNewCountry(country: Country): Observable<any> {
+      return this.httpClient.post(CountryService.COUNTRY_URL_PREFIX, country);
+    }
+
 }

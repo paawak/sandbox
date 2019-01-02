@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { CountryService } from './country.service';
@@ -24,7 +25,8 @@ import { CountryCreateComponent } from './country-create/country-create.componen
   imports: [
     CommonModule,
     CountryRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     CountryService

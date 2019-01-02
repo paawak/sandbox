@@ -3,22 +3,27 @@
     <div class="row">
       <div class="col-md-5">
         <h1 class="page-title">Create Country</h1>
-        <form>
+        <form #newCountryForm="ngForm">
           <div class="form-group">
-            <label for="title">Name</label>
+            <label for="name">Name</label>
             <input type="text"
                    class="form-control"
-                   id="title">
+                   id="name"
+                   name="name"
+                   [(ngModel)]="newCountry.name"
+                   >
           </div>
 
           <div class="form-group">
-            <label for="city">Short Name</label>
+            <label for="shortname">Short Name</label>
             <input type="text"
                    class="form-control"
-                   id="city">
+                   id="shortname"
+                   name="shortname"
+                   [(ngModel)]="newCountry.shortname">
           </div>          
           
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-primary" (click)="createNewCountry()" >Submit</button>
         </form>
       </div>
     </div>
