@@ -25,6 +25,7 @@ export class CountryDetailItemComponent implements OnInit {
         countryObservable.subscribe(
           (data: Country) => {
             this.country = data;
+            console.log('country: ' + this.country);
           },
           (error) => {
             console.log(error);

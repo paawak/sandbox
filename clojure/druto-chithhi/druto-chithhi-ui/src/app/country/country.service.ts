@@ -17,23 +17,7 @@ export class CountryService {
       }
 
       public getCountry(countryId: number): Observable<Country> {
-        const countryObservable = new Observable<Country>((observer) => {
-
-          setTimeout(() => {
-              const country = {
-                id: 1,
-                shortname: 'IN',
-                name: 'India'
-              };
-              observer.next(country);
-          }, 100);
-
-          setTimeout(() => {
-              observer.complete();
-          }, 150);
-
-        });
-        return countryObservable;
+        return <Observable<Country>>this.httpClient.get(CountryService.COUNTRY_URL_PREFIX + '/' + countryId);
     }
 
     public addNewCountry(country: Country): Observable<any> {
