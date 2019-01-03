@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { Country } from '../country.model';
 import { CountryService } from '../country.service';
@@ -14,7 +15,8 @@ export class CountryCreateComponent implements OnInit {
   newCountry: Country;
   httpErrorMessage: string = null;
 
-  constructor(private countryService: CountryService) { }
+  constructor(private countryService: CountryService,
+    private router: Router) { }
 
   ngOnInit() {
     this.newCountry = new Country();
@@ -24,8 +26,9 @@ export class CountryCreateComponent implements OnInit {
   public createNewCountry() {
     console.log(this.newCountry);
     this.countryService.addNewCountry(this.newCountry).subscribe(
-      (data) => {
-        console.log('Data: ' + data);
+      (countrySaveReponse) => {
+        console.log('countrySaveReponse: ' + countrySaveReponse);
+        this.router.navigate([`/country/${countrySaveReponse.id}`]);
       },
       (errorResponse: HttpErrorResponse) => {
         this.httpErrorMessage = errorResponse.message;
