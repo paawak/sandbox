@@ -8,6 +8,16 @@
   (:import (com.swayam.products.drutochithhi.clientaccount.model.Models Country))
   )
 
+(defn get-country
+  [request]
+  (let [
+        countryId ((request :path-params) :id)
+        ]
+    (println "Trying to fetch country with id: " countryId)
+    {:status 200 :body {:id countryId :status "TBD"}}
+    )
+  )
+
 (defn list-countries
   [request]
   {:status 200 :body (dao/list-countries)}

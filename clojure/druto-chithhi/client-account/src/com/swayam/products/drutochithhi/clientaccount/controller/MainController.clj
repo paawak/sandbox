@@ -28,6 +28,7 @@
 ;; Tabular routes
 (def routes #{["/" :get (conj common-interceptors `home-page)]
               ["/about" :get (conj common-interceptors `about-page)]
+              ["/country/:id" :get (conj common-interceptors `countryController/get-country)]
               ["/country" :get (conj common-interceptors `countryController/list-countries)]
               ["/country" :post (conj common-interceptors `countryController/add-new-country)]
               ["/country" :put (conj common-interceptors `countryController/modify-country)]
