@@ -20,5 +20,5 @@
 
 (defn get-country
   [countryId]
-  (jdbc/query config/datasource ["SELECT * FROM COUNTRY WHERE ACTIVE=TRUE AND ID = ?" (read-string countryId)])
+  (jdbc/query config/datasource ["SELECT * FROM COUNTRY WHERE ACTIVE=TRUE AND ID = ?" (read-string countryId)] {:result-set-fn first})
   )
