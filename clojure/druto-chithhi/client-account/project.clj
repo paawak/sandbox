@@ -8,7 +8,7 @@
 
                  ;; Remove this line and uncomment one of the next lines to
                  ;; use Immutant or Tomcat instead of Jetty:
-                 [io.pedestal/pedestal.jetty "0.5.4"]
+                 ;;[io.pedestal/pedestal.jetty "0.5.4"] ;;commenting jetty as it does not work inside Docker
                  ;; [io.pedestal/pedestal.immutant "0.5.4"]
                  [io.pedestal/pedestal.tomcat "0.5.4"]
                  [org.clojure/java.jdbc "0.7.8"]
