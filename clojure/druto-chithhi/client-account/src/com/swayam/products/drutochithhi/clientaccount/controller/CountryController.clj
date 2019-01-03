@@ -14,7 +14,7 @@
         countryId ((request :path-params) :id)
         ]
     (println "Trying to fetch country with id: " countryId)
-    {:status 200 :body {:id countryId :status "TBD"}}
+    {:status 200 :body (dao/get-country countryId)}
     )
   )
 

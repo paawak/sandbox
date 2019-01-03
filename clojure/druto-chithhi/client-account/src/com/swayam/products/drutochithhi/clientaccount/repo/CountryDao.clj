@@ -17,3 +17,8 @@
   []
   (jdbc/query config/datasource ["SELECT * FROM COUNTRY WHERE ACTIVE=TRUE"])
   )
+
+(defn get-country
+  [countryId]
+  (jdbc/query config/datasource ["SELECT * FROM COUNTRY WHERE ACTIVE=TRUE AND ID = ?" (read-string countryId)])
+  )
