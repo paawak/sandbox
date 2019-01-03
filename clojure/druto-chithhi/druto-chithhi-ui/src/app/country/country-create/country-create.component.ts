@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { Country } from '../country.model';
-
 import { CountryService } from '../country.service';
 
 @Component({
@@ -11,12 +11,14 @@ import { CountryService } from '../country.service';
 })
 export class CountryCreateComponent implements OnInit {
 
-  private newCountry: Country;
+  newCountry: Country;
+  httpErrorMessage: string = null;
 
   constructor(private countryService: CountryService) { }
 
   ngOnInit() {
     this.newCountry = new Country();
+    this.httpErrorMessage = null;
   }
 
   public createNewCountry() {
@@ -25,8 +27,9 @@ export class CountryCreateComponent implements OnInit {
       (data) => {
         console.log('Data: ' + data);
       },
-      (error) => {
-        console.error(error);
+      (errorResponse: HttpErrorResponse) => {
+        this.httpErrorMessage = errorResponse.message;
+        console.error('Error creating new Country: ' + errorResponse);
       }
     );
   }

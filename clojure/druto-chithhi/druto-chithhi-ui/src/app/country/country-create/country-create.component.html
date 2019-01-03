@@ -1,4 +1,9 @@
 <section id="newCountry">
+  <div *ngIf="httpErrorMessage" class="alert alert-danger" role="alert">
+    <p>
+      {{httpErrorMessage}}
+    </p>
+  </div>
   <div class="form-group">
     <div class="row">
       <div class="col-md-5">
@@ -11,6 +16,7 @@
                    id="name"
                    name="name"
                    [(ngModel)]="newCountry.name"
+                   required
                    >
           </div>
 
@@ -20,7 +26,9 @@
                    class="form-control"
                    id="shortname"
                    name="shortname"
-                   [(ngModel)]="newCountry.shortname">
+                   [(ngModel)]="newCountry.shortname"
+                   required
+                   >
           </div>          
           
           <button type="button" class="btn btn-primary" (click)="createNewCountry()" >Submit</button>
