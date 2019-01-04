@@ -26,12 +26,12 @@
                           ])
 
 ;; Tabular routes
-(def routes #{["/" :get (conj common-interceptors `home-page)]
-              ["/about" :get (conj common-interceptors `about-page)]
+(def landing-page-routes #{["/" :get (conj common-interceptors `home-page)]
+                           ["/about" :get (conj common-interceptors `about-page)]
            })
 
 (def all-routes
-  (clojure.set/union routes countryController/routes)
+  (clojure.set/union landing-page-routes countryController/country-routes)
   )
 
 ;; Map-based routes

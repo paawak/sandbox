@@ -14,7 +14,7 @@
                     ]
   )
 
-(def routes #{
+(def country-routes #{
               ["/country/:id" :get (conj interceptors `get-country)]
               ["/country" :get (conj interceptors `list-countries)]
               ["/country" :post (conj interceptors `add-new-country)]

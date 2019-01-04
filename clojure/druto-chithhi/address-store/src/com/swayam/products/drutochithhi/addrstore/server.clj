@@ -18,7 +18,7 @@
               ::server/join? false
               ;; Routes can be a function that resolve routes,
               ;;  we can use this to set the routes to be reloadable
-              ::server/routes #(route/expand-routes (deref #'controller/routes))
+              ::server/routes #(route/expand-routes (deref #'controller/all-routes))
               ;; all origins are allowed in dev mode
               ::server/allowed-origins {:creds true :allowed-origins (constantly true)}
               ;; Content Security Policy (CSP) is mostly turned off in dev mode
@@ -33,6 +33,7 @@
   "The entry-point for 'lein run'"
   [& args]
   (println "\nCreating your server...")
+  (println "\nRoutes defined: " controller/all-routes)
   (server/start runnable-service))
 
 ;; If you package the service up as a WAR,
