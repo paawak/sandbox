@@ -28,11 +28,11 @@
 ;; Tabular routes
 (def routes #{["/" :get (conj common-interceptors `home-page)]
               ["/about" :get (conj common-interceptors `about-page)]
-              ["/country/:id" :get (conj common-interceptors `countryController/get-country)]
-              ["/country" :get (conj common-interceptors `countryController/list-countries)]
-              ["/country" :post (conj common-interceptors `countryController/add-new-country)]
-              ["/country" :put (conj common-interceptors `countryController/modify-country)]
            })
+
+(def all-routes
+  (clojure.set/union routes countryController/routes)
+  )
 
 ;; Map-based routes
 ;(def routes `{"/" {:interceptors [(body-params/body-params) http/html-body]
@@ -54,7 +54,7 @@
               ;; dev-mode. If you do, many other keys for configuring
               ;; default interceptors will be ignored.
               ;; ::http/interceptors []
-              ::http/routes routes
+              ::http/routes all-routes
 
               ;; Uncomment next line to enable CORS support, add
               ;; string(s) specifying scheme, host and port for

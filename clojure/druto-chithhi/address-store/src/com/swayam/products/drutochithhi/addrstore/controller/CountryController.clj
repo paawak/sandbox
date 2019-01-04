@@ -8,6 +8,20 @@
   (:import (com.swayam.products.drutochithhi.addrstore.model.Models Country))
   )
 
+(def interceptors [
+                    (body-params/body-params) 
+                    http/json-body
+                    ]
+  )
+
+(def routes #{
+              ["/country/:id" :get (conj interceptors `get-country)]
+              ["/country" :get (conj interceptors `list-countries)]
+              ["/country" :post (conj interceptors `add-new-country)]
+              ["/country" :put (conj interceptors `modify-country)]
+           }
+  )
+
 (defn get-country
   [request]
   (let [
