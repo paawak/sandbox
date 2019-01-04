@@ -1,50 +1,12 @@
-(ns com.swayam.products.drutochithhi.addrstore.controller.MainController
+(ns com.swayam.products.drutochithhi.addrstore.controller.HttpService
   (:require [io.pedestal.http :as http]
-            [io.pedestal.http.route :as route]
-            [io.pedestal.http.body-params :as body-params]
-            [ring.util.response :as ring-resp]
             [com.swayam.products.drutochithhi.addrstore.controller.CountryController :as countryController]
+            [com.swayam.products.drutochithhi.addrstore.controller.LandingPageController :as landingPageController]
           ))
 
-(defn about-page
-  [request]
-  (ring-resp/response (format "Clojure %s - served from %s"
-                              (clojure-version)
-                              (route/url-for ::about-page))))
-
-(defn home-page
-  [request]
-  (ring-resp/response "Hello World!"))
-
-;; Defines "/" and "/about" routes with their associated :get handlers.
-;; The interceptors defined after the verb map (e.g., {:get home-page}
-;; apply to / and its children (/about).
-(def common-interceptors [
-                          (body-params/body-params) 
-                          http/html-body
-                          http/json-body
-                          ])
-
-;; Tabular routes
-(def landing-page-routes #{["/" :get (conj common-interceptors `home-page)]
-                           ["/about" :get (conj common-interceptors `about-page)]
-           })
-
 (def all-routes
-  (clojure.set/union landing-page-routes countryController/country-routes)
+  (clojure.set/union landingPageController/landing-page-routes countryController/country-routes)
   )
-
-;; Map-based routes
-;(def routes `{"/" {:interceptors [(body-params/body-params) http/html-body]
-;                   :get home-page
-;                   "/about" {:get about-page}}})
-
-;; Terse/Vector-based routes
-;(def routes
-;  `[[["/" {:get home-page}
-;      ^:interceptors [(body-params/body-params) http/html-body]
-;      ["/about" {:get about-page}]]]])
-
 
 ;; Consumed by com.swayam.products.drutochithhi.addrstore.server/create-server
 ;; See http/default-interceptors for additional options you can configure
