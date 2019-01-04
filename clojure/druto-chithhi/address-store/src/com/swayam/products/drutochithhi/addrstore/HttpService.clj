@@ -1,4 +1,4 @@
-(ns com.swayam.products.drutochithhi.addrstore.controller.HttpService
+(ns com.swayam.products.drutochithhi.addrstore.HttpService
   (:require [io.pedestal.http :as http]
             [com.swayam.products.drutochithhi.addrstore.controller.CountryController :as countryController]
             [com.swayam.products.drutochithhi.addrstore.controller.LandingPageController :as landingPageController]

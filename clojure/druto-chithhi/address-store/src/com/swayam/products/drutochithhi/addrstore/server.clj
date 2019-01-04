@@ -2,23 +2,23 @@
   (:gen-class) ; for -main method in uberjar
   (:require [io.pedestal.http :as server]
             [io.pedestal.http.route :as route]
-            [com.swayam.products.drutochithhi.addrstore.controller.MainController :as controller]))
+            [com.swayam.products.drutochithhi.addrstore.HttpService :as httpService]))
 
 ;; This is an adapted service map, that can be started and stopped
 ;; From the REPL you can call server/start and server/stop on this service
-(defonce runnable-service (server/create-server controller/service))
+(defonce runnable-service (server/create-server httpService/service))
 
 (defn run-dev
   "The entry-point for 'lein run-dev'"
   [& args]
   (println "\nCreating your [DEV] server...")
-  (-> controller/service ;; start with production configuration
+  (-> httpService/service ;; start with production configuration
       (merge {:env :dev
               ;; do not block thread that starts web server
               ::server/join? false
               ;; Routes can be a function that resolve routes,
               ;;  we can use this to set the routes to be reloadable
-              ::server/routes #(route/expand-routes (deref #'controller/all-routes))
+              ::server/routes #(route/expand-routes (deref #'httpService/all-routes))
               ;; all origins are allowed in dev mode
               ::server/allowed-origins {:creds true :allowed-origins (constantly true)}
               ;; Content Security Policy (CSP) is mostly turned off in dev mode
@@ -33,7 +33,7 @@
   "The entry-point for 'lein run'"
   [& args]
   (println "\nCreating your server...")
-  (println "\nRoutes defined: " controller/all-routes)
+  (println "\nRoutes defined: " httpService/all-routes)
   (server/start runnable-service))
 
 ;; If you package the service up as a WAR,
