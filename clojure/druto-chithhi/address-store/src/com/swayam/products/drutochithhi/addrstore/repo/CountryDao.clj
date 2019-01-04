@@ -1,9 +1,9 @@
-(ns com.swayam.products.drutochithhi.clientaccount.repo.CountryDao
+(ns com.swayam.products.drutochithhi.addrstore.repo.CountryDao
   (:require [clojure.java.jdbc :as jdbc]
-            [com.swayam.products.drutochithhi.clientaccount.repo.RepoConfig :as config]
-            [com.swayam.products.drutochithhi.clientaccount.model.Models :as models]
+            [com.swayam.products.drutochithhi.addrstore.repo.RepoConfig :as config]
+            [com.swayam.products.drutochithhi.addrstore.model.Models :as models]
   )
-  (:import [com.swayam.products.drutochithhi.clientaccount.model.Models Country])
+  (:import [com.swayam.products.drutochithhi.addrstore.model.Models Country])
  )
 
 

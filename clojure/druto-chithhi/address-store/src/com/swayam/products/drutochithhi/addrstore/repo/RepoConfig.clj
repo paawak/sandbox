@@ -1,4 +1,4 @@
-(ns com.swayam.products.drutochithhi.clientaccount.repo.RepoConfig
+(ns com.swayam.products.drutochithhi.addrstore.repo.RepoConfig
   (:import (com.zaxxer.hikari HikariDataSource)
    )
 )

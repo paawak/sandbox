@@ -1,8 +1,8 @@
-(ns com.swayam.products.drutochithhi.clientaccount.controller.MainControllerTest
+(ns com.swayam.products.drutochithhi.addrstore.controller.MainControllerTest
   (:require [clojure.test :refer :all]
             [io.pedestal.test :refer :all]
             [io.pedestal.http :as bootstrap]
-            [com.swayam.products.drutochithhi.clientaccount.controller.MainController :as controller]))
+            [com.swayam.products.drutochithhi.addrstore.controller.MainController :as controller]))
 
 (def service
   (::bootstrap/service-fn (bootstrap/create-servlet controller/service)))

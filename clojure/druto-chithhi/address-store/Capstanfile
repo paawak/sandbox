@@ -9,8 +9,8 @@ base: cloudius/osv-openjdk8
 #
 # The command line passed to OSv to start up the application.
 #
-#cmdline: /java.so -cp /client-account/app.jar clojure.main -m client-account
-cmdline: /java.so -jar /client-account/app.jar
+#cmdline: /java.so -cp /address-store/app.jar clojure.main -m address-store
+cmdline: /java.so -jar /address-store/app.jar
 
 #
 # The command to use to build the application.
@@ -25,5 +25,5 @@ cmdline: /java.so -jar /client-account/app.jar
 # List of files that are included in the generated image.
 #
 files:
-  /client-account/app.jar: ./target/client-account-0.0.1-SNAPSHOT-standalone.jar
+  /address-store/app.jar: ./target/address-store-0.0.1-SNAPSHOT-standalone.jar
 

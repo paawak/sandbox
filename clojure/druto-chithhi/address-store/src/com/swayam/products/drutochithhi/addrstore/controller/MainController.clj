@@ -1,9 +1,9 @@
-(ns com.swayam.products.drutochithhi.clientaccount.controller.MainController
+(ns com.swayam.products.drutochithhi.addrstore.controller.MainController
   (:require [io.pedestal.http :as http]
             [io.pedestal.http.route :as route]
             [io.pedestal.http.body-params :as body-params]
             [ring.util.response :as ring-resp]
-            [com.swayam.products.drutochithhi.clientaccount.controller.CountryController :as countryController]
+            [com.swayam.products.drutochithhi.addrstore.controller.CountryController :as countryController]
           ))
 
 (defn about-page
@@ -46,7 +46,7 @@
 ;      ["/about" {:get about-page}]]]])
 
 
-;; Consumed by com.swayam.products.drutochithhi.clientaccount.server/create-server
+;; Consumed by com.swayam.products.drutochithhi.addrstore.server/create-server
 ;; See http/default-interceptors for additional options you can configure
 (def service {:env :prod
               ;; You can bring your own non-default interceptors. Make
