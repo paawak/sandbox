@@ -1,9 +1,9 @@
 version: "3.3"
 services: 
 
-  client-account:
-    container_name: client-account
-    image: docker.io/paawak/client-account:0.0.1-SNAPSHOT
+  address-store:
+    container_name: address-store
+    image: docker.io/paawak/address-store:0.0.1-SNAPSHOT
     ports:
       - "8080:8080"
     networks:
@@ -14,7 +14,7 @@ services:
     container_name: druto-chithhi-ui
     image: docker.io/paawak/druto-chithhi-ui:1.0
     depends_on:
-      - client-account
+      - address-store
     ports:
       - "4200:80"
     networks:
