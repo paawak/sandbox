@@ -17,6 +17,8 @@
 
 ## Getting Started
 
+	java -Dconfig.file=dev/address_store_config.edn  -jar target/address-store-0.0.1-SNAPSHOT-standalone.jar 
+
 1. Start the application: `lein run`
 2. Go to [localhost:8080](http://localhost:8080/) to see: `Hello World!`
 3. Read your app's source code at src/com.swayam.products.drutochithhi.addrstore/service.clj. Explore the docs of functions

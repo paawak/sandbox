@@ -2,6 +2,8 @@
   (:require [clojure.java.jdbc :as jdbc]
             [com.swayam.products.drutochithhi.addrstore.repo.RepoConfig :as config]
             [com.swayam.products.drutochithhi.addrstore.model.Models :as models]
+            [com.swayam.products.drutochithhi.addrstore.config.Configs :as conf]
+            [omniconf.core :as cfg]
   )
   (:import [com.swayam.products.drutochithhi.addrstore.model.Models Country])
  )
@@ -15,6 +17,8 @@
 
 (defn list-countries
   []
+  (conf/load-configs)
+  (println "database-url from config: " (cfg/get :database-url))
   (jdbc/query config/datasource ["SELECT * FROM COUNTRY WHERE ACTIVE=TRUE"])
   )
 
