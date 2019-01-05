@@ -1,13 +1,10 @@
 (ns com.swayam.products.drutochithhi.addrstore.repo.RepoConfig
+  (:require
+    [omniconf.core :as cfg]
+    )
   (:import (com.zaxxer.hikari HikariDataSource)
    )
 )
-
-(def db-config
-  {:driver "org.postgresql.Driver"
-   :url "jdbc:postgresql://192.168.1.4:5432/druto-chithhi-client-account"
-   :user "postgres"
-   :password "postgres"})
 
 (defn connection-pool
   [spec]
@@ -19,4 +16,16 @@
                     )]
     {:datasource hikari-ds}))
 
-(def datasource (connection-pool db-config))
+(defn datasource
+  []
+  (let [
+        db-config
+				  {:driver (cfg/get :database-driver)
+				   :url (cfg/get :database-url)
+				   :user (cfg/get :database-user)
+				   :password (cfg/get :database-password)}
+        ]
+    (println "db-config")
+    (connection-pool db-config)
+    )
+  )

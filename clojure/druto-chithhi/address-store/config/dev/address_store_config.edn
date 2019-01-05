@@ -1,4 +1,5 @@
 {
+ :database-driver "org.postgresql.Driver"
  :database-url "jdbc:postgresql://localhost:5432/druto-chithhi-client-account"
  :database-user "postgres"
  :database-password "postgres"

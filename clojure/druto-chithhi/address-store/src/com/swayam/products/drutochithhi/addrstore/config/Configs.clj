@@ -9,6 +9,7 @@
 
 (defn load-configs
   []
+  (println "Looking for the System variable " CONFIG_FILE_LOCATION_SYSTEM_PROPERTY " for the config file location")
   (let [ 
         configFileLocation (System/getProperty CONFIG_FILE_LOCATION_SYSTEM_PROPERTY)
         configFileUri (io/resource configFileLocation)]
