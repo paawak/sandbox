@@ -1,12 +1,13 @@
 (ns com.swayam.products.drutochithhi.addrstore.repo.RepoConfig
   (:require
     [omniconf.core :as cfg]
+    [mount.core :refer [defstate] :as mount]
     )
   (:import (com.zaxxer.hikari HikariDataSource)
    )
 )
 
-(defn connection-pool
+(defn create-connection-pool
   [spec]
   (let [hikari-ds (doto (HikariDataSource.)
                     (.setDataSourceClassName (:classname spec))
@@ -16,7 +17,7 @@
                     )]
     {:datasource hikari-ds}))
 
-(defn datasource
+(defn create-address-store-datasource
   []
   (let [
         db-config
@@ -26,6 +27,11 @@
 				   :password (cfg/get :database-password)}
         ]
     (println "db-config")
-    (connection-pool db-config)
+    (create-connection-pool db-config)
     )
+  )
+
+(defstate address-store-db  
+  :start (create-address-store-datasource)  
+  :stop (.close address-store-db)
   )

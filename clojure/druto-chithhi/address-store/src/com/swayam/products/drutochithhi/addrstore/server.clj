@@ -2,6 +2,7 @@
   (:gen-class) ; for -main method in uberjar
   (:require [io.pedestal.http :as server]
             [io.pedestal.http.route :as route]
+            [mount.core :as mount]
             [com.swayam.products.drutochithhi.addrstore.config.Configs :as conf]
             [com.swayam.products.drutochithhi.addrstore.HttpService :as httpService]
             ))
@@ -36,6 +37,10 @@
   [& args]
   (println "Loading config...")
   (conf/load-configs)
+  (mount/start)
+  (.addShutdownHook
+   (Runtime/getRuntime)
+   (Thread. mount/stop))
   (println "\nCreating your server...")
   (println "\nRoutes defined: " httpService/all-routes)
   (server/start runnable-service))

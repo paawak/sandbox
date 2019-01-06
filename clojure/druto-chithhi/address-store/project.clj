@@ -11,6 +11,7 @@
                  [com.zaxxer/HikariCP "3.1.0"]
                  [org.clojure/data.json "0.2.6"]
                  [com.grammarly/omniconf "0.3.2"]
+                 [mount "0.1.15"]
 
                  [ch.qos.logback/logback-classic "1.2.3" :exclusions [org.slf4j/slf4j-api]]
                  [org.slf4j/jul-to-slf4j "1.7.25"]
