@@ -33,5 +33,5 @@
 
 (defstate address-store-db  
   :start (create-address-store-datasource)  
-  :stop (.close address-store-db)
+  :stop (.close (address-store-db :datasource))
   )
