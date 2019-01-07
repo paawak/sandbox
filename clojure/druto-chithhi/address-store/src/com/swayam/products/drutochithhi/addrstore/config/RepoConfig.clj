@@ -10,7 +10,7 @@
 (defn create-connection-pool
   [spec]
   (let [hikari-ds (doto (HikariDataSource.)
-                    (.setDataSourceClassName (:classname spec))
+                    (.setDriverClassName (:driver spec))
                     (.setJdbcUrl (:url spec))
                     (.setUsername (:user spec))
                     (.setPassword (:password spec))
