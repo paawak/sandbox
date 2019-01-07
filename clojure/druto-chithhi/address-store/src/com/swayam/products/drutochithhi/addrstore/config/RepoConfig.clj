@@ -8,30 +8,17 @@
 )
 
 (defn create-connection-pool
-  [spec]
+  []
   (let [hikari-ds (doto (HikariDataSource.)
-                    (.setDriverClassName (:driver spec))
-                    (.setJdbcUrl (:url spec))
-                    (.setUsername (:user spec))
-                    (.setPassword (:password spec))
+                    (.setDriverClassName (cfg/get :database-driver))
+                    (.setJdbcUrl (cfg/get :database-url))
+                    (.setUsername (cfg/get :database-user))
+                    (.setPassword (cfg/get :database-password))
                     )]
     {:datasource hikari-ds}))
 
-(defn create-address-store-datasource
-  []
-  (let [
-        db-config
-				  {:driver (cfg/get :database-driver)
-				   :url (cfg/get :database-url)
-				   :user (cfg/get :database-user)
-				   :password (cfg/get :database-password)}
-        ]
-    (println "db-config")
-    (create-connection-pool db-config)
-    )
-  )
 
 (defstate address-store-db  
-  :start (create-address-store-datasource)  
+  :start (create-connection-pool)  
   :stop (.close (address-store-db :datasource))
   )
