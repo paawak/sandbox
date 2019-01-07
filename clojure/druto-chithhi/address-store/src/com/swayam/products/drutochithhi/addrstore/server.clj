@@ -2,9 +2,8 @@
   (:gen-class) ; for -main method in uberjar
   (:require [io.pedestal.http :as server]
             [io.pedestal.http.route :as route]
-            [mount.core :as mount]
-            [com.swayam.products.drutochithhi.addrstore.config.ProfileConfig :as conf]
             [com.swayam.products.drutochithhi.addrstore.HttpService :as httpService]
+            [com.swayam.products.drutochithhi.addrstore.config.StartupConfig :as startUp]
             ))
 
 ;; This is an adapted service map, that can be started and stopped
@@ -35,13 +34,8 @@
 (defn -main
   "The entry-point for 'lein run'"
   [& args]
-  (println "Loading config...")
-  (conf/load-configs)
-  (mount/start)
-  (.addShutdownHook
-   (Runtime/getRuntime)
-   (Thread. mount/stop))
   (println "\nCreating your server...")
+  (startUp/init-on-startup)
   (println "\nRoutes defined: " httpService/all-routes)
   (server/start runnable-service))
 
