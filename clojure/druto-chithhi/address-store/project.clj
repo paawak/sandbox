@@ -20,6 +20,7 @@
   :min-lein-version "2.0.0"
   :resource-paths ["config"]
   :profiles {
+             :dev {:jvm-opts ["-Dconfig.file=dev/address_store_config.edn"] }
              :uberjar {:aot [com.swayam.products.drutochithhi.addrstore.server]}
              }
   :main ^{:skip-aot true} com.swayam.products.drutochithhi.addrstore.server)
