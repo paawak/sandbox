@@ -1,4 +1,4 @@
-(ns com.swayam.products.drutochithhi.addrstore.repo.RepoConfig
+(ns com.swayam.products.drutochithhi.addrstore.config.RepoConfig
   (:require
     [omniconf.core :as cfg]
     [mount.core :refer [defstate] :as mount]

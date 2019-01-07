@@ -1,7 +1,7 @@
 (ns com.swayam.products.drutochithhi.addrstore.repo.CountryDao
   (:require [clojure.java.jdbc :as jdbc]
             [com.swayam.products.drutochithhi.addrstore.model.Models :as models]
-            [com.swayam.products.drutochithhi.addrstore.repo.RepoConfig :refer [address-store-db]]
+            [com.swayam.products.drutochithhi.addrstore.config.RepoConfig :refer [address-store-db]]
   )
   (:import [com.swayam.products.drutochithhi.addrstore.model.Models Country])
  )
