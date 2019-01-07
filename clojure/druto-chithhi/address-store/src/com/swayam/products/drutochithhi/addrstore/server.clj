@@ -3,7 +3,7 @@
   (:require [io.pedestal.http :as server]
             [io.pedestal.http.route :as route]
             [mount.core :as mount]
-            [com.swayam.products.drutochithhi.addrstore.config.Configs :as conf]
+            [com.swayam.products.drutochithhi.addrstore.config.ProfileConfig :as conf]
             [com.swayam.products.drutochithhi.addrstore.HttpService :as httpService]
             ))
 

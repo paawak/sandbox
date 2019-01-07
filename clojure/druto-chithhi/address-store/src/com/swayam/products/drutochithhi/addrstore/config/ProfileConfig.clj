@@ -1,4 +1,4 @@
-(ns com.swayam.products.drutochithhi.addrstore.config.Configs
+(ns com.swayam.products.drutochithhi.addrstore.config.ProfileConfig
   (:require [omniconf.core :as cfg]
             [clojure.java.io :as io]
    )
