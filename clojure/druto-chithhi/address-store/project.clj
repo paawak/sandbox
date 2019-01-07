@@ -20,7 +20,10 @@
   :min-lein-version "2.0.0"
   :resource-paths ["config"]
   :profiles {
-             :dev {:jvm-opts ["-Dconfig.file=dev/address_store_config.edn"] }
+             :dev {:jvm-opts ["-Dconfig.file=dev/address_store_config.edn"]
+                   :aliases {"run-dev" ["trampoline" "run" "-m" "com.swayam.products.drutochithhi.addrstore.server/run-dev"]}
+                   :dependencies [[io.pedestal/pedestal.service-tools "0.5.4"]]
+                   }
              :uberjar {:aot [com.swayam.products.drutochithhi.addrstore.server]}
              }
   :main ^{:skip-aot true} com.swayam.products.drutochithhi.addrstore.server)
