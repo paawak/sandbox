@@ -2,6 +2,7 @@
   (:require 
             [mount.core :as mount]
             [com.swayam.products.drutochithhi.addrstore.config.ProfileConfig :as conf]
+            [com.swayam.products.drutochithhi.addrstore.config.FlywayConfig :as flyway]
             )
   )
 
@@ -24,5 +25,6 @@
   []
   (load-config-file)
   (start-mount)
+  (flyway/run-flyway)
   )
 

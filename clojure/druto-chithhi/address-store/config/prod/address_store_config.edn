@@ -1,6 +1,7 @@
 {
  :database-driver "org.postgresql.Driver"
- :database-url "jdbc:postgresql://192.168.1.4:5432/druto-chithhi-client-account"
+ :database-url "jdbc:postgresql://192.168.1.4:5432/druto-chithhi-address-store"
  :database-user "postgres"
  :database-password "postgres"
+ :flyway-sql-directory "sql"
  }
