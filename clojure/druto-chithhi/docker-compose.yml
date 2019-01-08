@@ -1,9 +1,23 @@
 version: "3.3"
 services: 
 
+  druto-chithhi-address-store-postgres:
+    container_name: druto-chithhi-address-store-postgres
+    image: postgres:9.5.15-alpine
+    environment:
+      POSTGRES_DB: "druto-chithhi-address-store"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - "15432:5432"
+    networks:
+      - druto-chithhi-app-network
+
   address-store:
     container_name: address-store
     image: docker.io/paawak/address-store:0.0.1-SNAPSHOT
+    depends_on:
+      - druto-chithhi-address-store-postgres
     ports:
       - "8080:8080"
     networks:
