@@ -4,4 +4,5 @@
  :database-user "postgres"
  :database-password "postgres"
  :flyway-sql-directory "sql"
+ :http-allowed-origins ["http://localhost:4200"]
  }

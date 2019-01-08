@@ -8,7 +8,9 @@
 
 ;; This is an adapted service map, that can be started and stopped
 ;; From the REPL you can call server/start and server/stop on this service
-(defonce runnable-service (server/create-server httpService/service))
+(defn runnable-service
+  []  (server/create-server (httpService/service))
+  )
 
 (defn run-dev
   "The entry-point for 'lein run-dev'"
@@ -37,7 +39,7 @@
   (println "\nCreating your server...")
   (startUp/init-on-startup)
   (println "\nRoutes defined: " httpService/all-routes)
-  (server/start runnable-service))
+  (server/start (runnable-service)))
 
 ;; If you package the service up as a WAR,
 ;; some form of the following function sections is required (for io.pedestal.servlet.ClojureVarServlet).
