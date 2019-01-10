@@ -16,6 +16,17 @@
                     ]
   )
 
+(defn extract-country-from-request-form-params
+  [request]
+  (let [
+        formParams (get request :form-params) 
+        id (get formParams :id)
+        name (get formParams :name) 
+        shortName (get formParams :shortname)]
+    (Country. id name shortName)
+    )  
+  )
+
 (def add-new-country-interceptor {
     :name ::add-new-country-interceptor
     :enter (fn [context]
@@ -26,8 +37,16 @@
 							               (do (log/info "The content-type is not specified")
 							               (chain/terminate context))
 								             (let [contentType (get request :content-type)]
-								               (cond (= contentType "application/x-www-form-urlencoded") (log/info "The content type is" contentType) 
-								                     (= contentType "application/json") (log/info "The content type is" contentType)
+								               (cond (= contentType "application/x-www-form-urlencoded") 
+                                     (do 
+                                       (log/info "The content type is" contentType)
+                                       (update context :request assoc :country (extract-country-from-request-form-params request))
+                                       ) 
+								                     (= contentType "application/json") 
+                                     (do 
+                                       (log/info "The content type is" contentType)
+                                       context
+                                       )
 								                     :else (do
 								                             (log/info "Un-supported content type: " contentType)
 								                             (chain/terminate context)
@@ -38,8 +57,15 @@
                )
              )
     :leave (fn [context]
-             (log/info "Request terminated successfully")
-             (assoc context :response {:status 415 :body "{'error': 'Bad request: Unsupported media type'}"}))
+             (let [request (get context :request)] 
+               (if-not (contains? request :country)
+                 (do(log/info "Request terminated successfully")
+                   (assoc context :response {:status 415 :body "{'error': 'Bad request: Unsupported media type'}"})
+                   )
+                 context
+                 )
+               )
+             )
    }
   )
 
@@ -68,22 +94,17 @@
 
 (defn add-new-country
   [request]
-  (let [
-        formParams (get (select-keys request [:form-params]) :form-params) 
-        name (get formParams :name) 
-        shortName (get formParams :shortname)]
-    (log/debug "request: " request)
-    (let [newCountry (Country. nil name shortName)
-          ]
-      (println "trying to insert " newCountry "...")
-	    (let [generatedKeys (dao/add-new-country newCountry) newId (get (first generatedKeys) :id)]
-        (println "generatedKeys: " generatedKeys)
-        (println "newId: " newId)
-        {:status 200 :body {:id newId}}
-	      )
-      )
-    )
+  (let [newCountry (get request :country)
+            ]
+        (log/debug "trying to insert " newCountry "...")
+	      (let [generatedKeys (dao/add-new-country newCountry) newId (get (first generatedKeys) :id)]
+          (log/debug "generatedKeys: " generatedKeys)
+          (log/debug "newId: " newId)
+          {:status 200 :body {:id newId}}
+	        )
+        )
   )
+
 
 (defn modify-country
   [request]
