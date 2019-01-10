@@ -1,6 +1,7 @@
 (ns com.swayam.products.drutochithhi.addrstore.controller.CountryController
   (:require [io.pedestal.http :as http]
             [io.pedestal.http.route :as route]
+            [io.pedestal.interceptor.chain :as chain]
             [io.pedestal.http.body-params :as body-params]
             [ring.util.response :as ring-resp]
             [clojure.tools.logging :as log]
@@ -18,9 +19,12 @@
 (def add-new-country-interceptor {
     :name ::add-new-country-interceptor
     :enter (fn [context]
-             (log/info context)
-             context
+             (log/info "Terminating the request...")
+             (chain/terminate context)
              )
+    :leave (fn [context]
+             (log/info "Request terminated successfully")
+             (assoc context :response {:status 415 :body "{'error': 'Bad request: Unsupported media type'}"}))
    }
   )
 
