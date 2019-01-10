@@ -2,6 +2,7 @@
   (:gen-class) ; for -main method in uberjar
   (:require [io.pedestal.http :as server]
             [io.pedestal.http.route :as route]
+            [clojure.tools.logging :as log]
             [com.swayam.products.drutochithhi.addrstore.HttpService :as httpService]
             [com.swayam.products.drutochithhi.addrstore.config.StartupConfig :as startUp]
             ))
@@ -15,8 +16,8 @@
 (defn -main
   "The entry-point for 'lein run'"
   [& args]
-  (println "\nCreating your server...")
+  (log/info "Creating your server...")
   (startUp/init-on-startup)
-  (println "\nRoutes defined: " httpService/all-routes)
+  (log/info "Routes defined: " httpService/all-routes)
   (server/start (runnable-service)))
 

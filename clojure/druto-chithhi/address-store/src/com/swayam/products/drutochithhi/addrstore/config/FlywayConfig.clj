@@ -2,6 +2,7 @@
   (:require
   [omniconf.core :as cfg]
   [com.swayam.products.drutochithhi.addrstore.config.RepoConfig :as repoConfig]
+  [clojure.tools.logging :as log]
   )
   (:import (org.flywaydb.core Flyway)
    )
@@ -9,7 +10,7 @@
 
 (defn run-flyway
   []
-  (println "Running flyway...")
+  (log/info "Running flyway...")
   (let [
         db-spec (repoConfig/get-address-store-db-spec)
         flywayFluentConfiguration

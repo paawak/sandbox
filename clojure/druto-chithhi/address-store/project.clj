@@ -14,6 +14,7 @@
                  [mount "0.1.15"]
                  [org.flywaydb/flyway-core "5.2.4"]
 
+                 [org.clojure/tools.logging "0.4.1"]
                  [ch.qos.logback/logback-classic "1.2.3" :exclusions [org.slf4j/slf4j-api]]
                  [org.slf4j/jul-to-slf4j "1.7.25"]
                  [org.slf4j/jcl-over-slf4j "1.7.25"]

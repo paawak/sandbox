@@ -3,18 +3,19 @@
             [mount.core :as mount]
             [com.swayam.products.drutochithhi.addrstore.config.ProfileConfig :as conf]
             [com.swayam.products.drutochithhi.addrstore.config.FlywayConfig :as flyway]
+            [clojure.tools.logging :as log]
             )
   )
 
 (defn load-config-file
   []
-  (println "Loading config...")
+  (log/info "Loading config...")
   (conf/load-configs)
   )
 
 (defn start-mount
   []
-  (println "Starting mount...")
+  (log/info "Starting mount...")
   (mount/start)
   (.addShutdownHook
    (Runtime/getRuntime)
