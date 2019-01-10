@@ -3,6 +3,7 @@
             [io.pedestal.http.route :as route]
             [io.pedestal.http.body-params :as body-params]
             [ring.util.response :as ring-resp]
+            [clojure.tools.logging :as log]
             [com.swayam.products.drutochithhi.addrstore.repo.CountryDao :as dao]
          )
   (:import (com.swayam.products.drutochithhi.addrstore.model.Models Country))
@@ -14,10 +15,19 @@
                     ]
   )
 
+(def add-new-country-interceptor {
+    :name ::add-new-country-interceptor
+    :enter (fn [context]
+             (log/info context)
+             context
+             )
+   }
+  )
+
 (def country-routes #{
               ["/country/:id" :get (conj interceptors `get-country)]
               ["/country" :get (conj interceptors `list-countries)]
-              ["/country" :post (conj interceptors `add-new-country)]
+              ["/country" :post (conj interceptors add-new-country-interceptor `add-new-country)]
               ["/country" :put (conj interceptors `modify-country)]
            }
   )
