@@ -19,8 +19,23 @@
 (def add-new-country-interceptor {
     :name ::add-new-country-interceptor
     :enter (fn [context]
-             (log/info "Terminating the request...")
-             (chain/terminate context)
+             (let [
+                   request (get context :request)
+                   ]
+                            (if-not (contains? request :content-type)
+							               (do (log/info "The content-type is not specified")
+							               (chain/terminate context))
+								             (let [contentType (get request :content-type)]
+								               (cond (= contentType "application/x-www-form-urlencoded") (log/info "The content type is" contentType) 
+								                     (= contentType "application/json") (log/info "The content type is" contentType)
+								                     :else (do
+								                             (log/info "Un-supported content type: " contentType)
+								                             (chain/terminate context)
+								                             )
+								                 )
+								               )
+							             )
+               )
              )
     :leave (fn [context]
              (log/info "Request terminated successfully")
@@ -41,7 +56,7 @@
   (let [
         countryId ((request :path-params) :id)
         ]
-    (println "Trying to fetch country with id: " countryId)
+    (log/debug "Trying to fetch country with id: " countryId)
     {:status 200 :body (dao/get-country countryId)}
     )
   )
@@ -57,7 +72,7 @@
         formParams (get (select-keys request [:form-params]) :form-params) 
         name (get formParams :name) 
         shortName (get formParams :shortname)]
-    (println name "--" shortName)
+    (log/debug "request: " request)
     (let [newCountry (Country. nil name shortName)
           ]
       (println "trying to insert " newCountry "...")
