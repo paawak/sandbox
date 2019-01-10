@@ -16,13 +16,12 @@
                     ]
   )
 
-(defn extract-country-from-request-form-params
-  [request]
+(defn extract-country
+  [requestParam]
   (let [
-        formParams (get request :form-params) 
-        id (get formParams :id)
-        name (get formParams :name) 
-        shortName (get formParams :shortname)]
+        id (get requestParam :id)
+        name (get requestParam :name) 
+        shortName (get requestParam :shortname)]
     (Country. id name shortName)
     )  
   )
@@ -40,12 +39,12 @@
 								               (cond (= contentType "application/x-www-form-urlencoded") 
                                      (do 
                                        (log/info "The content type is" contentType)
-                                       (update context :request assoc :country (extract-country-from-request-form-params request))
+                                       (update context :request assoc :country (extract-country (get request :form-params)))
                                        ) 
 								                     (= contentType "application/json") 
                                      (do 
                                        (log/info "The content type is" contentType)
-                                       context
+                                       (update context :request assoc :country (extract-country (get request :json-params)))
                                        )
 								                     :else (do
 								                             (log/info "Un-supported content type: " contentType)
