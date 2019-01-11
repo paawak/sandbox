@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './common/header/header.component';
 import { CountryModule } from './country/country.module';
 import { StateComponent } from './state/state.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    StateComponent
+    StateComponent,
+    WelcomePageComponent
   ],
   imports: [
     BrowserModule,

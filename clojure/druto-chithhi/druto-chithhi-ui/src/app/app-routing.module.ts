@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CountryComponent } from './country/country.component';
 import { StateComponent } from './state/state.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/country', pathMatch: 'full'},
-  {path: 'state', component: StateComponent}
+  // {path: '', redirectTo: '/welcome', pathMatch: 'full'},
+  {path: 'state', component: StateComponent},
+  {path: '', component: WelcomePageComponent}
 ];
 
 @NgModule({
