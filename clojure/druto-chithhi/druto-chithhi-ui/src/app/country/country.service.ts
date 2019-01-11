@@ -21,9 +21,8 @@ export class CountryService {
     }
 
     public addNewCountry(country: Country): Observable<any> {
-      const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
-      const formBody = 'name=' + country.name + '&shortname=' + country.shortname;
-      return this.httpClient.post(CountryService.COUNTRY_URL_PREFIX, formBody, { headers });
+      const headers = new HttpHeaders().set('Content-Type', 'application/json');
+      return this.httpClient.post(CountryService.COUNTRY_URL_PREFIX, country, { headers });
     }
 
 }
