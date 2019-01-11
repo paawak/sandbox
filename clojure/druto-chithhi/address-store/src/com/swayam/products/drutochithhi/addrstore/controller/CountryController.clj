@@ -34,8 +34,10 @@
                    ]
                             (if-not (contains? request :content-type)
 							               (do (log/info "The content-type is not specified")
-							               (chain/terminate context))
+                              (chain/terminate context)
+                             )
 								             (let [contentType (get request :content-type)]
+                               (log/debug "trying to map request params to object...")
 								               (cond (= contentType "application/x-www-form-urlencoded") 
                                      (do 
                                        (log/info "The content type is" contentType)
