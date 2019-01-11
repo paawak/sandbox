@@ -26,8 +26,8 @@
     )  
   )
 
-(def add-new-country-interceptor {
-    :name ::add-new-country-interceptor
+(def country-interceptor {
+    :name ::country-interceptor
     :enter (fn [context]
              (let [
                    request (get context :request)
@@ -71,7 +71,7 @@
 (def country-routes #{
               ["/country/:id" :get (conj interceptors `get-country)]
               ["/country" :get (conj interceptors `list-countries)]
-              ["/country" :post (conj interceptors add-new-country-interceptor `add-new-country)]
+              ["/country" :post (conj interceptors country-interceptor `add-new-country)]
               ["/country" :put (conj interceptors `modify-country)]
            }
   )
