@@ -1,7 +1,9 @@
 #REST Calls
 ## Country
 ### Create a new country
-	curl -X POST -d "name=India&shortname=IN" "http://localhost:8080/country"
+	curl -H "content-type:application/x-www-form-urlencoded" -X POST -d "name=India&shortname=IN" "http://localhost:8080/country"
+	curl -H "content-type:application/json" -X POST -d '{"name":"South Africa", "shortname":"SF"}' "http://localhost:8080/country"
+	
 ### List all countries	
 	curl -i localhost:8080/country
 
