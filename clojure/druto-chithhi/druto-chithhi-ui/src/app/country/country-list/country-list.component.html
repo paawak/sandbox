@@ -1,9 +1,10 @@
 <section id="labelAndInput">
   <h1 class="title">List Of Countries</h1>
-  
-  <div class="row">
-    <div class='col-md-1 col-xs-3' *ngFor="let country of countries">
-      <app-country-list-item [currentCountry]="country"></app-country-list-item>
+  <div class="container" *ngFor="let country of countries">
+    <div class="row">
+      <div class="col">
+        <app-country-list-item [currentCountry]="country"></app-country-list-item>        
+      </div>      
     </div>
   </div>
 </section>
