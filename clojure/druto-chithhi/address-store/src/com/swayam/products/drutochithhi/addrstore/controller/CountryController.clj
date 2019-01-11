@@ -31,30 +31,23 @@
     :enter (fn [context]
              (let [
                    request (get context :request)
+                   contentType (get request :content-type)
+                   country
+				               (cond (= contentType "application/x-www-form-urlencoded") (extract-country (get request :form-params)) 
+				                     (= contentType "application/json") (extract-country (get request :json-params))
+				                     :else nil
+				                 )
                    ]
-                            (if-not (contains? request :content-type)
-							               (do (log/info "The content-type is not specified")
-                              (chain/terminate context)
-                             )
-								             (let [contentType (get request :content-type)]
-                               (log/debug "trying to map request params to object...")
-								               (cond (= contentType "application/x-www-form-urlencoded") 
-                                     (do 
-                                       (log/info "The content type is" contentType)
-                                       (update context :request assoc :country (extract-country (get request :form-params)))
-                                       ) 
-								                     (= contentType "application/json") 
-                                     (do 
-                                       (log/info "The content type is" contentType)
-                                       (update context :request assoc :country (extract-country (get request :json-params)))
-                                       )
-								                     :else (do
-								                             (log/info "Un-supported content type: " contentType)
-								                             (chain/terminate context)
-								                             )
-								                 )
-								               )
-							             )
+               (if (= country nil)
+                 (do
+                   (log/warn "The country could not be mapped from the request params, terminating request")
+                   (chain/terminate context)
+                   )
+                 (do
+                   (log/debug "Found country in request: " country)
+                   (update context :request assoc :country country)
+                   )
+                 )
                )
              )
     :leave (fn [context]
