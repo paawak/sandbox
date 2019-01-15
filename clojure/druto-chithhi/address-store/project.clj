@@ -36,6 +36,7 @@
              :test {
                     :jvm-opts ["-Dconfig.file=test/address_store_test_config.edn"]
                     :resource-paths ["src/test/resources"]
+                    :dependencies [[com.h2database/h2 "1.4.197"]]
                     }
              }
   :main ^{:skip-aot true} com.swayam.products.drutochithhi.addrstore.server)

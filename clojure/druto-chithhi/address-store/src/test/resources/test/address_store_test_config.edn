@@ -1,8 +1,8 @@
 {
- :database-driver "org.postgresql.Driver"
- :database-url "jdbc:postgresql://localhost:5432/druto-chithhi-address-store"
- :database-user "postgres"
- :database-password "postgres"
- :flyway-sql-directory "sql"
+ :database-driver "org.h2.Driver"
+ :database-url "jdbc:h2:mem:druto-chithhi-address-store"
+ :database-user "sa"
+ :database-password "sa"
+ :flyway-sql-directory "test/sql"
  :http-allowed-origins ["http://localhost:4200"]
  }
