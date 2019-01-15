@@ -6,7 +6,6 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
   :source-paths ["src/main/clojure"]
-;;  :java-source-paths ["src/main/java"]  
   :test-paths ["src/test/clojure"]
   :resource-paths ["src/main/resources"]
 
@@ -25,12 +24,17 @@
                  [ch.qos.logback/logback-classic "1.2.3" :exclusions [org.slf4j/slf4j-api]]
                  [org.slf4j/jul-to-slf4j "1.7.25"]
                  [org.slf4j/jcl-over-slf4j "1.7.25"]
-                 [org.slf4j/log4j-over-slf4j "1.7.25"]]
+                 [org.slf4j/log4j-over-slf4j "1.7.25"]
+                 ]
 
   :profiles {
              :dev {:jvm-opts ["-Dconfig.file=dev/address_store_config.edn"]
-                   :aliases {"run-dev" ["trampoline" "run" "-m" "com.swayam.products.drutochithhi.addrstore.server/run-dev"]}
-                   :dependencies [[io.pedestal/pedestal.service-tools "0.5.4"]]
+;;                   :aliases {"run-dev" ["trampoline" "run" "-m" "com.swayam.products.drutochithhi.addrstore.server/run-dev"]}
+                   :dependencies [
+                                  [io.pedestal/pedestal.service-tools "0.5.4"]
+;;                                  [clj-http "2.0.0"]
+                                  ]
+;;                   :plugins [[cider/cider-nrepl "0.20.0"]]
                    }
              :uberjar {:aot [com.swayam.products.drutochithhi.addrstore.server]}
              :test {
