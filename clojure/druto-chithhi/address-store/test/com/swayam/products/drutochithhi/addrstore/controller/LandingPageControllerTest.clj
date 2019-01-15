@@ -10,8 +10,10 @@
 
 (def controller
   (::bootstrap/service-fn 
-    ;(startUp/init-on-startup)
-    (bootstrap/create-servlet (httpService/service))
+    (do
+      (startUp/init-on-startup)
+      (bootstrap/create-servlet (httpService/service))
+    )
     )
   )
 
