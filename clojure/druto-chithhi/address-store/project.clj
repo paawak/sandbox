@@ -33,6 +33,10 @@
                    :dependencies [[io.pedestal/pedestal.service-tools "0.5.4"]]
                    }
              :uberjar {:aot [com.swayam.products.drutochithhi.addrstore.server]}
+             :test {
+                    :jvm-opts ["-Dconfig.file=test/address_store_test_config.edn"]
+                    :resource-paths ["src/test/resources"]
+                    }
              }
   :main ^{:skip-aot true} com.swayam.products.drutochithhi.addrstore.server)
 
