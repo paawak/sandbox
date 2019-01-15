@@ -29,7 +29,7 @@
 
   :profiles {
              :dev {:jvm-opts ["-Dconfig.file=dev/address_store_config.edn"]
-;;                   :aliases {"run-dev" ["trampoline" "run" "-m" "com.swayam.products.drutochithhi.addrstore.server/run-dev"]}
+                   :aliases {"run-dev" ["trampoline" "run" "-m" "com.swayam.products.drutochithhi.addrstore.server/run-dev"]}
                    :dependencies [
                                   [io.pedestal/pedestal.service-tools "0.5.4"]
 ;;                                  [clj-http "2.0.0"]
