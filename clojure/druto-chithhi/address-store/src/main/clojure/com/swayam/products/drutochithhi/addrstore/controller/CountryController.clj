@@ -54,7 +54,9 @@
              (let [request (get context :request)] 
                (if-not (contains? request :country)
                  (do(log/info "Request terminated successfully")
-                   (assoc context :response {:status 415 :body "{'error': 'Bad request: Unsupported media type'}"})
+                   (assoc context :response {:status 415 :headers {"Content-Type" "application/json;charset=UTF-8"} 
+                                             :body "{\"error\":\"Bad request: Unsupported media type\"}"
+                                             })
                    )
                  context
                  )
