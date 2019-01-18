@@ -18,15 +18,14 @@
     )
   )
 
-(defn reset-country-table
-  [test-case]
-  (test-case)
-  (jdbc/delete! address-store-db :country [])
-  (jdbc/execute! address-store-db ["alter sequence SEQ_COUNTRY restart with 1"])
-  )
-
 (use-fixtures :each 
-      reset-country-table
+      (fn [test-case]
+        (log/info "************************** running test case...")
+        (test-case)
+        (log/info "************************** cleanup after test...")
+        (jdbc/delete! address-store-db :country [])
+        (jdbc/execute! address-store-db ["alter sequence SEQ_COUNTRY restart with 1"])
+        )
  )
 
 (defn print-map
