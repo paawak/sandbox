@@ -35,11 +35,12 @@
   )
 
 (deftest about-page-test
+  (let [ response (response-for server :get "/about")]
   (is (.contains
-       (:body (response-for server :get "/about"))
+       (:body response)
        "Clojure 1.9"))
   (is (=
-       (:headers (response-for server :get "/about"))
+       (:headers response)
        {"Content-Type" "text/html;charset=UTF-8"
         "Strict-Transport-Security" "max-age=31536000; includeSubdomains"
         "X-Frame-Options" "DENY"
@@ -47,5 +48,7 @@
         "X-XSS-Protection" "1; mode=block"
         "X-Download-Options" "noopen"
         "X-Permitted-Cross-Domain-Policies" "none"
-        "Content-Security-Policy" "object-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'strict-dynamic' https: http:;"})))
+        "Content-Security-Policy" "object-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'strict-dynamic' https: http:;"}))
+  )
+)
 
