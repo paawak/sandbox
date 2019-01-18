@@ -21,9 +21,12 @@
   (let [ response (response-for server :get "/country")
          body (:body response)
          headers (:headers response)
+         headerKeys (keys headers)
          contentType (get headers "Content-Type")
         ]
-    (log/info "********* " headers)
+    (log/info "printing all headers...")
+    (doseq [header headerKeys]
+      (log/info "-----\n\tName:" header "\n\tValue: " (get headers header)))
 	  (is (=
 	       body
 	       "[{\"id\":1,\"name\":\"India\",\"shortname\":\"IN\",\"active\":true}]"
