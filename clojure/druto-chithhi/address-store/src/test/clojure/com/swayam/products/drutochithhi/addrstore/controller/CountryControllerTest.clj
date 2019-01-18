@@ -5,6 +5,7 @@
             [io.pedestal.http :as server]
             [com.swayam.products.drutochithhi.addrstore.config.StartupConfig :as startUp]
             [com.swayam.products.drutochithhi.addrstore.HttpService :as httpService]
+            [clojure.tools.logging :as log]
             ))
 
 (def server
@@ -20,26 +21,16 @@
   (let [ response (response-for server :get "/country")
          body (:body response)
          headers (:headers response)
+         contentType (get headers "Content-Type")
         ]
+    (log/info "********* " headers)
 	  (is (=
 	       body
-	       [{
-          :id 1
-          :name "India"
-          :shortname "IN"
-          :active true
-          }]
+	       "[{\"id\":1,\"name\":\"India\",\"shortname\":\"IN\",\"active\":true}]"
         ))
 	  (is (=
-	       headers
-	       {"Content-Type" "text/html;charset=UTF-8"
-	        "Strict-Transport-Security" "max-age=31536000; includeSubdomains"
-	        "X-Frame-Options" "DENY"
-	        "X-Content-Type-Options" "nosniff"
-	        "X-XSS-Protection" "1; mode=block"
-	        "X-Download-Options" "noopen"
-	        "X-Permitted-Cross-Domain-Policies" "none"
-	        "Content-Security-Policy" "object-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'strict-dynamic' https: http:;"}))
+	       contentType
+	       "application/json;charset=UTF-8"))
    )
   )
 
