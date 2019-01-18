@@ -7,8 +7,7 @@
             [clojure.tools.logging :as log]
             ))
 
-(defn create-server
-  []
+(def server
   (::http/service-fn 
     (do
       (startUp/init-on-startup)
@@ -27,7 +26,7 @@
   )
 
 (deftest list-countries-test
-  (let [ server (create-server) response (response-for server :get "/country")
+  (let [ response (response-for server :get "/country")
          body (:body response)
          headers (:headers response)
          contentType (get headers "Content-Type")
@@ -45,7 +44,7 @@
   )
 
 (deftest add-new-country-form-data-test
-  (let [ server (create-server) response (response-for server :post "/country" 
+  (let [ response (response-for server :post "/country" 
                      :body "name=South Africa&shortname=SF"
                      :headers {"Content-Type" "application/x-www-form-urlencoded"}
                    )
@@ -66,7 +65,7 @@
   )
 
 (deftest add-new-country-json-data-test
-  (let [ server (create-server) response (response-for server :post "/country" 
+  (let [ response (response-for server :post "/country" 
                      :body "{\"name\":\"Finland\", \"shortname\":\"FN\"}"
                      :headers {"Content-Type" "application/json"}
                    )
@@ -87,7 +86,7 @@
   )
 
 (deftest add-new-country-bad-data-no-content-type-test
-  (let [ server (create-server) response (response-for server :post "/country" )
+  (let [ response (response-for server :post "/country" )
          body (:body response)
          headers (:headers response)
          contentType (get headers "Content-Type")
