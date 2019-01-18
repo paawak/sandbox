@@ -64,3 +64,9 @@
 	       "application/json;charset=UTF-8"))
    )
   )
+
+;; run the tests in the correct order
+(defn test-ns-hook []
+  (list-countries-test)
+  (add-new-country-form-data-test)
+  )
