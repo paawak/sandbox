@@ -32,18 +32,18 @@
              (let [
                    request (get context :request)
                    contentType (get request :content-type)
-                   country
-				               (cond (= contentType "application/x-www-form-urlencoded") (extract-country (get request :form-params)) 
-				                     (= contentType "application/json") (extract-country (get request :json-params))
+                   paramKey
+				               (cond (= contentType "application/x-www-form-urlencoded") :form-params 
+				                     (= contentType "application/json") :json-params
 				                     :else nil
 				                 )
                    ]
-               (if (= country nil)
+               (if (= paramKey nil)
                  (do
                    (log/warn "The country could not be mapped from the request params, terminating request")
                    (chain/terminate context)
                    )
-                 (do
+                 (let [country (extract-country (get request paramKey))]
                    (log/debug "Found country in request: " country)
                    (update context :request assoc :country country)
                    )
