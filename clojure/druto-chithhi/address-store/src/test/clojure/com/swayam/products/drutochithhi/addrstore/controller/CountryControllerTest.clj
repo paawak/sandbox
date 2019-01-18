@@ -2,9 +2,11 @@
   (:require [clojure.test :refer :all]
             [io.pedestal.test :refer :all]
             [io.pedestal.http :as http]
+            [clojure.java.jdbc :as jdbc]
+            [clojure.tools.logging :as log]
             [com.swayam.products.drutochithhi.addrstore.config.StartupConfig :as startUp]
             [com.swayam.products.drutochithhi.addrstore.HttpService :as httpService]
-            [clojure.tools.logging :as log]
+            [com.swayam.products.drutochithhi.addrstore.config.RepoConfig :refer [address-store-db]]
             ))
 
 (def server
@@ -16,6 +18,17 @@
     )
   )
 
+(defn reset-country-table
+  [test-case]
+  (test-case)
+  (jdbc/delete! address-store-db :country [])
+  (jdbc/execute! address-store-db ["alter sequence SEQ_COUNTRY restart with 1"])
+  )
+
+(use-fixtures :each 
+      reset-country-table
+ )
+
 (defn print-map
   [map]
   (let [keys (keys map)]
@@ -26,6 +39,7 @@
   )
 
 (deftest list-countries-test
+  (jdbc/execute! address-store-db ["INSERT INTO country (name, shortname ) VALUES ('India', 'IN')"])
   (let [ response (response-for server :get "/country")
          body (:body response)
          headers (:headers response)
@@ -56,7 +70,7 @@
     (print-map headers)
 	  (is (=
 	       body
-	       "{\"id\":2}"
+	       "{\"id\":1}"
         ))
 	  (is (=
 	       contentType
@@ -77,7 +91,7 @@
     (print-map headers)
 	  (is (=
 	       body
-	       "{\"id\":3}"
+	       "{\"id\":1}"
         ))
 	  (is (=
 	       contentType
@@ -103,10 +117,3 @@
    )
   )
 
-;; run the tests in the correct order
-(defn test-ns-hook []
-  (list-countries-test)
-  (add-new-country-form-data-test)
-  (add-new-country-json-data-test)
-  (add-new-country-bad-data-no-content-type-test)
-  )
