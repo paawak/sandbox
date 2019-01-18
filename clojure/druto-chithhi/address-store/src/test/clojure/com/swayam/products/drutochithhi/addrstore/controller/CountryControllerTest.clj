@@ -44,4 +44,23 @@
    )
   )
 
-
+(deftest add-new-country-form-data-test
+  (let [ response (response-for server :post "/country" 
+                     :body "name=South Africa&shortname=SF"
+                     :headers {"Content-Type" "application/x-www-form-urlencoded"}
+                   )
+         body (:body response)
+         headers (:headers response)
+         contentType (get headers "Content-Type")
+        ]
+    (log/info "printing all headers...")
+    (print-map headers)
+	  (is (=
+	       body
+	       "{\"id\":2}"
+        ))
+	  (is (=
+	       contentType
+	       "application/json;charset=UTF-8"))
+   )
+  )
