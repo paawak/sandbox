@@ -1,17 +1,16 @@
 (ns com.swayam.products.drutochithhi.addrstore.controller.LandingPageControllerTest
   (:require [clojure.test :refer :all]
             [io.pedestal.test :refer :all]
-            [io.pedestal.http :as bootstrap]
-            [io.pedestal.http :as server]
+            [io.pedestal.http :as http]
             [com.swayam.products.drutochithhi.addrstore.config.StartupConfig :as startUp]
             [com.swayam.products.drutochithhi.addrstore.HttpService :as httpService]
             ))
 
 (def server
-  (::bootstrap/service-fn 
+  (::http/service-fn 
     (do
       (startUp/init-on-startup)
-      (bootstrap/create-servlet (httpService/service))
+      (http/create-servlet (httpService/service))
     )
     )
   )
