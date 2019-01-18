@@ -1,6 +1,6 @@
 {
  :database-driver "org.h2.Driver"
- :database-url "jdbc:h2:mem:druto-chithhi-address-store"
+ :database-url "jdbc:h2:mem:druto-chithhi-address-store;TRACE_LEVEL_FILE=3;IGNORECASE=TRUE;MODE=PostgreSQL;DATABASE_TO_UPPER=false;DB_CLOSE_DELAY=-1"
  :database-user "sa"
  :database-password "sa"
  :flyway-sql-directory "test/sql"
