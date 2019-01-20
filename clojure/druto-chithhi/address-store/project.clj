@@ -6,7 +6,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
   :source-paths ["src/main/clojure"]
-  :test-paths ["src/test/clojure"]
+  :test-paths ["src/test/unit/clojure" "src/test/e2e/clojure"]
   :resource-paths ["src/main/resources"]
 
   :dependencies [[org.clojure/clojure "1.9.0"]
