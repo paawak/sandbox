@@ -1,4 +1,4 @@
-(ns com.swayam.products.drutochithhi.addrstore.controller.LandingPageControllerTest
+(ns com.swayam.products.drutochithhi.addrstore.controller.LandingPageControllerIntegrationTest
   (:require [clojure.test :refer :all]
             [io.pedestal.test :refer :all]
             [io.pedestal.http :as http]
