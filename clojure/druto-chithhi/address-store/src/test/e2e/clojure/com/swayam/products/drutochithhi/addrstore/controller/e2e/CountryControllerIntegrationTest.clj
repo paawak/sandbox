@@ -1,4 +1,4 @@
-(ns com.swayam.products.drutochithhi.addrstore.controller.CountryControllerIntegrationTest
+(ns com.swayam.products.drutochithhi.addrstore.controller.e2e.CountryControllerIntegrationTest
   (:require [clojure.test :refer :all]
             [io.pedestal.test :refer :all]
             [io.pedestal.http :as http]
