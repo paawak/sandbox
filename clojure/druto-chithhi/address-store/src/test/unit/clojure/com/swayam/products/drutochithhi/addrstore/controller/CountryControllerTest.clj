@@ -10,4 +10,7 @@
 
 (deftest country-interceptor-test
   (log/info "Blank test case for now!")
+  ;;http://clojuredocs.org/clojure.core/binding
+  ;;http://clojuredocs.org/clojure.core/with-redefs
+  ;;http://clojuredocs.org/clojure.core/with-redefs-fn
   )
