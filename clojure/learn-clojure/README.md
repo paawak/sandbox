@@ -2,9 +2,19 @@
 
 A Clojure library designed to ... well, that part is up to you.
 
-## Usage
+# Using the REPL
 
-FIXME
+## Launching REPL
+
+	lein repl
+	
+## Using a name-space
+
+	(use 'learnclojure.core)
+	
+## Reloading a name-space after code change
+
+	(use 'learnclojure.core :reload)		
 
 ## License
 
