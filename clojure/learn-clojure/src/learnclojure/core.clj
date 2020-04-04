@@ -18,10 +18,15 @@
 (defn calmness
   "degrees of calmness"
   [calm text]
+  (println "Clojure Meditate v2.0")
   (cond (< calm 5) (str (clojure.string/upper-case text) ", I TELL YA!") 
-  (and (>= calm 5) (<= calm 9))  (clojure.string/capitalize text)
-  (>= calm 10)  (clojure.string/reverse text)
+  (<= 5 calm 9)  (clojure.string/capitalize text)
+  (= calm 10)  (clojure.string/reverse text)
   )
+  )
+
+(defn encode
+  "encodes with the best algo"
   )
 
 (defn findFact
