@@ -27,6 +27,15 @@
 
 (defn encode
   "encodes with the best algo"
+  [msg]
+  (println msg)
+  (clojure.string/replace msg #"\w"  (fn [letter] (
+    let [charArray (char-array letter) 
+         firstChar (first charArray) 
+         intValue (int firstChar)
+         totalLength (count (char-array msg))
+         seed (+ intValue totalLength)
+         ] (str (Math/pow seed 2))) ))
   )
 
 (defn findFact
