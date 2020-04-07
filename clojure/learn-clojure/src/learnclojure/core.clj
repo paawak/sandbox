@@ -151,7 +151,8 @@
 (defn tennis-stats
   [statsFileCsv]
   (let [dataFile (io/resource statsFileCsv)
-        rawLines (slurp dataFile)
+        fileReader (io/reader dataFile)
+        rawLines (line-seq fileReader)
         ]
     (println (count rawLines))
     ) 
