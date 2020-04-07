@@ -154,7 +154,7 @@
         fileReader (io/reader dataFile)
         rawLines (line-seq fileReader)
         ]
-    (println (count rawLines))
+    (println ( map #(str % "\n") rawLines))
     ) 
   )
 
