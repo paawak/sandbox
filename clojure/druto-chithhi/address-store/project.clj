@@ -4,6 +4,7 @@
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
+  :plugins [[cider/cider-nrepl "0.24.0"]]
 
   :source-paths ["src/main/clojure"]
   :test-paths ["src/test/unit/clojure" "src/test/e2e/clojure"]
